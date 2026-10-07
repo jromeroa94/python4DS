@@ -1,18 +1,24 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Layers – Python for Data Science</title>
+<title>Capas – Python for Data Science</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -21,8 +27,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +40,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -57,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -67,17 +74,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./exploratory-data-analysis.html" rel="next">
 <link href="./visualise.html" rel="prev">
 <link href="./favicon.ico" rel="icon">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-b9e8d9863b7928896e96ff6494065671.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b8d228dfc8ea33805744e1debdbf65c8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-b9e8d9863b7928896e96ff6494065671.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -92,17 +102,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
   }
 }</script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-LXJC37BJVX"></script>
@@ -114,30 +124,192 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
 
 
-<meta name="twitter:title" content="Layers – Python for Data Science">
+<meta name="twitter:title" content="Capas – Python for Data Science">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-sidebar docked">
+<body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./visualise.html">Visualise</a></li><li class="breadcrumb-item"><a href="./vis-layers.html"><span class="chapter-title">Layers</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./visualise.html">Visualizar</a></li><li class="breadcrumb-item"><a href="./vis-layers.html"><span class="chapter-title">Capas</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -151,40 +323,40 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Python for Data Science</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/aeturrell/python4DS" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+    <a href="https://github.com/aeturrell/python4DS" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
 </div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
+        <div id="quarto-search" class="" title="Buscar"></div>
         </div>
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Welcome</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bienvenida</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
- <span class="menu-text">Introduction</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">Introducción</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">First Steps</span></a>
+  <a href="./introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Primeros pasos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./prerequisites.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prerequisites</span></a>
+  <a href="./prerequisites.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Requisitos previos</span></a>
   </div>
 </li>
       </ul>
@@ -192,60 +364,60 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
- <span class="menu-text">Quick Start</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">Inicio rápido</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./whole-game.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Whole Game</span></a>
+  <a href="./whole-game.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">El juego completo</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-visualise.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Visualisation</span></a>
+  <a href="./data-visualise.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Visualización de datos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./workflow-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Workflow: Basics</span></a>
+  <a href="./workflow-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Flujo de trabajo: conceptos básicos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-transform.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Transformation</span></a>
+  <a href="./data-transform.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Transformación de datos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./workflow-style.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Workflow: Style</span></a>
+  <a href="./workflow-style.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Flujo de trabajo: estilo</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-tidy.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Tidy Data</span></a>
+  <a href="./data-tidy.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Tidy data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./workflow-writing-code.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Workflow: Writing Code</span></a>
+  <a href="./workflow-writing-code.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Flujo de trabajo: escribir código</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-import.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Import</span></a>
+  <a href="./data-import.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Importación de datos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./workflow-packages-and-environments.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Workflow: Packages and Environments</span></a>
+  <a href="./workflow-packages-and-environments.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Flujo de trabajo: paquetes y entornos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./workflow-help.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Postscript: Getting Further Help</span></a>
+  <a href="./workflow-help.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Epílogo: cómo obtener más ayuda</span></a>
   </div>
 </li>
       </ul>
@@ -253,30 +425,30 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Visualise</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+ <span class="menu-text">Visualizar</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualise.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Visualisation</span></a>
+  <a href="./visualise.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Visualización</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./vis-layers.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Layers</span></a>
+  <a href="./vis-layers.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Capas</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exploratory-data-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exploratory Data Analysis</span></a>
+  <a href="./exploratory-data-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Análisis exploratorio de datos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./communicate-plots.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Graphics for Communication</span></a>
+  <a href="./communicate-plots.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Gráficos para comunicar</span></a>
   </div>
 </li>
       </ul>
@@ -284,45 +456,45 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">Transform</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">Transformar</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./boolean-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Boolean Data</span></a>
+  <a href="./boolean-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Datos booleanos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./numbers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Numbers</span></a>
+  <a href="./numbers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Números</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./strings.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Strings and Text</span></a>
+  <a href="./strings.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Strings y texto</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./regex.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regular Expressions, aka regex</span></a>
+  <a href="./regex.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Expresiones regulares, también conocidas como regex</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./categorical-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Categorical Data</span></a>
+  <a href="./categorical-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Datos categóricos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dates-and-times.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Dates and Times</span></a>
+  <a href="./dates-and-times.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Fechas y horas</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./missing-values.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Missing Values</span></a>
+  <a href="./missing-values.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Valores faltantes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -335,30 +507,30 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Import</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">Importar</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./spreadsheets.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Spreadsheets</span></a>
+  <a href="./spreadsheets.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Hojas de cálculo</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./databases.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Databases</span></a>
+  <a href="./databases.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bases de datos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rectangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Nested Data</span></a>
+  <a href="./rectangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Datos anidados</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./webscraping-and-apis.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Webscraping and APIs</span></a>
+  <a href="./webscraping-and-apis.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Web scraping y API</span></a>
   </div>
 </li>
       </ul>
@@ -366,25 +538,25 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">Programme</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">Programar</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./functions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Functions</span></a>
+  <a href="./functions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Funciones</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./iteration.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Iteration</span></a>
+  <a href="./iteration.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Iteración</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./command-line.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">The Command Line</span></a>
+  <a href="./command-line.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">La línea de comandos</span></a>
   </div>
 </li>
       </ul>
@@ -392,8 +564,8 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
- <span class="menu-text">Communicate</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">Comunicar</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -413,8 +585,8 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
- <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">Apéndices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -422,7 +594,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
+ <span class="menu-text">Referencias</span></a>
   </div>
 </li>
       </ul>
@@ -434,38 +606,39 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción">Introducción</a>
   <ul class="collapse">
-  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
+  <li><a href="#requisitos-previos" id="toc-requisitos-previos" class="nav-link" data-scroll-target="#requisitos-previos">Requisitos previos</a></li>
   </ul></li>
-  <li><a href="#aesthetic-mappings" id="toc-aesthetic-mappings" class="nav-link" data-scroll-target="#aesthetic-mappings">Aesthetic mappings</a></li>
-  <li><a href="#geometric-objects" id="toc-geometric-objects" class="nav-link" data-scroll-target="#geometric-objects">Geometric objects</a>
+  <li><a href="#mapeos-estéticos" id="toc-mapeos-estéticos" class="nav-link" data-scroll-target="#mapeos-estéticos">Mapeos estéticos</a></li>
+  <li><a href="#objetos-geométricos" id="toc-objetos-geométricos" class="nav-link" data-scroll-target="#objetos-geométricos">Objetos geométricos</a>
   <ul class="collapse">
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios">Ejercicios</a></li>
   </ul></li>
-  <li><a href="#facets" id="toc-facets" class="nav-link" data-scroll-target="#facets">Facets</a>
+  <li><a href="#facetas" id="toc-facetas" class="nav-link" data-scroll-target="#facetas">Facetas</a>
   <ul class="collapse">
-  <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1">Exercises</a></li>
+  <li><a href="#ejercicios-1" id="toc-ejercicios-1" class="nav-link" data-scroll-target="#ejercicios-1">Ejercicios</a></li>
   </ul></li>
-  <li><a href="#statistical-transformations" id="toc-statistical-transformations" class="nav-link" data-scroll-target="#statistical-transformations">Statistical transformations</a></li>
-  <li><a href="#position-adjustments" id="toc-position-adjustments" class="nav-link" data-scroll-target="#position-adjustments">Position adjustments</a>
+  <li><a href="#transformaciones-estadísticas" id="toc-transformaciones-estadísticas" class="nav-link" data-scroll-target="#transformaciones-estadísticas">Transformaciones estadísticas</a></li>
+  <li><a href="#ajustes-de-posición" id="toc-ajustes-de-posición" class="nav-link" data-scroll-target="#ajustes-de-posición">Ajustes de posición</a>
   <ul class="collapse">
-  <li><a href="#exercises-2" id="toc-exercises-2" class="nav-link" data-scroll-target="#exercises-2">Exercises</a></li>
+  <li><a href="#ejercicios-2" id="toc-ejercicios-2" class="nav-link" data-scroll-target="#ejercicios-2">Ejercicios</a></li>
   </ul></li>
-  <li><a href="#the-layered-grammar-of-graphics" id="toc-the-layered-grammar-of-graphics" class="nav-link" data-scroll-target="#the-layered-grammar-of-graphics">The layered grammar of graphics</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#la-gramática-de-gráficos-por-capas" id="toc-la-gramática-de-gráficos-por-capas" class="nav-link" data-scroll-target="#la-gramática-de-gráficos-por-capas">La gramática de gráficos por capas</a></li>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link" data-scroll-target="#resumen">Resumen</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.dev/aeturrell/python4DS/blob/main/vis-layers.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/aeturrell/python4DS/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.dev/aeturrell/python4DS/blob/main/vis-layers.ipynb" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/aeturrell/python4DS/issues/new" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./visualise.html">Visualise</a></li><li class="breadcrumb-item"><a href="./vis-layers.html"><span class="chapter-title">Layers</span></a></li></ol></nav>
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./visualise.html">Visualizar</a></li><li class="breadcrumb-item"><a href="./vis-layers.html"><span class="chapter-title">Capas</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-vis-layers" class="quarto-section-identifier"><span class="chapter-title">Layers</span></span></h1>
+<h1 class="title"><span id="sec-vis-layers" class="quarto-section-identifier"><span class="chapter-title">Capas</span></span></h1>
 </div>
 
 
@@ -482,23 +655,23 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </header>
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>In the previous chapters, you’ve learned much more than just how to make scatterplots, bar charts, and boxplots. You learned a foundation that you can use to make <em>any</em> type of plot with <strong>lets-plot</strong>.</p>
-<p>In this chapter, you’ll expand on that foundation as you learn about the layered grammar of graphics. We’ll start with a deeper dive into aesthetic mappings, geometric objects, and facets. Then, you will learn about statistical transformations <strong>lets-plot</strong> makes under the hood when creating a plot. These transformations are used to calculate new values to plot, such as the heights of bars in a bar plot or medians in a box plot. You will also learn about position adjustments, which modify how geoms are displayed in your plots. Finally, we’ll briefly introduce coordinate systems.</p>
-<p>We will not cover every single function and option for each of these layers, but we will walk you through the most important and commonly used functionality provided by <strong>lets-plot</strong>.</p>
-<section id="prerequisites" class="level3">
-<h3 class="anchored" data-anchor-id="prerequisites">Prerequisites</h3>
-<p>You will need to install the <strong>letsplot</strong> package for this chapter, as well as <strong>pandas</strong>.</p>
-<p>In your Python session, import the libraries we’ll be using:</p>
+<section id="introducción" class="level2">
+<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
+<p>En los capítulos anteriores aprendiste mucho más que a hacer scatter plots, gráficos de barras y boxplots. Aprendiste una base que puedes usar para hacer <em>cualquier</em> tipo de gráfico con <strong>lets-plot</strong>.</p>
+<p>En este capítulo ampliarás esa base mientras aprendes sobre la gramática de gráficos por capas. Empezaremos profundizando en los mapeos estéticos, los objetos geométricos y las facetas. Luego, aprenderás sobre las transformaciones estadísticas que <strong>lets-plot</strong> realiza internamente al crear un gráfico. Estas transformaciones se usan para calcular nuevos valores que graficar, como las alturas de las barras en un gráfico de barras o las medianas en un boxplot. También aprenderás sobre los ajustes de posición, que modifican cómo se muestran los geoms en tus gráficos. Por último, presentaremos brevemente los sistemas de coordenadas.</p>
+<p>No cubriremos cada función y opción de cada una de estas capas, pero te guiaremos por la funcionalidad más importante y de uso más frecuente que ofrece <strong>lets-plot</strong>.</p>
+<section id="requisitos-previos" class="level3">
+<h3 class="anchored" data-anchor-id="requisitos-previos">Requisitos previos</h3>
+<p>Para este capítulo necesitarás instalar el paquete <strong>letsplot</strong>, además de <strong>pandas</strong>.</p>
+<p>En tu sesión de Python, importa las librerías que usaremos:</p>
 <div id="a86fb211" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> lets_plot <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>LetsPlot.setup_html()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>LetsPlot.setup_html()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
-            <div id="JVGcwa"></div>
+            <div id="gtx9VZ"></div>
             <script type="text/javascript" data-lets-plot-script="library">
                 if(!window.letsPlotCallQueue) {
                     window.letsPlotCallQueue = [];
@@ -522,9 +695,9 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
                         var div = document.createElement("div");
                         div.style.color = 'darkred';
                         div.textContent = 'Error loading Lets-Plot JS';
-                        document.getElementById("JVGcwa").appendChild(div);
+                        document.getElementById("gtx9VZ").appendChild(div);
                     };
-                    var e = document.getElementById("JVGcwa");
+                    var e = document.getElementById("gtx9VZ");
                     e.appendChild(script);
                 })()
             </script>
@@ -533,14 +706,14 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </div>
 </section>
 </section>
-<section id="aesthetic-mappings" class="level2">
-<h2 class="anchored" data-anchor-id="aesthetic-mappings">Aesthetic mappings</h2>
+<section id="mapeos-estéticos" class="level2">
+<h2 class="anchored" data-anchor-id="mapeos-estéticos">Mapeos estéticos</h2>
 <blockquote class="blockquote">
-<p>“The greatest value of a picture is when it forces us to notice what we never expected to see.” — John Tukey</p>
+<p>“El mayor valor de una imagen es cuando nos obliga a notar lo que nunca esperábamos ver.” — John Tukey</p>
 </blockquote>
-<p>We’re going to use the <code>mpg</code> dataset for this section, so let’s download it.</p>
+<p>En esta sección usaremos el dataset <code>mpg</code>, así que vamos a descargarlo.</p>
 <div id="39a6d993" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="op">=</span> pd.read_csv(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="op">=</span> pd.read_csv(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://vincentarelbundock.github.io/Rdatasets/csv/ggplot2/mpg.csv"</span>, index_col<span class="op">=</span><span class="dv">0</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -559,12 +732,12 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"class"</span>: <span class="st">"category"</span>,</span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>mpg.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>mpg.head()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -580,7 +753,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <th data-quarto-table-cell-role="th">fl</th>
 <th data-quarto-table-cell-role="th">class</th>
 </tr>
-<tr class="odd">
+<tr class="even">
 <th data-quarto-table-cell-role="th">rownames</th>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th"></th>
@@ -597,7 +770,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>audi</td>
 <td>a4</td>
 <td>1.8</td>
@@ -611,7 +784,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <td>compact</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">2</td>
+<th data-quarto-table-cell-role="th">2</th>
 <td>audi</td>
 <td>a4</td>
 <td>1.8</td>
@@ -625,7 +798,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <td>compact</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">3</td>
+<th data-quarto-table-cell-role="th">3</th>
 <td>audi</td>
 <td>a4</td>
 <td>2.0</td>
@@ -639,7 +812,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <td>compact</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">4</td>
+<th data-quarto-table-cell-role="th">4</th>
 <td>audi</td>
 <td>a4</td>
 <td>2.0</td>
@@ -653,7 +826,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <td>compact</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">5</td>
+<th data-quarto-table-cell-role="th">5</th>
 <td>audi</td>
 <td>a4</td>
 <td>2.8</td>
@@ -672,23 +845,23 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>Among the variables in <code>mpg</code> are:</p>
+<p>Entre las variables de <code>mpg</code> están:</p>
 <ol type="1">
-<li><p><code>displ</code>: A car’s engine size, in liters. A numerical variable.</p></li>
-<li><p><code>hwy</code>: A car’s fuel efficiency on the highway, in miles per gallon (mpg). A car with a low fuel efficiency consumes more fuel than a car with a high fuel efficiency when they travel the same distance. A numerical variable.</p></li>
-<li><p><code>class</code>: Type of car. A categorical variable.</p></li>
+<li><p><code>displ</code>: el tamaño del motor de un auto, en litros. Una variable numérica.</p></li>
+<li><p><code>hwy</code>: la eficiencia de combustible de un auto en carretera, en millas por galón (mpg). Un auto con baja eficiencia de combustible consume más combustible que uno con alta eficiencia cuando recorren la misma distancia. Una variable numérica.</p></li>
+<li><p><code>class</code>: tipo de auto. Una variable categórica.</p></li>
 </ol>
-<p>Let’s start by visualising the relationship between <code>displ</code> and <code>hwy</code> for various <code>class</code>es of cars. We can do this with a scatterplot where the numerical variables are mapped to the <code>x</code> and <code>y</code> aesthetics and the categorical variable is mapped to an aesthetic like <code>color</code> or <code>shape</code>.</p>
+<p>Empecemos visualizando la relación entre <code>displ</code> y <code>hwy</code> para varias clases (<code>class</code>) de autos. Podemos hacerlo con un scatter plot en el que las variables numéricas se mapean a las estéticas <code>x</code> e <code>y</code>, y la variable categórica se mapea a una estética como <code>color</code> o <code>shape</code>.</p>
 <div id="fe77349a" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>, color<span class="op">=</span><span class="st">"class"</span>)) <span class="op">+</span> geom_point())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>, color<span class="op">=</span><span class="st">"class"</span>)) <span class="op">+</span> geom_point())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
-   <div id="ncnXbC"></div>
+   <div id="os3QQJ"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("ncnXbC");
+   var containerDiv = document.getElementById("os3QQJ");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -793,15 +966,15 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </div>
 </div>
 <div id="e77b5640" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>, shape<span class="op">=</span><span class="st">"class"</span>)) <span class="op">+</span> geom_point())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>, shape<span class="op">=</span><span class="st">"class"</span>)) <span class="op">+</span> geom_point())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
-   <div id="T7eVLq"></div>
+   <div id="Zt9Wvi"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("T7eVLq");
+   var containerDiv = document.getElementById("Zt9Wvi");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -905,17 +1078,17 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
    </script>
 </div>
 </div>
-<p>Similarly, we can map <code>class</code> to <code>size</code> or <code>alpha</code> aesthetics as well, which control the shape and the transparency of the points, respectively.</p>
+<p>De manera similar, también podemos mapear <code>class</code> a las estéticas <code>size</code> o <code>alpha</code>, que controlan la forma y la transparencia de los puntos, respectivamente.</p>
 <div id="ef221330" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>, size<span class="op">=</span><span class="st">"class"</span>)) <span class="op">+</span> geom_point())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>, size<span class="op">=</span><span class="st">"class"</span>)) <span class="op">+</span> geom_point())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
-   <div id="u2N9PU"></div>
+   <div id="pLQbce"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("u2N9PU");
+   var containerDiv = document.getElementById("pLQbce");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -1020,15 +1193,15 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </div>
 </div>
 <div id="d042255e" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>, alpha<span class="op">=</span><span class="st">"class"</span>)) <span class="op">+</span> geom_point())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>, alpha<span class="op">=</span><span class="st">"class"</span>)) <span class="op">+</span> geom_point())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-   <div id="u0S9Fz"></div>
+   <div id="CN2eqb"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("u0S9Fz");
+   var containerDiv = document.getElementById("CN2eqb");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -1132,19 +1305,19 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
    </script>
 </div>
 </div>
-<p>While we are able to do it, mapping an unordered discrete (categorical) variable (<code>class</code>) to an ordered aesthetic variable (<code>size</code> or <code>alpha</code>) is generally not a good idea because it implies a ranking that does not in fact exist.</p>
-<p>Once you map an aesthetic, <strong>lets-plot</strong> takes care of the rest. It selects a reasonable scale to use with the aesthetic, and it constructs a legend that explains the mapping between levels and values. For x and y aesthetics, <strong>lets-plot</strong> does not create a legend, but it creates an axis line with tick marks and a label. The axis line provides the same information as a legend; it explains the mapping between locations and values.</p>
-<p>You can also set the visual properties of your geom manually as an argument of your geom function (<em>outside</em> of <code>aes()</code>) instead of relying on a variable mapping to determine the appearance. For example, we can make all of the points in our plot blue:</p>
+<p>Aunque podemos hacerlo, mapear una variable discreta no ordenada (categórica) (<code>class</code>) a una estética ordenada (<code>size</code> o <code>alpha</code>) en general no es buena idea, porque implica una jerarquía que en realidad no existe.</p>
+<p>Una vez que mapeas una estética, <strong>lets-plot</strong> se encarga del resto. Selecciona una escala razonable para usar con la estética y construye una leyenda que explica el mapeo entre niveles y valores. Para las estéticas x e y, <strong>lets-plot</strong> no crea una leyenda, pero sí crea una línea de eje con marcas y una etiqueta. La línea del eje proporciona la misma información que una leyenda: explica el mapeo entre ubicaciones y valores.</p>
+<p>También puedes fijar manualmente las propiedades visuales de tu geom como argumento de la función geom (<em>fuera</em> de <code>aes()</code>) en lugar de depender de un mapeo de variables para determinar su apariencia. Por ejemplo, podemos hacer que todos los puntos de nuestro gráfico sean azules:</p>
 <div id="618edcb4" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>)) <span class="op">+</span> geom_point(color<span class="op">=</span><span class="st">"blue"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>)) <span class="op">+</span> geom_point(color<span class="op">=</span><span class="st">"blue"</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
-   <div id="DCnlpR"></div>
+   <div id="58sAWE"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("DCnlpR");
+   var containerDiv = document.getElementById("58sAWE");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -1247,39 +1420,39 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
    </script>
 </div>
 </div>
-<p>Here, the colour doesn’t convey information about a variable, but only changes the appearance of the plot. You’ll need to pick a value that makes sense for that aesthetic:</p>
+<p>Aquí, el color no transmite información sobre una variable, sino que solo cambia la apariencia del gráfico. Tendrás que elegir un valor que tenga sentido para esa estética:</p>
 <ul>
-<li>The name of a color as a character string, e.g., <code>color = "blue"</code></li>
-<li>The size of a point in mm, e.g., <code>size = 1</code></li>
-<li>The shape of a point as a number, e.g, <code>shape = 1</code>.</li>
+<li>El nombre de un color como string, p.&nbsp;ej., <code>color = "blue"</code></li>
+<li>El tamaño de un punto en mm, p.&nbsp;ej., <code>size = 1</code></li>
+<li>La forma de un punto como número, p.&nbsp;ej., <code>shape = 1</code>.</li>
 </ul>
-<p>Try changing the above plot but, instead of specifying colour, try specifying the shape aesthetic. What do you get with shape set to 1, 2, or 3?</p>
-<p>So far we have discussed aesthetics that we can map or set in a scatterplot, when using a point geom.</p>
-<p>The specific aesthetics you can use for a plot depend on the geom you use to represent the data. In the next section we dive deeper into geoms.</p>
+<p>Intenta modificar el gráfico anterior pero, en lugar de especificar el color, especifica la estética de forma. ¿Qué obtienes con shape igual a 1, 2 o 3?</p>
+<p>Hasta ahora hemos hablado de las estéticas que podemos mapear o fijar en un scatter plot, al usar un geom de puntos.</p>
+<p>Las estéticas específicas que puedes usar en un gráfico dependen del geom que uses para representar los datos. En la siguiente sección profundizamos en los geoms.</p>
 <ol type="1">
-<li><p>Create a scatterplot of <code>hwy</code> vs.&nbsp;<code>displ</code> where the points are pink filled in triangles.</p></li>
-<li><p>Why does the following code not result in a plot with blue points?</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<li><p>Crea un scatter plot de <code>hwy</code> frente a <code>displ</code> en el que los puntos sean triángulos rellenos de color rosa.</p></li>
+<li><p>¿Por qué el siguiente código no produce un gráfico con puntos azules?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    ggplot(mpg) <span class="op">+</span> </span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  geom_point(aes(x <span class="op">=</span> <span class="st">"displ"</span>, y <span class="op">=</span> <span class="st">"hwy"</span>, color <span class="op">=</span> <span class="st">"blue"</span>))</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p>What does the <code>stroke</code> aesthetic do? What shapes does it work with? (Hint: use <code>stroke</code> in the global aesthetic and <code>shape</code> in <code>geom_point()</code>)</p></li>
-<li><p>Try changing the last plot from above but, instead of specifying colour, try specifying the shape aesthetic. What do you get with shape set to 1, 2, or 3?</p></li>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>¿Qué hace la estética <code>stroke</code>? ¿Con qué formas funciona? (Pista: usa <code>stroke</code> en la estética global y <code>shape</code> en <code>geom_point()</code>)</p></li>
+<li><p>Intenta modificar el último gráfico de arriba pero, en lugar de especificar el color, especifica la estética de forma. ¿Qué obtienes con shape igual a 1, 2 o 3?</p></li>
 </ol>
 </section>
-<section id="geometric-objects" class="level2">
-<h2 class="anchored" data-anchor-id="geometric-objects">Geometric objects</h2>
-<p>How are these two plots similar?</p>
+<section id="objetos-geométricos" class="level2">
+<h2 class="anchored" data-anchor-id="objetos-geométricos">Objetos geométricos</h2>
+<p>¿En qué se parecen estos dos gráficos?</p>
 <div id="277a4c0f" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>)) <span class="op">+</span> geom_point(size<span class="op">=</span><span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>)) <span class="op">+</span> geom_point(size<span class="op">=</span><span class="dv">4</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
-   <div id="GUnN26"></div>
+   <div id="WoGCzv"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("GUnN26");
+   var containerDiv = document.getElementById("WoGCzv");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -1383,15 +1556,15 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </div>
 </div>
 <div id="07247ba9" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>)) <span class="op">+</span> geom_smooth(method<span class="op">=</span><span class="st">"loess"</span>, size<span class="op">=</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>)) <span class="op">+</span> geom_smooth(method<span class="op">=</span><span class="st">"loess"</span>, size<span class="op">=</span><span class="dv">2</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
-   <div id="JhP7Gi"></div>
+   <div id="92MJn0"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("JhP7Gi");
+   var containerDiv = document.getElementById("92MJn0");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -1497,20 +1670,20 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
    </script>
 </div>
 </div>
-<p>Both plots contain the same x variable, the same y variable, and both describe the same data. But the plots are not identical. Each plot uses a different geometric object, geom, to represent the data. The plot on the left uses the point geom, and the plot on the right uses the smooth geom, a smooth line fitted to the data.</p>
-<p>To change the geom in your plot, change the geom function that you add to <code>ggplot()</code>.</p>
-<p>Every geom function in <strong>lets-plot</strong> takes a <code>mapping</code> argument, either defined locally in the geom layer or globally in the <code>ggplot()</code> layer. However, not every aesthetic works with every geom. You could set the shape of a point, but you couldn’t set the “shape” of a line. If you try, <strong>lets-plot</strong> will silently ignore that aesthetic mapping. On the other hand, you <em>could</em> set the linetype of a line. <code>geom_smooth()</code> will draw a different line, with a different linetype, for each unique value of the variable that you map to linetype.</p>
-<p>Let’s take a look:</p>
+<p>Ambos gráficos contienen la misma variable x, la misma variable y, y ambos describen los mismos datos. Pero los gráficos no son idénticos. Cada gráfico usa un objeto geométrico distinto, o geom, para representar los datos. El gráfico de la izquierda usa el geom de puntos, y el de la derecha usa el geom smooth, una línea suavizada ajustada a los datos.</p>
+<p>Para cambiar el geom de tu gráfico, cambia la función geom que añades a <code>ggplot()</code>.</p>
+<p>Cada función geom de <strong>lets-plot</strong> acepta un argumento <code>mapping</code>, definido localmente en la capa del geom o globalmente en la capa <code>ggplot()</code>. Sin embargo, no todas las estéticas funcionan con todos los geoms. Puedes fijar la forma de un punto, pero no podrías fijar la “forma” de una línea. Si lo intentas, <strong>lets-plot</strong> ignorará silenciosamente ese mapeo estético. En cambio, <em>sí</em> podrías fijar el tipo de línea (linetype). <code>geom_smooth()</code> dibujará una línea diferente, con un tipo de línea diferente, para cada valor único de la variable que mapees a linetype.</p>
+<p>Veamos:</p>
 <div id="4b20c825" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>, line<span class="op">=</span><span class="st">"drv"</span>)) <span class="op">+</span> geom_smooth(method<span class="op">=</span><span class="st">"loess"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>, line<span class="op">=</span><span class="st">"drv"</span>)) <span class="op">+</span> geom_smooth(method<span class="op">=</span><span class="st">"loess"</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
-   <div id="7vM4q6"></div>
+   <div id="l1lozz"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("7vM4q6");
+   var containerDiv = document.getElementById("l1lozz");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -1557,15 +1730,15 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </div>
 </div>
 <div id="84df3e78" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>, linetype<span class="op">=</span><span class="st">"drv"</span>)) <span class="op">+</span> geom_smooth(method<span class="op">=</span><span class="st">"loess"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>, linetype<span class="op">=</span><span class="st">"drv"</span>)) <span class="op">+</span> geom_smooth(method<span class="op">=</span><span class="st">"loess"</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
-   <div id="hSCZiH"></div>
+   <div id="qGKpDb"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("hSCZiH");
+   var containerDiv = document.getElementById("qGKpDb");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -1672,22 +1845,22 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
    </script>
 </div>
 </div>
-<p>Here, <code>geom_smooth()</code> separates the cars into three lines based on their <code>drv</code> value, which describes a car’s drive train. One line describes all of the points that have a <code>4</code> value, one line describes all of the points that have an <code>f</code> value, and one line describes all of the points that have an <code>r</code> value. Here, <code>4</code> stands for four-wheel drive, <code>f</code> for front-wheel drive, and <code>r</code> for rear-wheel drive.</p>
-<p>If this is too confusing, we can make it clearer by overlaying the lines on top of the raw data and then coloring everything according to <code>drv</code>.</p>
+<p>Aquí, <code>geom_smooth()</code> separa los autos en tres líneas según su valor de <code>drv</code>, que describe el tipo de tracción del auto. Una línea describe todos los puntos con valor <code>4</code>, otra describe todos los puntos con valor <code>f</code> y otra describe todos los puntos con valor <code>r</code>. Aquí, <code>4</code> significa tracción en las cuatro ruedas, <code>f</code> tracción delantera y <code>r</code> tracción trasera.</p>
+<p>Si esto resulta demasiado confuso, podemos aclararlo superponiendo las líneas sobre los datos sin procesar y luego coloreando todo según <code>drv</code>.</p>
 <div id="c9e8d92f" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>, color<span class="op">=</span><span class="st">"drv"</span>))</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point()</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_smooth(aes(linetype<span class="op">=</span><span class="st">"drv"</span>), method<span class="op">=</span><span class="st">"loess"</span>)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
-   <div id="cJMj0q"></div>
+   <div id="dZpry0"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("cJMj0q");
+   var containerDiv = document.getElementById("dZpry0");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -1806,19 +1979,19 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
    </script>
 </div>
 </div>
-<p>Notice that this plot contains two geoms in the same graph.</p>
-<p>Many geoms, like <code>geom_smooth()</code>, use a single geometric object to display multiple rows of data. For these geoms, you can set the <code>group</code> aesthetic to a categorical variable to draw multiple objects. <strong>lets-plot</strong> will draw a separate object for each unique value of the grouping variable. In practice, <strong>lets-plot</strong> will automatically group the data for these geoms whenever you map an aesthetic to a discrete variable. It is convenient to rely on this feature because the <code>group</code> aesthetic by itself does not add a legend or distinguishing features to the geoms.</p>
-<p>Note that if you place mappings in a geom function, <strong>lets-plot</strong> will treat them as local mappings for the layer. It will use these mappings to extend or overwrite the global mappings <em>for that layer only</em>. This makes it possible to display different aesthetics in different layers.</p>
+<p>Observa que este gráfico contiene dos geoms en la misma figura.</p>
+<p>Muchos geoms, como <code>geom_smooth()</code>, usan un único objeto geométrico para mostrar varias filas de datos. Para estos geoms, puedes asignar la estética <code>group</code> a una variable categórica para dibujar varios objetos. <strong>lets-plot</strong> dibujará un objeto separado para cada valor único de la variable de agrupación. En la práctica, <strong>lets-plot</strong> agrupará automáticamente los datos de estos geoms siempre que mapees una estética a una variable discreta. Es conveniente aprovechar esta característica, porque la estética <code>group</code> por sí sola no añade una leyenda ni rasgos distintivos a los geoms.</p>
+<p>Ten en cuenta que si colocas mapeos en una función geom, <strong>lets-plot</strong> los tratará como mapeos locales de esa capa. Usará estos mapeos para ampliar o sobrescribir los mapeos globales <em>solo para esa capa</em>. Esto permite mostrar estéticas diferentes en capas diferentes.</p>
 <div id="b3916558" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>)) <span class="op">+</span> geom_point(aes(color<span class="op">=</span><span class="st">"class"</span>)) <span class="op">+</span> geom_smooth())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>)) <span class="op">+</span> geom_point(aes(color<span class="op">=</span><span class="st">"class"</span>)) <span class="op">+</span> geom_smooth())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
-   <div id="QrROFh"></div>
+   <div id="SLFamC"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("QrROFh");
+   var containerDiv = document.getElementById("SLFamC");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -1934,24 +2107,24 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
    </script>
 </div>
 </div>
-<p>You can use the same idea to specify different data for each layer. Here, we use red points as well as open circles to highlight two-seater cars. The local data argument in <code>geom_point()</code> overrides the global data argument in <code>ggplot()</code> for that layer only.</p>
+<p>Puedes usar la misma idea para especificar datos diferentes en cada capa. Aquí usamos puntos rojos y círculos abiertos para resaltar los autos biplaza. El argumento de datos local en <code>geom_point()</code> sobrescribe el argumento de datos global en <code>ggplot()</code> solo para esa capa.</p>
 <div id="38870eb5" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>))</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point()</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point(data<span class="op">=</span>mpg.loc[mpg[<span class="st">"class"</span>] <span class="op">==</span> <span class="st">"2seater"</span>, :], color<span class="op">=</span><span class="st">"red"</span>, size<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point(</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        data<span class="op">=</span>mpg.loc[mpg[<span class="st">"class"</span>] <span class="op">==</span> <span class="st">"2seater"</span>, :], shape<span class="op">=</span><span class="dv">1</span>, size<span class="op">=</span><span class="dv">3</span>, color<span class="op">=</span><span class="st">"red"</span></span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
-   <div id="Hvb5x2"></div>
+   <div id="4Z4m4a"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("Hvb5x2");
+   var containerDiv = document.getElementById("4Z4m4a");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -2146,37 +2319,37 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
    </script>
 </div>
 </div>
-<p>Geoms are the fundamental building blocks of <strong>lets-plot</strong>. You can completely transform the look of your plot by changing its geom, and different geoms can reveal different features of your data.</p>
-<p><strong>lets-plot</strong> provides over 40 geoms but these don’t cover all possible plots one could make. You can find an overview at the relevant part of the <a href="https://lets-plot.org/pages/api.html#geometries"><strong>lets-plot</strong> documentation</a>.</p>
-<p>If you need a geom that is not included, you have three main options: 1. Look for packages that extend <strong>lets-plot</strong> and that do what you need 2. Raise an issue on the <a href="https://github.com/JetBrains/lets-plot"><strong>lets-plot</strong> Github page</a> requesting it as a new feature—but bear in mind that it might not be a priority for the maintainers, and there’s no guarantee that they’ll add it, depending on how useful it is for others and how easy it is to implemet. 3. Turn to an imperative plotting package that gives you fine-grained control so you can build your own chart from the ground up—<a href="https://matplotlib.org/"><strong>matplotlib</strong></a> is absolutely excellent for this.</p>
-<section id="exercises" class="level3">
-<h3 class="anchored" data-anchor-id="exercises">Exercises</h3>
+<p>Los geoms son los componentes fundamentales de <strong>lets-plot</strong>. Puedes transformar por completo el aspecto de tu gráfico cambiando su geom, y distintos geoms pueden revelar distintas características de tus datos.</p>
+<p><strong>lets-plot</strong> ofrece más de 40 geoms, pero no cubren todos los gráficos posibles. Puedes encontrar un resumen en la parte correspondiente de la <a href="https://lets-plot.org/pages/api.html#geometries">documentación de <strong>lets-plot</strong></a>.</p>
+<p>Si necesitas un geom que no está incluido, tienes tres opciones principales: 1. Buscar paquetes que extiendan <strong>lets-plot</strong> y que hagan lo que necesitas 2. Abrir un issue en la <a href="https://github.com/JetBrains/lets-plot">página de Github de <strong>lets-plot</strong></a> solicitándolo como nueva funcionalidad, aunque ten en cuenta que puede no ser una prioridad para los mantenedores y no hay garantía de que lo añadan, según lo útil que sea para otros y lo fácil que sea de implementar. 3. Recurrir a un paquete de gráficos imperativo que te dé un control detallado para construir tu propio gráfico desde cero; <a href="https://matplotlib.org/"><strong>matplotlib</strong></a> es absolutamente excelente para esto.</p>
+<section id="ejercicios" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicios">Ejercicios</h3>
 <ol type="1">
-<li><p>What geom would you use to draw a line chart? A boxplot? A histogram? An area chart?</p></li>
-<li><p>What effect would running the previous example:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<li><p>¿Qué geom usarías para dibujar un gráfico de líneas? ¿Un boxplot? ¿Un histograma? ¿Un gráfico de área?</p></li>
+<li><p>¿Qué efecto tendría ejecutar el ejemplo anterior:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>ggplot(mpg, aes(x <span class="op">=</span> <span class="st">"displ"</span>, y <span class="op">=</span> <span class="st">"hwy"</span>, alpha <span class="op">=</span> <span class="st">"class"</span>)) <span class="op">+</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  geom_point()</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>with the keyword argument <code>show_legend=False</code> have on the chart generated by this code?</p></li>
-<li><p>What does the <code>se</code> argument to <code>geom_smooth()</code> do?</p></li>
-<li><p>Recreate the Python code necessary to generate the following graph.</p></li>
+<li><p>¿Qué hace el argumento <code>se</code> de <code>geom_smooth()</code>?</p></li>
+<li><p>Recrea el código Python necesario para generar el siguiente gráfico.</p></li>
 </ol>
 </section>
 </section>
-<section id="facets" class="level2">
-<h2 class="anchored" data-anchor-id="facets">Facets</h2>
-<p>In <a href="data-visualise.html" class="quarto-xref"><span>Data Visualisation</span></a>, you learned about faceting with <code>facet_wrap()</code>, which splits a plot into subplots that each display one subset of the data based on a categorical variable.</p>
+<section id="facetas" class="level2">
+<h2 class="anchored" data-anchor-id="facetas">Facetas</h2>
+<p>En <a href="data-visualise.html" class="quarto-xref"><span>Visualización de datos</span></a> aprendiste sobre las facetas con <code>facet_wrap()</code>, que divide un gráfico en subgráficos que muestran cada uno un subconjunto de los datos según una variable categórica.</p>
 <div id="cb651300" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>)) <span class="op">+</span> geom_point() <span class="op">+</span> facet_wrap(<span class="st">"cyl"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>)) <span class="op">+</span> geom_point() <span class="op">+</span> facet_wrap(<span class="st">"cyl"</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
-   <div id="KOHxUo"></div>
+   <div id="7eBAC9"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("KOHxUo");
+   var containerDiv = document.getElementById("7eBAC9");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -2285,17 +2458,17 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
    </script>
 </div>
 </div>
-<p>To facet your plot with the combination of two variables, switch from <code>facet_wrap()</code> to <code>facet_grid()</code>.</p>
+<p>Para dividir tu gráfico en facetas según la combinación de dos variables, cambia de <code>facet_wrap()</code> a <code>facet_grid()</code>.</p>
 <div id="61481052" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>)) <span class="op">+</span> geom_point() <span class="op">+</span> facet_grid(<span class="st">"drv"</span>, <span class="st">"cyl"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>)) <span class="op">+</span> geom_point() <span class="op">+</span> facet_grid(<span class="st">"drv"</span>, <span class="st">"cyl"</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
-   <div id="8dZyBH"></div>
+   <div id="DiRDJS"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("8dZyBH");
+   var containerDiv = document.getElementById("DiRDJS");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -2406,21 +2579,21 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
    </script>
 </div>
 </div>
-<p>By default each of the facets share the same scale and range for x and y axes. This is useful when you want to compare data across facets, and is the recommended default, but it can be limiting when you want to visualise the relationship within each facet better. Setting the <code>scales</code> argument in a faceting function to <code>"free"</code> will allow for different axis scales across both rows and columns, <code>"free_x"</code> will allow for different scales across rows, and <code>"free_y"</code> will allow for different scales across columns.</p>
+<p>De forma predeterminada, todas las facetas comparten la misma escala y el mismo rango en los ejes x e y. Esto resulta útil cuando quieres comparar datos entre facetas, y es la opción predeterminada recomendada, pero puede ser limitante cuando quieres visualizar mejor la relación dentro de cada faceta. Si estableces el argumento <code>scales</code> de una función de facetado en <code>"free"</code>, permitirás escalas de ejes distintas tanto en filas como en columnas; <code>"free_x"</code> permitirá escalas distintas entre filas, y <code>"free_y"</code> permitirá escalas distintas entre columnas.</p>
 <div id="adcd9079" class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>))</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point()</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> facet_grid(<span class="st">"drv"</span>, <span class="st">"cyl"</span>, scales<span class="op">=</span><span class="st">"free_y"</span>)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
-   <div id="IYsKnb"></div>
+   <div id="P9G42P"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("IYsKnb");
+   var containerDiv = document.getElementById("P9G42P");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -2533,15 +2706,15 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </div>
 </div>
 <div id="ceb2a354" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg) <span class="op">+</span> geom_point(aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>)) <span class="op">+</span> facet_wrap(<span class="st">"class"</span>, nrow<span class="op">=</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg) <span class="op">+</span> geom_point(aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>)) <span class="op">+</span> facet_wrap(<span class="st">"class"</span>, nrow<span class="op">=</span><span class="dv">2</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
-   <div id="cLsDTv"></div>
+   <div id="9tbe9Z"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("cLsDTv");
+   var containerDiv = document.getElementById("9tbe9Z");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -2651,17 +2824,17 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
    </script>
 </div>
 </div>
-<section id="exercises-1" class="level3">
-<h3 class="anchored" data-anchor-id="exercises-1">Exercises</h3>
+<section id="ejercicios-1" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicios-1">Ejercicios</h3>
 <ol type="1">
-<li><p>What happens if you facet on a continuous variable?</p></li>
-<li><p>What do the empty cells in plot with <code>facet_grid("drv", "cyl")</code> mean? Run the following code. How do they relate to the resulting plot?</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>    (</span>
+<li><p>¿Qué ocurre si haces facetas sobre una variable continua?</p></li>
+<li><p>¿Qué significan las celdas vacías del gráfico con <code>facet_grid("drv", "cyl")</code>? Ejecuta el siguiente código. ¿Qué relación tienen con el gráfico resultante?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>    (</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>      ggplot(mpg) <span class="op">+</span> </span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  geom_point(aes(x <span class="op">=</span> <span class="st">"drv"</span>, y <span class="op">=</span> <span class="st">"cyl"</span>))</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p>What plots does the following code make? What does omitting the second variable do?</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>¿Qué gráficos genera el siguiente código? ¿Qué efecto tiene omitir la segunda variable?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  ggplot(mpg) <span class="op">+</span> </span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  geom_point(aes(x <span class="op">=</span> <span class="st">"displ"</span>, y <span class="op">=</span> <span class="st">"hwy"</span>)) <span class="op">+</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  facet_grid(<span class="st">"drv"</span>)</span>
@@ -2671,29 +2844,29 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  ggplot(mpg) <span class="op">+</span> </span>
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  geom_point(aes(x <span class="op">=</span> displ, y <span class="op">=</span> <span class="st">"hwy"</span>)) <span class="op">+</span></span>
 <span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  facet_grid(<span class="st">"cyl"</span>)</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p>Take the first faceted plot in this section:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Toma el primer gráfico con facetas de esta sección:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    ggplot(mpg) <span class="op">+</span> </span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>      geom_point(aes(x <span class="op">=</span> <span class="st">"displ"</span>, y <span class="op">=</span> <span class="st">"hwy"</span>)) <span class="op">+</span> </span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>      facet_wrap(<span class="st">"class"</span>, nrow <span class="op">=</span> <span class="dv">2</span>)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>What are the advantages to using faceting instead of the color aesthetic? What are the disadvantages? How might the balance change if you had a larger dataset?</p></li>
-<li><p>Read <code>help(facet_wrap)</code> or hover your mouse over <code>facet_wrap()</code> in Visual Studio Code. What does <code>nrow</code> do? What does <code>ncol</code> do? What other options control the layout of the individual panels? Why doesn’t <code>facet_grid()</code> have <code>nrow</code> and <code>ncol</code> arguments?</p></li>
-<li><p>Recreate the following plot using <code>facet_wrap()</code> instead of <code>facet_grid()</code>. How do the positions of the facet labels change?</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>¿Qué ventajas tiene usar facetas en lugar de la estética de color? ¿Cuáles son las desventajas? ¿Cómo podría cambiar el equilibrio si tuvieras un dataset más grande?</p></li>
+<li><p>Lee <code>help(facet_wrap)</code> o pasa el ratón por encima de <code>facet_wrap()</code> en Visual Studio Code. ¿Qué hace <code>nrow</code>? ¿Qué hace <code>ncol</code>? ¿Qué otras opciones controlan la disposición de los paneles individuales? ¿Por qué <code>facet_grid()</code> no tiene los argumentos <code>nrow</code> y <code>ncol</code>?</p></li>
+<li><p>Recrea el siguiente gráfico usando <code>facet_wrap()</code> en lugar de <code>facet_grid()</code>. ¿Cómo cambian las posiciones de las etiquetas de las facetas?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    ggplot(mpg) <span class="op">+</span> </span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>      geom_point(aes(x <span class="op">=</span> <span class="st">"displ"</span>, y <span class="op">=</span> <span class="st">"hwy"</span>)) <span class="op">+</span></span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>      facet_grid(<span class="st">"drv"</span>)</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></li>
 </ol>
 </section>
 </section>
-<section id="statistical-transformations" class="level2">
-<h2 class="anchored" data-anchor-id="statistical-transformations">Statistical transformations</h2>
-<p>Consider a basic bar chart, drawn with <code>geom_bar()</code> or <code>geom_col()</code>. The following chart displays the total number of diamonds in the <code>diamonds</code> dataset, grouped by <code>cut</code>. The <code>diamonds</code> dataset contains information on ~54,000 diamonds, including the <code>price</code>, <code>carat</code>, <code>color</code>, <code>clarity</code>, and <code>cut</code> of each diamond. We’ll load it in a moment. The chart shows that more diamonds are available with high quality cuts than with low quality cuts.</p>
+<section id="transformaciones-estadísticas" class="level2">
+<h2 class="anchored" data-anchor-id="transformaciones-estadísticas">Transformaciones estadísticas</h2>
+<p>Considera un gráfico de barras básico, dibujado con <code>geom_bar()</code> o <code>geom_col()</code>. El siguiente gráfico muestra el número total de diamantes del dataset <code>diamonds</code>, agrupados por <code>cut</code>. El dataset <code>diamonds</code> contiene información sobre ~54.000 diamantes, incluidos el <code>price</code>, <code>carat</code>, <code>color</code>, <code>clarity</code> y <code>cut</code> de cada diamante. Lo cargaremos en un momento. El gráfico muestra que hay más diamantes disponibles con cortes de alta calidad que con cortes de baja calidad.</p>
 <div id="f379e31b" class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="op">=</span> pd.read_csv(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="op">=</span> pd.read_csv(</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://vincentarelbundock.github.io/Rdatasets/csv/ggplot2/diamonds.csv"</span>,</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    index_col<span class="op">=</span><span class="dv">0</span>,</span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -2701,12 +2874,12 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>diamonds[<span class="st">"cut"</span>] <span class="op">=</span> diamonds[<span class="st">"cut"</span>].astype(</span>
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    pd.CategoricalDtype(categories<span class="op">=</span>diamonds_cut_order, ordered<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>diamonds.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>diamonds.head()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -2721,7 +2894,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <th data-quarto-table-cell-role="th">y</th>
 <th data-quarto-table-cell-role="th">z</th>
 </tr>
-<tr class="odd">
+<tr class="even">
 <th data-quarto-table-cell-role="th">rownames</th>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th"></th>
@@ -2737,7 +2910,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>0.23</td>
 <td>Ideal</td>
 <td>E</td>
@@ -2750,7 +2923,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <td>2.43</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">2</td>
+<th data-quarto-table-cell-role="th">2</th>
 <td>0.21</td>
 <td>Premium</td>
 <td>E</td>
@@ -2763,7 +2936,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <td>2.31</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">3</td>
+<th data-quarto-table-cell-role="th">3</th>
 <td>0.23</td>
 <td>Good</td>
 <td>E</td>
@@ -2776,7 +2949,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <td>2.31</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">4</td>
+<th data-quarto-table-cell-role="th">4</th>
 <td>0.29</td>
 <td>Premium</td>
 <td>I</td>
@@ -2789,7 +2962,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <td>2.63</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">5</td>
+<th data-quarto-table-cell-role="th">5</th>
 <td>0.31</td>
 <td>Good</td>
 <td>J</td>
@@ -2808,15 +2981,15 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </div>
 </div>
 <div id="d8faf1ab" class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>(ggplot(diamonds, aes(x<span class="op">=</span><span class="st">"cut"</span>)) <span class="op">+</span> geom_bar())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>(ggplot(diamonds, aes(x<span class="op">=</span><span class="st">"cut"</span>)) <span class="op">+</span> geom_bar())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
-   <div id="oSLyfb"></div>
+   <div id="k52HHT"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("oSLyfb");
+   var containerDiv = document.getElementById("k52HHT");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -2919,32 +3092,32 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
    </script>
 </div>
 </div>
-<p>On the x-axis, the chart displays <code>cut</code>, a variable from <code>diamonds</code>. On the y-axis, it displays count, but count is not a variable in <code>diamonds</code>! Where does count come from? Many graphs, like scatterplots, plot the raw values of your dataset. Other graphs, like bar charts, calculate new values to plot:</p>
+<p>En el eje x, el gráfico muestra <code>cut</code>, una variable de <code>diamonds</code>. En el eje y, muestra el conteo, ¡pero el conteo no es una variable de <code>diamonds</code>! ¿De dónde sale el conteo? Muchos gráficos, como los scatter plots, representan los valores brutos de tu dataset. Otros gráficos, como los de barras, calculan nuevos valores para representar:</p>
 <ul>
-<li><p>Bar charts, histograms, and frequency polygons bin your data and then plot bin counts, the number of points that fall in each bin.</p></li>
-<li><p>Smoothers fit a model to your data and then plot predictions from the model.</p></li>
-<li><p>Boxplots compute the five-number summary of the distribution and then display that summary as a specially formatted box.</p></li>
+<li><p>Los gráficos de barras, los histogramas y los polígonos de frecuencia agrupan tus datos en intervalos (bins) y luego representan el conteo de cada intervalo, es decir, el número de puntos que caen en cada uno.</p></li>
+<li><p>Los suavizadores ajustan un modelo a tus datos y luego representan las predicciones del modelo.</p></li>
+<li><p>Los boxplots calculan el resumen de cinco números de la distribución y luego muestran ese resumen como una caja con un formato especial.</p></li>
 </ul>
-<p>The algorithm used to calculate new values for a graph is called a <strong>stat</strong>, short for statistical transformation. The figure below shows how this process works with <code>geom_bar()</code>.</p>
+<p>El algoritmo que se usa para calcular los nuevos valores de un gráfico se llama <strong>stat</strong>, abreviatura de transformación estadística (<em>statistical transformation</em>). La figura siguiente muestra cómo funciona este proceso con <code>geom_bar()</code>.</p>
 <p><img src="https://r4ds.hadley.nz/images/visualization-stat-bar.png" class="img-fluid"></p>
-<p>You can learn which stat a geom uses by inspecting the default value for the <code>stat</code> argument. For example, <code>help(geom_bar)</code> (or hovering your mouse over the function written in code) shows that the default value for <code>stat</code> is “count”, which means that <code>geom_bar()</code> uses counts of the number of occurrences.</p>
-<p>Every geom has a default stat; and every stat has a default geom. This means that you can typically use geoms without worrying about the underlying statistical transformation. However, there are some reasons why you might need to use a stat explicitly; for example, you might want to override the default stat. In the code below, we change the stat of <code>geom_bar()</code> from count (the default) to identity. This lets us map the height of the bars to the raw values of a y variable.</p>
+<p>Puedes saber qué stat usa un geom inspeccionando el valor predeterminado del argumento <code>stat</code>. Por ejemplo, <code>help(geom_bar)</code> (o pasar el ratón por encima de la función escrita en el código) muestra que el valor predeterminado de <code>stat</code> es “count”, lo que significa que <code>geom_bar()</code> usa el conteo del número de ocurrencias.</p>
+<p>Cada geom tiene un stat predeterminado, y cada stat tiene un geom predeterminado. Esto significa que normalmente puedes usar los geoms sin preocuparte por la transformación estadística subyacente. Sin embargo, hay algunas razones por las que podrías necesitar usar un stat de forma explícita; por ejemplo, podrías querer sustituir el stat predeterminado. En el código siguiente, cambiamos el stat de <code>geom_bar()</code> de count (el predeterminado) a identity. Esto nos permite asignar la altura de las barras a los valores brutos de una variable y.</p>
 <div id="ca772dd5" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    ggplot(</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>        diamonds.value_counts(<span class="st">"cut"</span>).reset_index(name<span class="op">=</span><span class="st">"counts"</span>),</span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>        aes(x<span class="op">=</span><span class="st">"cut"</span>, y<span class="op">=</span><span class="st">"counts"</span>),</span>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_bar(stat<span class="op">=</span><span class="st">"identity"</span>)</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
-   <div id="x2LloT"></div>
+   <div id="HD81pY"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("x2LloT");
+   var containerDiv = document.getElementById("HD81pY");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -3026,19 +3199,19 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </div>
 </div>
 </section>
-<section id="position-adjustments" class="level2">
-<h2 class="anchored" data-anchor-id="position-adjustments">Position adjustments</h2>
-<p>There’s one more piece of magic associated with bar charts. You can colour a bar chart using either the <code>color</code> aesthetic, or, more usefully, the <code>fill</code> aesthetic:</p>
+<section id="ajustes-de-posición" class="level2">
+<h2 class="anchored" data-anchor-id="ajustes-de-posición">Ajustes de posición</h2>
+<p>Hay otra pieza de magia asociada a los gráficos de barras. Puedes colorear un gráfico de barras usando la estética <code>color</code> o, lo que es más útil, la estética <code>fill</code>:</p>
 <div id="f8da7d91" class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"drv"</span>, color<span class="op">=</span><span class="st">"drv"</span>)) <span class="op">+</span> geom_bar())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"drv"</span>, color<span class="op">=</span><span class="st">"drv"</span>)) <span class="op">+</span> geom_bar())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
-   <div id="taRNVw"></div>
+   <div id="HMLOzm"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("taRNVw");
+   var containerDiv = document.getElementById("HMLOzm");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -3141,15 +3314,15 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </div>
 </div>
 <div id="088e7550" class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"drv"</span>, fill<span class="op">=</span><span class="st">"drv"</span>)) <span class="op">+</span> geom_bar())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"drv"</span>, fill<span class="op">=</span><span class="st">"drv"</span>)) <span class="op">+</span> geom_bar())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="24">
-   <div id="rEB3XV"></div>
+   <div id="9DiKtM"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("rEB3XV");
+   var containerDiv = document.getElementById("9DiKtM");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -3251,17 +3424,17 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
    </script>
 </div>
 </div>
-<p>Note what happens if you map the fill aesthetic to another variable, like <code>class</code>: the bars are automatically stacked. Each colored rectangle represents a combination of <code>drv</code> and <code>class</code>.</p>
+<p>Fíjate en lo que ocurre si asignas la estética fill a otra variable, como <code>class</code>: las barras se apilan automáticamente. Cada rectángulo coloreado representa una combinación de <code>drv</code> y <code>class</code>.</p>
 <div id="181c70d2" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"drv"</span>, fill<span class="op">=</span><span class="st">"class"</span>)) <span class="op">+</span> geom_bar())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"drv"</span>, fill<span class="op">=</span><span class="st">"class"</span>)) <span class="op">+</span> geom_bar())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
-   <div id="66Aj06"></div>
+   <div id="vgPqV5"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("66Aj06");
+   var containerDiv = document.getElementById("vgPqV5");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -3364,20 +3537,20 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
    </script>
 </div>
 </div>
-<p>The stacking is performed automatically using the <strong>position adjustment</strong> specified by the <code>position</code> argument. If you don’t want a stacked bar chart, you can use one of three other options: <code>"identity"</code>, <code>"dodge"</code> or <code>"fill"</code>.</p>
+<p>El apilado se realiza automáticamente mediante el <strong>ajuste de posición</strong> especificado por el argumento <code>position</code>. Si no quieres un gráfico de barras apiladas, puedes usar una de otras tres opciones: <code>"identity"</code>, <code>"dodge"</code> o <code>"fill"</code>.</p>
 <ul>
-<li><code>position = "identity"</code> will place each object exactly where it falls in the context of the graph. This is not very useful for bars, because it overlaps them. To see that overlapping we usually need to make the bars slightly transparent by setting <code>alpha</code> to a small value.</li>
+<li><code>position = "identity"</code> colocará cada objeto exactamente donde le corresponde en el contexto del gráfico. Esto no es muy útil para las barras, porque las superpone. Para ver esa superposición, normalmente necesitamos hacer las barras ligeramente transparentes estableciendo <code>alpha</code> en un valor pequeño.</li>
 </ul>
 <div id="a8e9c378" class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"drv"</span>, fill<span class="op">=</span><span class="st">"class"</span>)) <span class="op">+</span> geom_bar(alpha<span class="op">=</span><span class="fl">0.5</span>, position<span class="op">=</span><span class="st">"identity"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"drv"</span>, fill<span class="op">=</span><span class="st">"class"</span>)) <span class="op">+</span> geom_bar(alpha<span class="op">=</span><span class="fl">0.5</span>, position<span class="op">=</span><span class="st">"identity"</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="26">
-   <div id="mWCyZZ"></div>
+   <div id="zNKxpW"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("mWCyZZ");
+   var containerDiv = document.getElementById("zNKxpW");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -3482,20 +3655,20 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
    </script>
 </div>
 </div>
-<p>The identity position adjustment is more useful for 2d geoms, like points, where it is the default.</p>
+<p>El ajuste de posición identity es más útil para geoms 2D, como los puntos, donde es el predeterminado.</p>
 <ul>
-<li><code>position = "fill"</code> works like stacking, but makes each set of stacked bars the same height. This makes it easier to compare proportions across groups.</li>
+<li><code>position = "fill"</code> funciona como el apilado, pero hace que cada conjunto de barras apiladas tenga la misma altura. Esto facilita comparar proporciones entre grupos.</li>
 </ul>
 <div id="14205000" class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"drv"</span>, fill<span class="op">=</span><span class="st">"class"</span>)) <span class="op">+</span> geom_bar(position<span class="op">=</span><span class="st">"fill"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"drv"</span>, fill<span class="op">=</span><span class="st">"class"</span>)) <span class="op">+</span> geom_bar(position<span class="op">=</span><span class="st">"fill"</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="27">
-   <div id="GQSTQK"></div>
+   <div id="e9lSc0"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("GQSTQK");
+   var containerDiv = document.getElementById("e9lSc0");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -3600,18 +3773,18 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </div>
 </div>
 <ul>
-<li><code>position = "dodge"</code> places overlapping objects directly <em>beside</em> one another. This makes it easier to compare individual values.</li>
+<li><code>position = "dodge"</code> coloca los objetos superpuestos directamente <em>uno al lado del otro</em>. Esto facilita comparar valores individuales.</li>
 </ul>
 <div id="c33c4a03" class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"drv"</span>, fill<span class="op">=</span><span class="st">"class"</span>)) <span class="op">+</span> geom_bar(position<span class="op">=</span><span class="st">"dodge"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"drv"</span>, fill<span class="op">=</span><span class="st">"class"</span>)) <span class="op">+</span> geom_bar(position<span class="op">=</span><span class="st">"dodge"</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="28">
-   <div id="Hietbt"></div>
+   <div id="HzAazv"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("Hietbt");
+   var containerDiv = document.getElementById("HzAazv");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -3715,17 +3888,17 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
    </script>
 </div>
 </div>
-<p>There’s one other type of adjustment that’s not useful for bar charts, but can be very useful for scatterplots. Recall our first scatterplot. Did you notice that the plot displays only some of the points (even though there are 234 observations in the dataset)?</p>
+<p>Hay otro tipo de ajuste que no es útil para los gráficos de barras, pero que puede ser muy útil para los scatter plots. Recuerda nuestro primer scatter plot. ¿Te diste cuenta de que el gráfico muestra solo algunos de los puntos (aunque hay 234 observaciones en el dataset)?</p>
 <div id="ba4161de" class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>)) <span class="op">+</span> geom_point())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>)) <span class="op">+</span> geom_point())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="29">
-   <div id="9FbgVJ"></div>
+   <div id="Llx07L"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("9FbgVJ");
+   var containerDiv = document.getElementById("Llx07L");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -3827,18 +4000,18 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
    </script>
 </div>
 </div>
-<p>The underlying values of <code>hwy</code> and <code>displ</code> are rounded so the points appear on a grid and many points overlap each other. This problem is known as <strong>overplotting</strong>. This arrangement makes it difficult to see the distribution of the data. Are the data points spread equally throughout the graph, or is there one special combination of <code>hwy</code> and <code>displ</code> that contains 109 values?</p>
-<p>You can avoid this gridding by setting the position adjustment to “jitter”. <code>position = "jitter"</code> adds a small amount of random noise to each point. This spreads the points out because no two points are likely to receive the same amount of random noise.</p>
+<p>Los valores subyacentes de <code>hwy</code> y <code>displ</code> están redondeados, de modo que los puntos aparecen en una cuadrícula y muchos se superponen entre sí. Este problema se conoce como <strong>sobretrazado</strong> (<em>overplotting</em>). Esta disposición dificulta ver la distribución de los datos. ¿Están los puntos repartidos por igual en todo el gráfico, o hay una combinación especial de <code>hwy</code> y <code>displ</code> que contiene 109 valores?</p>
+<p>Puedes evitar esta cuadrícula estableciendo el ajuste de posición en “jitter”. <code>position = "jitter"</code> añade una pequeña cantidad de ruido aleatorio a cada punto. Esto dispersa los puntos, ya que es poco probable que dos puntos reciban la misma cantidad de ruido aleatorio.</p>
 <div id="414ce7af" class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>)) <span class="op">+</span> geom_point(position<span class="op">=</span><span class="st">"jitter"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"displ"</span>, y<span class="op">=</span><span class="st">"hwy"</span>)) <span class="op">+</span> geom_point(position<span class="op">=</span><span class="st">"jitter"</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="30">
-   <div id="NOihpA"></div>
+   <div id="bxaKBX"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("NOihpA");
+   var containerDiv = document.getElementById("bxaKBX");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -3941,25 +4114,25 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
    </script>
 </div>
 </div>
-<p>Adding randomness seems like a strange way to improve your plot, but while it makes your graph less accurate at small scales, it makes your graph <em>more</em> revealing at large scales.</p>
-<p>Because this is such a useful operation, <strong>letsplot</strong> comes with a shorthand for <code>geom_point(position = "jitter")</code>: <code>geom_jitter()</code>.</p>
-<p>Of course, a more sophisticated way of dealing with overplotting is via a binscatter plot, which is available in the <a href="https://nppackages.github.io/binsreg/"><strong>binsreg</strong></a> package.</p>
-<p>To learn more about position adjustment, take a look at the <a href="https://lets-plot.org/">documentation</a>.</p>
-<section id="exercises-2" class="level3">
-<h3 class="anchored" data-anchor-id="exercises-2">Exercises</h3>
+<p>Añadir aleatoriedad parece una forma extraña de mejorar tu gráfico, pero, aunque lo hace menos preciso a escalas pequeñas, lo hace <em>más</em> revelador a escalas grandes.</p>
+<p>Como es una operación tan útil, <strong>letsplot</strong> incluye un atajo para <code>geom_point(position = "jitter")</code>: <code>geom_jitter()</code>.</p>
+<p>Por supuesto, una forma más sofisticada de abordar el sobretrazado es mediante un gráfico binscatter, disponible en el paquete <a href="https://nppackages.github.io/binsreg/"><strong>binsreg</strong></a>.</p>
+<p>Para saber más sobre los ajustes de posición, consulta la <a href="https://lets-plot.org/">documentación</a>.</p>
+<section id="ejercicios-2" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicios-2">Ejercicios</h3>
 <ol type="1">
-<li>What is the problem with the following plot? How could you improve it?</li>
+<li>¿Cuál es el problema del siguiente gráfico? ¿Cómo podrías mejorarlo?</li>
 </ol>
 <div id="9bc38aef" class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"cty"</span>, y<span class="op">=</span><span class="st">"hwy"</span>)) <span class="op">+</span> geom_point())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>(ggplot(mpg, aes(x<span class="op">=</span><span class="st">"cty"</span>, y<span class="op">=</span><span class="st">"hwy"</span>)) <span class="op">+</span> geom_point())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="31">
-   <div id="aimpoW"></div>
+   <div id="FKk5pl"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("aimpoW");
+   var containerDiv = document.getElementById("FKk5pl");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -4062,424 +4235,297 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </div>
 </div>
 <ol start="2" type="1">
-<li><p>What, if anything, is the difference between the two plots? Why?</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<li><p>¿Hay alguna diferencia entre los dos gráficos? Si es así, ¿cuál? ¿Por qué?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    ggplot(mpg, aes(x <span class="op">=</span> <span class="st">"displ"</span>, y <span class="op">=</span> <span class="st">"hwy"</span>)) <span class="op">+</span></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>      geom_point()</span>
 <span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    ggplot(mpg, aes(x <span class="op">=</span> <span class="st">"displ"</span>, y <span class="op">=</span> <span class="st">"hwy"</span>)) <span class="op">+</span></span>
 <span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>      geom_point(position <span class="op">=</span> <span class="st">"identity"</span>)</span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p>What parameters to <code>geom_jitter()</code> control the amount of jittering?</p></li>
-<li><p>What’s the default position adjustment for <code>geom_boxplot()</code>? Create a visualisation of the <code>mpg</code> dataset that demonstrates it.</p></li>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>¿Qué parámetros de <code>geom_jitter()</code> controlan la cantidad de jitter?</p></li>
+<li><p>¿Cuál es el ajuste de posición predeterminado de <code>geom_boxplot()</code>? Crea una visualización del dataset <code>mpg</code> que lo demuestre.</p></li>
 </ol>
 </section>
 </section>
-<section id="the-layered-grammar-of-graphics" class="level2">
-<h2 class="anchored" data-anchor-id="the-layered-grammar-of-graphics">The layered grammar of graphics</h2>
-<p>We can expand on the graphing template you learned already by adding position adjustments, stats, coordinate systems, and faceting:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>ggplot(data <span class="op">=</span> <span class="op">&lt;</span>DATA<span class="op">&gt;</span>) <span class="op">+</span> </span>
+<section id="la-gramática-de-gráficos-por-capas" class="level2">
+<h2 class="anchored" data-anchor-id="la-gramática-de-gráficos-por-capas">La gramática de gráficos por capas</h2>
+<p>Podemos ampliar la plantilla de gráficos que ya aprendiste añadiendo ajustes de posición, stats, sistemas de coordenadas y facetas:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>ggplot(data <span class="op">=</span> <span class="op">&lt;</span>DATA<span class="op">&gt;</span>) <span class="op">+</span> </span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">&lt;</span>GEOM_FUNCTION<span class="op">&gt;</span>(</span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>     mapping <span class="op">=</span> aes(<span class="op">&lt;</span>MAPPINGS<span class="op">&gt;</span>),</span>
 <span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>     stat <span class="op">=</span> <span class="op">&lt;</span>STAT<span class="op">&gt;</span>, </span>
 <span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>     position <span class="op">=</span> <span class="op">&lt;</span>POSITION<span class="op">&gt;</span></span>
 <span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="op">+</span></span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">&lt;</span>FACET_FUNCTION<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Our new template takes six parameters, the bracketed words that appear in the template. In practice, you rarely need to supply all seven parameters to make a graph because <strong>lets-plot</strong> will provide useful defaults for everything except the data, the mappings, and the geom function.</p>
-<p>The six parameters in the template compose the grammar of graphics, a formal system for building plots. The grammar of graphics is based on the insight that you can uniquely describe <em>any</em> plot as a combination of a dataset, a geom, a set of mappings, a stat, a position adjustment, a coordinate system, a faceting scheme, and a theme.</p>
-<p>To see how this works, consider how you could build a basic plot from scratch: you could start with a dataset and then transform it into the information that you want to display (with a stat). Next, you could choose a geometric object to represent each observation in the transformed data. You could then use the aesthetic properties of the geoms to represent variables in the data. You would map the values of each variable to the levels of an aesthetic. These steps are illustrated in the figure below.</p>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">&lt;</span>FACET_FUNCTION<span class="op">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Nuestra nueva plantilla admite seis parámetros, las palabras entre corchetes que aparecen en ella. En la práctica, rara vez necesitas proporcionar los siete parámetros para crear un gráfico, porque <strong>lets-plot</strong> proporcionará valores predeterminados útiles para todo excepto los datos, las asignaciones y la función geom.</p>
+<p>Los seis parámetros de la plantilla componen la gramática de gráficos, un sistema formal para construir gráficos. La gramática de gráficos se basa en la idea de que puedes describir de forma única <em>cualquier</em> gráfico como una combinación de un dataset, un geom, un conjunto de asignaciones, un stat, un ajuste de posición, un sistema de coordenadas, un esquema de facetas y un tema.</p>
+<p>Para ver cómo funciona, piensa en cómo podrías construir un gráfico básico desde cero: podrías empezar con un dataset y luego transformarlo en la información que quieres mostrar (con un stat). A continuación, podrías elegir un objeto geométrico para representar cada observación de los datos transformados. Luego podrías usar las propiedades estéticas de los geoms para representar variables de los datos. Asignarías los valores de cada variable a los niveles de una estética. Estos pasos se ilustran en la figura siguiente.</p>
 <p><img src="https://r4ds.hadley.nz/images/visualization-grammar.png" class="img-fluid"></p>
-<p>At this point, you would have a complete graph, but you could further adjust the positions of the geoms within the coordinate system (a position adjustment) or split the graph into subplots (faceting). You could also extend the plot by adding one or more additional layers, where each additional layer uses a dataset, a geom, a set of mappings, a stat, and a position adjustment.</p>
-<p>You could use this method to create a lot of plots that you can imagine.</p>
+<p>En este punto, tendrías un gráfico completo, pero podrías ajustar aún más las posiciones de los geoms dentro del sistema de coordenadas (un ajuste de posición) o dividir el gráfico en subgráficos (facetas). También podrías ampliar el gráfico añadiendo una o más capas adicionales, donde cada capa adicional usa un dataset, un geom, un conjunto de asignaciones, un stat y un ajuste de posición.</p>
+<p>Podrías usar este método para crear muchos de los gráficos que puedas imaginar.</p>
 </section>
-<section id="summary" class="level2">
-<h2 class="anchored" data-anchor-id="summary">Summary</h2>
-<p>In this chapter you learned about the layered grammar of graphics starting with aesthetics and geometries to build a simple plot, facets for splitting the plot into subsets, statistics for understanding how geoms are calculated, position adjustments for controlling the fine details of position when geoms might otherwise overlap, and coordinate systems which allow you to fundamentally change what <code>x</code> and <code>y</code> mean.</p>
-<p>The most useful further resource on <strong>lets-plot</strong> is the documentation, which you <a href="https://lets-plot.org/">can find here</a>.</p>
+<section id="resumen" class="level2">
+<h2 class="anchored" data-anchor-id="resumen">Resumen</h2>
+<p>En este capítulo aprendiste la gramática de gráficos por capas: empezando por las estéticas y las geometrías para construir un gráfico sencillo, las facetas para dividir el gráfico en subconjuntos, los stats para entender cómo se calculan los geoms, los ajustes de posición para controlar los detalles finos de la posición cuando los geoms podrían superponerse, y los sistemas de coordenadas, que te permiten cambiar de forma fundamental lo que significan <code>x</code> e <code>y</code>.</p>
+<p>El recurso adicional más útil sobre <strong>lets-plot</strong> es su documentación, que <a href="https://lets-plot.org/">puedes encontrar aquí</a>.</p>
 
 
 </section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
-      }
-    }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-      }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
-        }
-      });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
       return false;
     }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
     }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
         }
       }
       return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
-        return container.innerHTML
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -4487,194 +4533,170 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./visualise.html" class="pagination-link" aria-label="Visualisation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Visualisation</span></span>
+      <a href="./visualise.html" class="pagination-link" aria-label="Visualización">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Visualización</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./exploratory-data-analysis.html" class="pagination-link" aria-label="Exploratory Data Analysis">
-        <span class="nav-page-text"><span class="chapter-title">Exploratory Data Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./exploratory-data-analysis.html" class="pagination-link" aria-label="Análisis exploratorio de datos">
+        <span class="nav-page-text"><span class="chapter-title">Análisis exploratorio de datos</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -4683,4 +4705,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/aeturrell/python4DS/blob/main/vis-layers.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/aeturrell/python4DS/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/aeturrell/python4DS/blob/main/vis-layers.ipynb" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/aeturrell/python4DS/issues/new" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></div></div></footer></body></html>

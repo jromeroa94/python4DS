@@ -1,18 +1,24 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Webscraping and APIs – Python for Data Science</title>
+<title>Web scraping y API – Python for Data Science</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -21,8 +27,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +40,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -57,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -67,17 +74,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./functions.html" rel="next">
 <link href="./rectangling.html" rel="prev">
 <link href="./favicon.ico" rel="icon">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-b9e8d9863b7928896e96ff6494065671.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b8d228dfc8ea33805744e1debdbf65c8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-b9e8d9863b7928896e96ff6494065671.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -92,17 +102,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
   }
 }</script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-LXJC37BJVX"></script>
@@ -114,30 +124,193 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
 
 
-<meta name="twitter:title" content="Webscraping and APIs – Python for Data Science">
+<meta name="twitter:title" content="Web scraping y API – Python for Data Science">
 <meta name="twitter:description" content="">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="webscraping-and-apis_files/figure-html/cell-5-output-2.svg">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-sidebar docked">
+<body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./spreadsheets.html">Import</a></li><li class="breadcrumb-item"><a href="./webscraping-and-apis.html"><span class="chapter-title">Webscraping and APIs</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./spreadsheets.html">Importar</a></li><li class="breadcrumb-item"><a href="./webscraping-and-apis.html"><span class="chapter-title">Web scraping y API</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -151,40 +324,40 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Python for Data Science</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/aeturrell/python4DS" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+    <a href="https://github.com/aeturrell/python4DS" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
 </div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
+        <div id="quarto-search" class="" title="Buscar"></div>
         </div>
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Welcome</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bienvenida</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
- <span class="menu-text">Introduction</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">Introducción</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">First Steps</span></a>
+  <a href="./introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Primeros pasos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./prerequisites.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prerequisites</span></a>
+  <a href="./prerequisites.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Requisitos previos</span></a>
   </div>
 </li>
       </ul>
@@ -192,60 +365,60 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
- <span class="menu-text">Quick Start</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">Inicio rápido</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./whole-game.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Whole Game</span></a>
+  <a href="./whole-game.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">El juego completo</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-visualise.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Visualisation</span></a>
+  <a href="./data-visualise.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Visualización de datos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./workflow-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Workflow: Basics</span></a>
+  <a href="./workflow-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Flujo de trabajo: conceptos básicos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-transform.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Transformation</span></a>
+  <a href="./data-transform.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Transformación de datos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./workflow-style.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Workflow: Style</span></a>
+  <a href="./workflow-style.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Flujo de trabajo: estilo</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-tidy.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Tidy Data</span></a>
+  <a href="./data-tidy.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Tidy data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./workflow-writing-code.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Workflow: Writing Code</span></a>
+  <a href="./workflow-writing-code.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Flujo de trabajo: escribir código</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-import.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Import</span></a>
+  <a href="./data-import.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Importación de datos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./workflow-packages-and-environments.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Workflow: Packages and Environments</span></a>
+  <a href="./workflow-packages-and-environments.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Flujo de trabajo: paquetes y entornos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./workflow-help.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Postscript: Getting Further Help</span></a>
+  <a href="./workflow-help.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Epílogo: cómo obtener más ayuda</span></a>
   </div>
 </li>
       </ul>
@@ -253,30 +426,30 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
- <span class="menu-text">Visualise</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">Visualizar</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualise.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Visualisation</span></a>
+  <a href="./visualise.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Visualización</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./vis-layers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Layers</span></a>
+  <a href="./vis-layers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Capas</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exploratory-data-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exploratory Data Analysis</span></a>
+  <a href="./exploratory-data-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Análisis exploratorio de datos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./communicate-plots.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Graphics for Communication</span></a>
+  <a href="./communicate-plots.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Gráficos para comunicar</span></a>
   </div>
 </li>
       </ul>
@@ -284,45 +457,45 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">Transform</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">Transformar</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./boolean-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Boolean Data</span></a>
+  <a href="./boolean-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Datos booleanos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./numbers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Numbers</span></a>
+  <a href="./numbers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Números</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./strings.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Strings and Text</span></a>
+  <a href="./strings.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Strings y texto</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./regex.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regular Expressions, aka regex</span></a>
+  <a href="./regex.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Expresiones regulares, también conocidas como regex</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./categorical-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Categorical Data</span></a>
+  <a href="./categorical-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Datos categóricos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dates-and-times.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Dates and Times</span></a>
+  <a href="./dates-and-times.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Fechas y horas</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./missing-values.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Missing Values</span></a>
+  <a href="./missing-values.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Valores faltantes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -335,30 +508,30 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Import</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+ <span class="menu-text">Importar</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./spreadsheets.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Spreadsheets</span></a>
+  <a href="./spreadsheets.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Hojas de cálculo</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./databases.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Databases</span></a>
+  <a href="./databases.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bases de datos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rectangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Nested Data</span></a>
+  <a href="./rectangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Datos anidados</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./webscraping-and-apis.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Webscraping and APIs</span></a>
+  <a href="./webscraping-and-apis.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Web scraping y API</span></a>
   </div>
 </li>
       </ul>
@@ -366,25 +539,25 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">Programme</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">Programar</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./functions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Functions</span></a>
+  <a href="./functions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Funciones</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./iteration.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Iteration</span></a>
+  <a href="./iteration.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Iteración</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./command-line.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">The Command Line</span></a>
+  <a href="./command-line.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">La línea de comandos</span></a>
   </div>
 </li>
       </ul>
@@ -392,8 +565,8 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
- <span class="menu-text">Communicate</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">Comunicar</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -413,8 +586,8 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
- <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">Apéndices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -422,7 +595,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
+ <span class="menu-text">Referencias</span></a>
   </div>
 </li>
       </ul>
@@ -434,34 +607,35 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción">Introducción</a>
   <ul class="collapse">
-  <li><a href="#ethical-and-legal-considerations" id="toc-ethical-and-legal-considerations" class="nav-link" data-scroll-target="#ethical-and-legal-considerations">Ethical and legal considerations</a></li>
-  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
+  <li><a href="#consideraciones-éticas-y-legales" id="toc-consideraciones-éticas-y-legales" class="nav-link" data-scroll-target="#consideraciones-éticas-y-legales">Consideraciones éticas y legales</a></li>
+  <li><a href="#requisitos-previos" id="toc-requisitos-previos" class="nav-link" data-scroll-target="#requisitos-previos">Requisitos previos</a></li>
   </ul></li>
-  <li><a href="#extracting-data-from-files-on-the-internet-using-pandas" id="toc-extracting-data-from-files-on-the-internet-using-pandas" class="nav-link" data-scroll-target="#extracting-data-from-files-on-the-internet-using-pandas">Extracting Data from Files on the Internet using <strong>pandas</strong></a></li>
-  <li><a href="#obtaining-data-using-apis" id="toc-obtaining-data-using-apis" class="nav-link" data-scroll-target="#obtaining-data-using-apis">Obtaining data using APIs</a>
+  <li><a href="#extraer-datos-de-archivos-en-internet-con-pandas" id="toc-extraer-datos-de-archivos-en-internet-con-pandas" class="nav-link" data-scroll-target="#extraer-datos-de-archivos-en-internet-con-pandas">Extraer datos de archivos en internet con <strong>pandas</strong></a></li>
+  <li><a href="#obtener-datos-mediante-api" id="toc-obtener-datos-mediante-api" class="nav-link" data-scroll-target="#obtener-datos-mediante-api">Obtener datos mediante API</a>
   <ul class="collapse">
-  <li><a href="#pandas-datareader-an-easier-way-to-interact-with-some-apis" id="toc-pandas-datareader-an-easier-way-to-interact-with-some-apis" class="nav-link" data-scroll-target="#pandas-datareader-an-easier-way-to-interact-with-some-apis">Pandas Datareader: an easier way to interact with (some) APIs</a></li>
-  <li><a href="#the-oecd-api" id="toc-the-oecd-api" class="nav-link" data-scroll-target="#the-oecd-api">The OECD API</a></li>
-  <li><a href="#other-useful-apis" id="toc-other-useful-apis" class="nav-link" data-scroll-target="#other-useful-apis">Other Useful APIs</a></li>
+  <li><a href="#pandas-datareader-una-forma-más-fácil-de-interactuar-con-algunas-api" id="toc-pandas-datareader-una-forma-más-fácil-de-interactuar-con-algunas-api" class="nav-link" data-scroll-target="#pandas-datareader-una-forma-más-fácil-de-interactuar-con-algunas-api">Pandas Datareader: una forma más fácil de interactuar con (algunas) API</a></li>
+  <li><a href="#la-api-de-la-ocde" id="toc-la-api-de-la-ocde" class="nav-link" data-scroll-target="#la-api-de-la-ocde">La API de la OCDE</a></li>
+  <li><a href="#otras-api-útiles" id="toc-otras-api-útiles" class="nav-link" data-scroll-target="#otras-api-útiles">Otras API útiles</a></li>
   </ul></li>
-  <li><a href="#webscraping" id="toc-webscraping" class="nav-link" data-scroll-target="#webscraping">Webscraping</a>
+  <li><a href="#web-scraping" id="toc-web-scraping" class="nav-link" data-scroll-target="#web-scraping">Web scraping</a>
   <ul class="collapse">
-  <li><a href="#webscraping-tables" id="toc-webscraping-tables" class="nav-link" data-scroll-target="#webscraping-tables">Webscraping Tables</a></li>
+  <li><a href="#web-scraping-de-tablas" id="toc-web-scraping-de-tablas" class="nav-link" data-scroll-target="#web-scraping-de-tablas">Web scraping de tablas</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.dev/aeturrell/python4DS/blob/main/webscraping-and-apis.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/aeturrell/python4DS/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.dev/aeturrell/python4DS/blob/main/webscraping-and-apis.ipynb" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/aeturrell/python4DS/issues/new" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./spreadsheets.html">Import</a></li><li class="breadcrumb-item"><a href="./webscraping-and-apis.html"><span class="chapter-title">Webscraping and APIs</span></a></li></ol></nav>
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./spreadsheets.html">Importar</a></li><li class="breadcrumb-item"><a href="./webscraping-and-apis.html"><span class="chapter-title">Web scraping y API</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-webscraping-and-apis" class="quarto-section-identifier"><span class="chapter-title">Webscraping and APIs</span></span></h1>
+<h1 class="title"><span id="sec-webscraping-and-apis" class="quarto-section-identifier"><span class="chapter-title">Web scraping y API</span></span></h1>
 </div>
 
 
@@ -478,37 +652,37 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </header>
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>This chapter will show you how to work with online data that is either obtained from webpages via webscraping or more directly over the internet via an API. An important principle is always to use an API if one is available as this is designed to pass information directly into your Python session and will save you a lot of effort.</p>
-<section id="ethical-and-legal-considerations" class="level3">
-<h3 class="anchored" data-anchor-id="ethical-and-legal-considerations">Ethical and legal considerations</h3>
-<p>As we’ve already said, you should use an API whenever you can. But, for the cases when you can’t, what are the rules of the game when it comes to webscraping? First, we need to talk about whether it’s legal and ethical for you to do so. Overall, the situation is complicated with regards to both of these.</p>
-<p>Legalities depend a lot on where you live. However, as a general principle, if the data is public, non-personal, non-commercial, and factual, you’re likely to be ok. These three factors are important because they’re connected to the site’s terms and conditions, personally identifiable information, and copyright, as we’ll discuss below.</p>
-<p>If the data isn’t public, non-personal, or factual or you’re scraping the data specifically to make money with it, or you’re scraping something that is only available commercially, you’ll need to talk to a lawyer. In any case, you should be respectful of the resources of the server hosting the pages you are scraping. Most importantly, this means that if you’re scraping many pages, you should make sure to wait a little between each request. <a href="https://tenacity.readthedocs.io/en/latest/">Tenacity</a> is an excellent package for this—it has a function that pauses between attempts to do something (as well as a bunch of other useful features).</p>
-<p>If you look closely, you’ll find many websites include a “terms and conditions” or “terms of service” link somewhere on the page, and if you read that page closely you’ll often discover that the site specifically prohibits web scraping. These pages tend to be a legal land grab where companies make very broad claims. It’s polite to respect these terms of service where possible, but take any claims with a grain of salt.</p>
-<p>US courts have generally found that simply putting the terms of service in the footer of the website isn’t sufficient for you to be bound by them, e.g., <a href="https://en.wikipedia.org/wiki/HiQ_Labs_v._LinkedIn">HiQ Labs v. LinkedIn</a>. Generally, to be bound to the terms of service, you must have taken some explicit action like creating an account or checking a box. This is why whether or not the data is <strong>public</strong> is important; if you don’t need an account to access them, it is unlikely that you are bound to the terms of service. Note, however, the situation is rather different in Europe where courts have found that terms of service are enforceable even if you don’t explicitly agree to them.</p>
-<p>Even if the data is public, you should be extremely careful about scraping personally identifiable information like names, email addresses, phone numbers, dates of birth, etc. Europe has strict laws about the collection or storage of such data (known as GDPR), and regardless of where you live you’re likely to be entering an ethical quagmire. For example, in 2016, a group of researchers scraped public profile information (e.g., usernames, age, gender, location, etc.) about 70,000 people on the dating site OkCupid and they publicly released these data without any attempts at anonymisation. While the researchers felt that there was nothing wrong with this since the data were already public, this work was widely condemned due to ethics concerns around identifiability of users whose information was released in the dataset. If your work involves scraping personally identifiable information, we strongly recommend reading about the OkCupid study3 as well as similar studies with questionable research ethics involving the acquisition and release of personally identifiable information.</p>
-<p>Finally, you also need to worry about copyright law. Copyright law is complicated. US law describes exactly what’s protected: “[…] original works of authorship fixed in any tangible medium of expression, […]”. It then goes on to describe specific categories that it applies like literary works, musical works, motion pictures and more. Notably absent from copyright protection are data. This means that as long as you limit your scraping to facts, copyright protection does not apply. (But note that Europe has a separate “sui generis” right that protects databases.)</p>
-<p>As a brief example, in the US, lists of ingredients and instructions are not copyrightable, so copyright can not be used to protect a recipe. But if that list of recipes is accompanied by substantial novel literary content, that is copyrightable. This is why when you’re looking for a recipe on the internet there’s always so much content beforehand.</p>
-<p>If you do need to scrape original content (like text or images), you may still be protected under the doctrine of fair use. Fair use is not a hard and fast rule, but weighs up a number of factors. It’s more likely to apply if you are collecting the data for research or non-commercial purposes and if you limit what you scrape to just what you need.</p>
+<section id="introducción" class="level2">
+<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
+<p>Este capítulo te mostrará cómo trabajar con datos en línea, ya sea obtenidos de páginas web mediante web scraping o de forma más directa a través de internet mediante una API. Un principio importante es usar siempre una API si hay una disponible, ya que está diseñada para pasar la información directamente a tu sesión de Python y te ahorrará mucho esfuerzo.</p>
+<section id="consideraciones-éticas-y-legales" class="level3">
+<h3 class="anchored" data-anchor-id="consideraciones-éticas-y-legales">Consideraciones éticas y legales</h3>
+<p>Como ya dijimos, deberías usar una API siempre que puedas. Pero, para los casos en que no sea posible, ¿cuáles son las reglas del juego en lo que respecta al web scraping? Primero, tenemos que hablar de si es legal y ético hacerlo. En general, la situación es complicada en ambos aspectos.</p>
+<p>Las cuestiones legales dependen mucho de dónde vivas. Sin embargo, como principio general, si los datos son públicos, no personales, no comerciales y fácticos, probablemente no tendrás problemas. Estos tres factores son importantes porque están relacionados con los términos y condiciones del sitio, la información de identificación personal y los derechos de autor, como veremos a continuación.</p>
+<p>Si los datos no son públicos, no son no personales o no son fácticos, o si haces scraping de los datos específicamente para ganar dinero con ellos, o si haces scraping de algo que solo está disponible comercialmente, tendrás que hablar con un abogado. En cualquier caso, debes ser respetuoso con los recursos del servidor que aloja las páginas de las que haces scraping. Sobre todo, esto significa que, si haces scraping de muchas páginas, debes asegurarte de esperar un poco entre cada solicitud. <a href="https://tenacity.readthedocs.io/en/latest/">Tenacity</a> es un paquete excelente para esto: tiene una función que hace pausas entre intentos de hacer algo (además de muchas otras funcionalidades útiles).</p>
+<p>Si te fijas bien, verás que muchos sitios web incluyen en algún lugar de la página un enlace a “términos y condiciones” o “términos de servicio”, y si lees esa página con atención a menudo descubrirás que el sitio prohíbe específicamente el web scraping. Estas páginas suelen ser un acaparamiento legal en el que las empresas hacen afirmaciones muy amplias. Es de buena educación respetar estos términos de servicio cuando sea posible, pero toma cualquier afirmación con cautela.</p>
+<p>Los tribunales de EE. UU. han determinado en general que simplemente poner los términos de servicio en el pie de página del sitio web no basta para que quedes obligado por ellos, p.&nbsp;ej., <a href="https://en.wikipedia.org/wiki/HiQ_Labs_v._LinkedIn">HiQ Labs v. LinkedIn</a>. Por lo general, para quedar obligado por los términos de servicio, debes haber realizado alguna acción explícita, como crear una cuenta o marcar una casilla. Por eso es importante si los datos son <strong>públicos</strong> o no; si no necesitas una cuenta para acceder a ellos, es poco probable que estés obligado por los términos de servicio. Ten en cuenta, sin embargo, que la situación es bastante distinta en Europa, donde los tribunales han determinado que los términos de servicio son exigibles incluso si no los aceptas explícitamente.</p>
+<p>Incluso si los datos son públicos, debes tener muchísimo cuidado al hacer scraping de información de identificación personal, como nombres, direcciones de correo electrónico, números de teléfono, fechas de nacimiento, etc. Europa tiene leyes estrictas sobre la recopilación o el almacenamiento de este tipo de datos (conocidas como RGPD o GDPR), y, vivas donde vivas, probablemente te estarás metiendo en un atolladero ético. Por ejemplo, en 2016, un grupo de investigadores hizo scraping de la información de perfiles públicos (p.&nbsp;ej., nombres de usuario, edad, género, ubicación, etc.) de 70.000 personas en el sitio de citas OkCupid y publicaron estos datos sin ningún intento de anonimización. Aunque los investigadores consideraron que no había nada malo en ello, ya que los datos ya eran públicos, este trabajo fue ampliamente condenado por preocupaciones éticas sobre la identificabilidad de los usuarios cuya información se publicó en el dataset. Si tu trabajo implica hacer scraping de información de identificación personal, te recomendamos encarecidamente leer sobre el estudio de OkCupid3, así como sobre estudios similares con una ética de investigación cuestionable que implicaron la obtención y publicación de información de identificación personal.</p>
+<p>Por último, también tienes que preocuparte por la ley de derechos de autor. La ley de derechos de autor es complicada. La ley de EE. UU. describe exactamente qué está protegido: “[…] obras originales de autoría fijadas en cualquier medio tangible de expresión, […]”. Luego describe categorías específicas a las que se aplica, como obras literarias, obras musicales, películas y más. Llama la atención que los datos no gozan de protección de derechos de autor. Esto significa que, mientras limites tu scraping a hechos, la protección de derechos de autor no se aplica. (Pero ten en cuenta que Europa tiene un derecho “sui generis” aparte que protege las bases de datos).</p>
+<p>Como breve ejemplo, en EE. UU., las listas de ingredientes y las instrucciones no son protegibles por derechos de autor, así que los derechos de autor no pueden usarse para proteger una receta. Pero si esa lista de recetas va acompañada de un contenido literario original sustancial, eso sí es protegible. Por eso, cuando buscas una receta en internet, siempre hay tanto contenido antes.</p>
+<p>Si necesitas hacer scraping de contenido original (como texto o imágenes), es posible que aun así estés protegido por la doctrina del uso legítimo (fair use). El uso legítimo no es una regla estricta, sino que sopesa varios factores. Es más probable que se aplique si recopilas los datos con fines de investigación o no comerciales y si limitas lo que extraes a solo lo que necesitas.</p>
 </section>
-<section id="prerequisites" class="level3">
-<h3 class="anchored" data-anchor-id="prerequisites">Prerequisites</h3>
-<p>You will need to install the <strong>pandas</strong> package for this chapter. We’ll use <strong>seaborn</strong> too, which you should already have installed. You will also need to install the <strong>beautifulsoup</strong>, <strong>pandas-datareader</strong>, and <strong>wbgapi</strong> packages in your terminal using <code>uv add beautifulsoup4</code>, <code>uv add pandas-datareader</code>, and <code>uv add wbgapi</code> respectively. We’ll also use two built-in packages, <strong>textwrap</strong> and <strong>requests</strong>.</p>
-<p>To kick off, let’s import some of the packages we need (it’s always good practice to import the packages you need at the top of a script or notebook).</p>
+<section id="requisitos-previos" class="level3">
+<h3 class="anchored" data-anchor-id="requisitos-previos">Requisitos previos</h3>
+<p>Para este capítulo necesitarás instalar el paquete <strong>pandas</strong>. También usaremos <strong>seaborn</strong>, que ya deberías tener instalado. Además, necesitarás instalar los paquetes <strong>beautifulsoup</strong>, <strong>pandas-datareader</strong> y <strong>wbgapi</strong> en tu terminal usando <code>uv add beautifulsoup4</code>, <code>uv add pandas-datareader</code> y <code>uv add wbgapi</code>, respectivamente. También usaremos dos paquetes integrados, <strong>textwrap</strong> y <strong>requests</strong>.</p>
+<p>Para empezar, importemos algunos de los paquetes que necesitamos (siempre es una buena práctica importar los paquetes que necesitas al principio de un script o notebook).</p>
 <div id="a7f62293" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> textwrap</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> textwrap</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> lets_plot <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>LetsPlot.setup_html()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>LetsPlot.setup_html()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
-            <div id="V14tGV"></div>
+            <div id="BgjjKv"></div>
             <script type="text/javascript" data-lets-plot-script="library">
                 if(!window.letsPlotCallQueue) {
                     window.letsPlotCallQueue = [];
@@ -532,9 +706,9 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
                         var div = document.createElement("div");
                         div.style.color = 'darkred';
                         div.textContent = 'Error loading Lets-Plot JS';
-                        document.getElementById("V14tGV").appendChild(div);
+                        document.getElementById("BgjjKv").appendChild(div);
                     };
-                    var e = document.getElementById("V14tGV");
+                    var e = document.getElementById("BgjjKv");
                     e.appendChild(script);
                 })()
             </script>
@@ -543,18 +717,18 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </div>
 </section>
 </section>
-<section id="extracting-data-from-files-on-the-internet-using-pandas" class="level2">
-<h2 class="anchored" data-anchor-id="extracting-data-from-files-on-the-internet-using-pandas">Extracting Data from Files on the Internet using <strong>pandas</strong></h2>
-<p>It’s easy to read data from the internet once you have the url and file type. Here, for instance, is an example that reads in the ‘storms’ dataset, which is stored as a CSV file in a URL (we’ll only grab the first 10 rows):</p>
+<section id="extraer-datos-de-archivos-en-internet-con-pandas" class="level2">
+<h2 class="anchored" data-anchor-id="extraer-datos-de-archivos-en-internet-con-pandas">Extraer datos de archivos en internet con <strong>pandas</strong></h2>
+<p>Es fácil leer datos de internet una vez que tienes la URL y el tipo de archivo. Aquí, por ejemplo, hay un ejemplo que lee el dataset ‘storms’, que está almacenado como archivo CSV en una URL (solo tomaremos las primeras 10 filas):</p>
 <div id="06108a4d" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pd.read_csv(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pd.read_csv(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://vincentarelbundock.github.io/Rdatasets/csv/dplyr/storms.csv"</span>, nrows<span class="op">=</span><span class="dv">10</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -576,7 +750,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th data-quarto-table-cell-role="th">0</th>
 <td>1</td>
 <td>Amy</td>
 <td>1975</td>
@@ -593,7 +767,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <td>NaN</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>2</td>
 <td>Amy</td>
 <td>1975</td>
@@ -610,7 +784,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <td>NaN</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th data-quarto-table-cell-role="th">2</th>
 <td>3</td>
 <td>Amy</td>
 <td>1975</td>
@@ -627,7 +801,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <td>NaN</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th data-quarto-table-cell-role="th">3</th>
 <td>4</td>
 <td>Amy</td>
 <td>1975</td>
@@ -644,7 +818,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <td>NaN</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th data-quarto-table-cell-role="th">4</th>
 <td>5</td>
 <td>Amy</td>
 <td>1975</td>
@@ -661,7 +835,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <td>NaN</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
+<th data-quarto-table-cell-role="th">5</th>
 <td>6</td>
 <td>Amy</td>
 <td>1975</td>
@@ -678,7 +852,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <td>NaN</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
+<th data-quarto-table-cell-role="th">6</th>
 <td>7</td>
 <td>Amy</td>
 <td>1975</td>
@@ -695,7 +869,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <td>NaN</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
+<th data-quarto-table-cell-role="th">7</th>
 <td>8</td>
 <td>Amy</td>
 <td>1975</td>
@@ -712,7 +886,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <td>NaN</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
+<th data-quarto-table-cell-role="th">8</th>
 <td>9</td>
 <td>Amy</td>
 <td>1975</td>
@@ -729,7 +903,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <td>NaN</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">9</td>
+<th data-quarto-table-cell-role="th">9</th>
 <td>10</td>
 <td>Amy</td>
 <td>1975</td>
@@ -752,28 +926,28 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </div>
 </div>
 </section>
-<section id="obtaining-data-using-apis" class="level2">
-<h2 class="anchored" data-anchor-id="obtaining-data-using-apis">Obtaining data using APIs</h2>
-<p>Using an API (application programming interface) is another way to draw down information from the interweb. Their just a way for one tool, say Python, to speak to another tool, say a server, and usefully exchange information. The classic use case would be to post a request for data that fits a certain query via an API and to get a download of that data back in return. (You should always preferentially use an API over webscraping a site.)</p>
-<p>Because they are designed to work with any tool, you don’t actually need a programming language to interact with an API, it’s just a <em>lot</em> easier if you do.</p>
+<section id="obtener-datos-mediante-api" class="level2">
+<h2 class="anchored" data-anchor-id="obtener-datos-mediante-api">Obtener datos mediante API</h2>
+<p>Usar una API (interfaz de programación de aplicaciones) es otra forma de obtener información de internet. Las API son simplemente una manera de que una herramienta, digamos Python, hable con otra herramienta, digamos un servidor, e intercambien información de forma útil. El caso de uso clásico sería enviar, mediante una API, una solicitud de datos que cumplan una determinada consulta y recibir a cambio una descarga de esos datos. (Siempre deberías usar preferentemente una API antes que hacer web scraping de un sitio).</p>
+<p>Como están diseñadas para funcionar con cualquier herramienta, en realidad no necesitas un lenguaje de programación para interactuar con una API; simplemente es <em>mucho</em> más fácil si lo usas.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Nota
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>An API key is needed in order to access some APIs. Sometimes all you need to do is register with site, in other cases you may have to pay for access.</p>
 </div>
 </div>
-<p>To see this, let’s directly use an API to get some time series data. We will make the call out to the internet using the <strong>requests</strong> package.</p>
-<p>An API has an ‘endpoint’, the base url, and then a URL that encodes the question. Let’s see an example with the ONS API for which the endpoint is “https://api.beta.ons.gov.uk/v1/”. The rest of the API has the form ‘data?uri=’ and then the long ID of both the timeseries (jp9z) and then the dataset (LMS), which is vacancies in the UK services sector.</p>
-<p>The data that are returned by APIs are typically in JSON format, which looks a lot like a nested Python dictionary and its entries can be accessed in the same way–this is what is happening when getting the series’ title in the example below. JSON is not good for analysis, so we’ll use <strong>pandas</strong> to put the data into shape.</p>
+<p>Para comprobarlo, usemos directamente una API para obtener algunos datos de series temporales. Haremos la llamada a internet con el paquete <strong>requests</strong>.</p>
+<p>Una API tiene un ‘endpoint’, la URL base, y luego una URL que codifica la pregunta. Veamos un ejemplo con la API de la ONS, cuyo endpoint es “https://api.beta.ons.gov.uk/v1/”. El resto de la API tiene la forma ‘data?uri=’ seguida del ID largo tanto de la serie temporal (jp9z) como del dataset (LMS), que corresponde a las vacantes en el sector servicios del Reino Unido.</p>
+<p>Los datos que devuelven las API suelen estar en formato JSON, que se parece mucho a un diccionario anidado de Python y a cuyas entradas se puede acceder de la misma manera; eso es lo que ocurre al obtener el título de la serie en el ejemplo siguiente. JSON no es bueno para el análisis, así que usaremos <strong>pandas</strong> para darles forma a los datos.</p>
 <div id="c4226d67" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://api.beta.ons.gov.uk/v1/data?uri=/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/timeseries/jp9z/lms/previous/v108"</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://api.beta.ons.gov.uk/v1/data?uri=/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/timeseries/jp9z/lms/previous/v108"</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the data from the ONS API:</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>json_data <span class="op">=</span> requests.get(url).json()</span>
@@ -789,9 +963,9 @@ Note
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    .set_index(<span class="st">"date"</span>)</span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"value"</span>].plot(title<span class="op">=</span>title, ylim<span class="op">=</span>(<span class="dv">0</span>, df[<span class="st">"value"</span>].<span class="bu">max</span>() <span class="op">*</span> <span class="fl">1.2</span>), lw<span class="op">=</span><span class="fl">3.0</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"value"</span>].plot(title<span class="op">=</span>title, ylim<span class="op">=</span>(<span class="dv">0</span>, df[<span class="st">"value"</span>].<span class="bu">max</span>() <span class="op">*</span> <span class="fl">1.2</span>), lw<span class="op">=</span><span class="fl">3.0</span>)<span class="op">;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_5244/1249132001.py:11: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+<pre><code>/var/folders/8n/n8x6tb9n5tz72hhnwdf7l04w0000gn/T/ipykernel_46615/1249132001.py:11: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
   date=lambda x: pd.to_datetime(x["date"]),</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -802,11 +976,11 @@ Note
 </div>
 </div>
 </div>
-<p>We’ve talked about <em>reading</em> APIs. You can also create your own to serve up data, models, whatever you like! This is an advanced topic and we won’t cover it; but if you do need to, the simplest way is to use <a href="https://fastapi.tiangolo.com/">Fast API</a>. You can find some short video tutorials for Fast API <a href="https://calmcode.io/fastapi/hello-world.html">here</a>.</p>
-<section id="pandas-datareader-an-easier-way-to-interact-with-some-apis" class="level3">
-<h3 class="anchored" data-anchor-id="pandas-datareader-an-easier-way-to-interact-with-some-apis">Pandas Datareader: an easier way to interact with (some) APIs</h3>
-<p>Although it didn’t take much code to get the ONS data, it would be even better if it was just a single line, wouldn’t it? Fortunately there are some packages out there that make this easy, but it does depend on the API (and APIs come and go over time).</p>
-<p>By far the most comprehensive library for accessing extra APIs is <a href="https://pandas-datareader.readthedocs.io/en/latest/"><strong>pandas-datareader</strong></a>, which provides convenient access to:</p>
+<p>Hemos hablado de <em>leer</em> API. ¡También puedes crear la tuya propia para servir datos, modelos o lo que quieras! Es un tema avanzado y no lo cubriremos; pero si lo necesitas, la forma más sencilla es usar <a href="https://fastapi.tiangolo.com/">Fast API</a>. Puedes encontrar algunos tutoriales breves en video sobre Fast API <a href="https://calmcode.io/fastapi/hello-world.html">aquí</a>.</p>
+<section id="pandas-datareader-una-forma-más-fácil-de-interactuar-con-algunas-api" class="level3">
+<h3 class="anchored" data-anchor-id="pandas-datareader-una-forma-más-fácil-de-interactuar-con-algunas-api">Pandas Datareader: una forma más fácil de interactuar con (algunas) API</h3>
+<p>Aunque no hizo falta mucho código para obtener los datos de la ONS, sería aún mejor si fuera una sola línea, ¿verdad? Por suerte, existen algunos paquetes que lo facilitan, aunque depende de la API (y las API aparecen y desaparecen con el tiempo).</p>
+<p>Con diferencia, la librería más completa para acceder a otras API es <a href="https://pandas-datareader.readthedocs.io/en/latest/"><strong>pandas-datareader</strong></a>, que ofrece un acceso cómodo a:</p>
 <ul>
 <li>FRED</li>
 <li>Quandl</li>
@@ -814,14 +988,14 @@ Note
 <li>OECD</li>
 <li>Eurostat</li>
 </ul>
-<p>and more.</p>
-<p>Let’s see an example using FRED (the Federal Reserve Bank of St.&nbsp;Louis’ economic data library). This time, let’s look at the UK unemployment rate:</p>
+<p>y más.</p>
+<p>Veamos un ejemplo con FRED (la librería de datos económicos del Banco de la Reserva Federal de St.&nbsp;Louis). Esta vez, veamos la tasa de desempleo del Reino Unido:</p>
 <div id="bf758fb4" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas_datareader.data <span class="im">as</span> web</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas_datareader.data <span class="im">as</span> web</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df_u <span class="op">=</span> web.DataReader(<span class="st">"LRHUTTTTGBM156S"</span>, <span class="st">"fred"</span>)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>df_u.plot(title<span class="op">=</span><span class="st">"UK unemployment (percent)"</span>, legend<span class="op">=</span><span class="va">False</span>, ylim<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">6</span>), lw<span class="op">=</span><span class="fl">3.0</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>df_u.plot(title<span class="op">=</span><span class="st">"UK unemployment (percent)"</span>, legend<span class="op">=</span><span class="va">False</span>, ylim<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">6</span>), lw<span class="op">=</span><span class="fl">3.0</span>)<span class="op">;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -830,9 +1004,9 @@ Note
 </div>
 </div>
 </div>
-<p>And, because it’s also a really useful one, let’s see how to use the <a href="https://pypi.org/project/wbgapi/"><strong>wbgapi</strong></a> package to access World Bank data. (<strong>pandas-datareader</strong> used to provide a World Bank reader too, but it has not been actively maintained, so we prefer <strong>wbgapi</strong> for new work.)</p>
+<p>Y, como también es muy útil, veamos cómo usar el paquete <a href="https://pypi.org/project/wbgapi/"><strong>wbgapi</strong></a> para acceder a datos del Banco Mundial. (<strong>pandas-datareader</strong> también solía ofrecer un lector para el Banco Mundial, pero no se ha mantenido activamente, así que preferimos <strong>wbgapi</strong> para trabajos nuevos).</p>
 <div id="380ca743" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># World Bank CO2 equivalent emissions (metric tons per capita)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># World Bank CO2 equivalent emissions (metric tons per capita)</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># https://data.worldbank.org/indicator/EN.GHG.ALL.PC.CE.AR5</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># country and region codes at http://api.worldbank.org/v2/country</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> wbgapi <span class="im">as</span> wb</span>
@@ -850,12 +1024,12 @@ Note
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"country"</span>] <span class="op">=</span> df[<span class="st">"country"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: textwrap.fill(x, <span class="dv">10</span>))  <span class="co"># wrap long names</span></span>
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.sort_values(indicator_code)  <span class="co"># re-order</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -865,27 +1039,27 @@ Note
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th data-quarto-table-cell-role="th">2</th>
 <td>India</td>
 <td>2.621464</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>East Asia\n&amp; Pacific</td>
 <td>8.435052</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th data-quarto-table-cell-role="th">0</th>
 <td>Europe &amp;\nCentral\nAsia</td>
-<td>9.171446</td>
+<td>9.171476</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th data-quarto-table-cell-role="th">3</th>
 <td>China</td>
 <td>9.982534</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th data-quarto-table-cell-role="th">4</th>
 <td>United\nStates</td>
 <td>18.921098</td>
 </tr>
@@ -896,7 +1070,7 @@ Note
 </div>
 </div>
 <div id="00379b93" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    ggplot(df, aes(x<span class="op">=</span><span class="st">"country"</span>, y<span class="op">=</span>indicator_code))</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_bar(aes(fill<span class="op">=</span><span class="st">"country"</span>), color<span class="op">=</span><span class="st">"black"</span>, alpha<span class="op">=</span><span class="fl">0.8</span>, stat<span class="op">=</span><span class="st">"identity"</span>)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_fill_discrete()</span>
@@ -908,15 +1082,15 @@ Note
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"The USA leads the world on per-capita emissions"</span>,</span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        y<span class="op">=</span><span class="st">""</span>,</span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
-   <div id="5I6yzr"></div>
+   <div id="A3m7ZX"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("5I6yzr");
+   var containerDiv = document.getElementById("A3m7ZX");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -931,7 +1105,7 @@ Note
                var plotSpec={
 "data":{
 "country":["India","East Asia\n& Pacific","Europe &\nCentral\nAsia","China","United\nStates"],
-"EN.GHG.ALL.PC.CE.AR5":[2.62146417435417,8.43505165453504,9.17144598243785,9.98253391061591,18.9210982930196]
+"EN.GHG.ALL.PC.CE.AR5":[2.62146417435417,8.43505165453504,9.17147616744916,9.98253391061591,18.9210982930196]
 },
 "mapping":{
 "x":"country",
@@ -1016,12 +1190,12 @@ Note
 </div>
 </div>
 </section>
-<section id="the-oecd-api" class="level3">
-<h3 class="anchored" data-anchor-id="the-oecd-api">The OECD API</h3>
-<p>Sometimes it’s convenient to use APIs directly, and, as an example, the OECD API comes with a LOT of complexity that direct access can take advantage of. The OECD API makes data available in both JSON and XML formats, and we’ll use <a href="https://pandasdmx.readthedocs.io/"><strong>pandasdmx</strong></a> (aka the Statistical Data and Metadata eXchange (SDMX) package for the Python data ecosystem) to pull down the XML format data and turn it into a regular <strong>pandas</strong> data frame.</p>
-<p>Now, key to using the OECD API is knowledge of its many codes: for countries, times, resources, and series. You can find some broad guidance on what codes the API uses <a href="https://data.oecd.org/api/sdmx-ml-documentation/">here</a> but to find exactly what you need can be a bit tricky. Two tips are: 1. If you know what you’re looking for is in a particular named dataset, eg “QNA” (Quarterly National Accounts), put <code>https://stats.oecd.org/restsdmx/sdmx.ashx/GetDataStructure/QNA/all?format=SDMX-ML</code> into your browser and look through the XML file; you can pick out the sub-codes and the countries that are available. 2. Browse around on https://stats.oecd.org/ and use Customise then check all the “Use Codes” boxes to see whatever your browsing’s code names.</p>
-<p>Let’s see an example of this in action. We’d like to see the productivity (GDP per hour) data for a range of countries since 2010. We are going to be in the productivity resource (code “PDB_LV”) and we want the USD current prices (code “CPC”) measure of GDP per employed worker (code “T_GDPEMP) from 2010 onwards (code”startTime=2010”). We’ll grab this for some developed countries where productivity measurements might be slightly more comparable. The comments below explain what’s happening in each step.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandasdmx <span class="im">as</span> pdmx</span>
+<section id="la-api-de-la-ocde" class="level3">
+<h3 class="anchored" data-anchor-id="la-api-de-la-ocde">La API de la OCDE</h3>
+<p>A veces conviene usar las API directamente y, por ejemplo, la API de la OCDE trae MUCHA complejidad que el acceso directo puede aprovechar. La API de la OCDE ofrece los datos en formato JSON y XML, y usaremos <a href="https://pandasdmx.readthedocs.io/"><strong>pandasdmx</strong></a> (también conocido como el paquete Statistical Data and Metadata eXchange (SDMX) para el ecosistema de datos de Python) para descargar los datos en formato XML y convertirlos en un dataframe normal de <strong>pandas</strong>.</p>
+<p>La clave para usar la API de la OCDE es conocer sus numerosos códigos: para países, periodos, recursos y series. Puedes encontrar una orientación general sobre los códigos que usa la API <a href="https://data.oecd.org/api/sdmx-ml-documentation/">aquí</a>, pero dar exactamente con lo que necesitas puede ser algo complicado. Dos consejos: 1. Si sabes que lo que buscas está en un dataset con un nombre concreto, p.&nbsp;ej., “QNA” (Quarterly National Accounts), pon <code>https://stats.oecd.org/restsdmx/sdmx.ashx/GetDataStructure/QNA/all?format=SDMX-ML</code> en tu navegador y revisa el archivo XML; ahí puedes identificar los subcódigos y los países disponibles. 2. Navega por https://stats.oecd.org/ y usa Customise; luego marca todas las casillas “Use Codes” para ver los nombres de código de lo que estés consultando.</p>
+<p>Veamos un ejemplo en acción. Queremos ver los datos de productividad (PIB por hora) de varios países desde 2010. Usaremos el recurso de productividad (código “PDB_LV”) y queremos la medida a precios corrientes en USD (código “CPC”) del PIB por trabajador ocupado (código “T_GDPEMP) desde 2010 en adelante (código”startTime=2010”). Obtendremos esto para algunos países desarrollados donde las mediciones de productividad pueden ser algo más comparables. Los comentarios de abajo explican qué ocurre en cada paso.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandasdmx <span class="im">as</span> pdmx</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Tell pdmx we want OECD data</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>oecd <span class="op">=</span> pdmx.Request(<span class="st">"OECD"</span>)</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set out everything about the request in the format specified by the OECD API</span></span>
@@ -1031,7 +1205,7 @@ Note
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>).to_pandas()</span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data).reset_index()</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -1086,85 +1260,82 @@ Note
 </tr>
 </tbody>
 </table>
-<p>Great that worked! We have data in a nice tidy format.</p>
+<p>¡Genial, funcionó! Tenemos los datos en un formato tidy muy cómodo.</p>
 </section>
-<section id="other-useful-apis" class="level3">
-<h3 class="anchored" data-anchor-id="other-useful-apis">Other Useful APIs</h3>
+<section id="otras-api-útiles" class="level3">
+<h3 class="anchored" data-anchor-id="otras-api-útiles">Otras API útiles</h3>
 <ul>
-<li>There is a regularly updated list of APIs over at this <a href="https://github.com/public-apis/public-apis">public APIs repo on github</a>. It doesn’t have an economics section (yet), but it has a LOT of other APIs.</li>
-<li>Berkeley Library maintains a <a href="https://guides.lib.berkeley.edu/c.php?g=4395&amp;p=7995952">list of economics APIs</a> that is well worth looking through.</li>
-<li><a href="https://docs.data.nasdaq.com/">NASDAQ Data Link</a>, which has a great deal of <a href="https://docs.data.nasdaq.com/docs/data-organization">financial data</a>.</li>
-<li><a href="https://db.nomics.world/">DBnomics</a>: publicly-available economic data provided by national and international statistical institutions, but also by researchers and private companies.</li>
+<li>Hay una lista de API que se actualiza con regularidad en este <a href="https://github.com/public-apis/public-apis">repositorio de API públicas en github</a>. No tiene (todavía) una sección de economía, pero tiene MUCHAS otras API.</li>
+<li>La Berkeley Library mantiene una <a href="https://guides.lib.berkeley.edu/c.php?g=4395&amp;p=7995952">lista de API de economía</a> que vale mucho la pena revisar.</li>
+<li><a href="https://docs.data.nasdaq.com/">NASDAQ Data Link</a>, que tiene una gran cantidad de <a href="https://docs.data.nasdaq.com/docs/data-organization">datos financieros</a>.</li>
+<li><a href="https://db.nomics.world/">DBnomics</a>: datos económicos públicos proporcionados por instituciones estadísticas nacionales e internacionales, pero también por investigadores y empresas privadas.</li>
 </ul>
 </section>
 </section>
-<section id="webscraping" class="level2">
-<h2 class="anchored" data-anchor-id="webscraping">Webscraping</h2>
-<p>Webscraping is a way of grabbing information from the internet that was intended to be displayed in a browser. But it should only be used as a last resort, and only then when permitted by the terms and conditions of a website.</p>
-<p>If you’re getting data from the internet, it’s much better to use an API whenever you can: grabbing information in a structure way is <em>exactly</em> why APIs exist. APIs should also be more stable than websites, which may change frequently. Typically, if an organisation is happy for you to grab their data, they will have made an API expressly for that purpose. It’s pretty rare that there’s a major website which <em>does</em> permit webscraping but which doesn’t have an API; for these websites, if they don’t have an API, chances scraping is against their terms and conditions. Those terms and conditions may be enforceable by law (different rules in different countries here, and you really need legal advice if it’s not unambiguous as to whether you can scrape or not.)</p>
-<p>There are other reasons why webscraping is not so good; for example, if you need a back-run then it might be offered through an API but not shown on the webpage. (Or it might not be available at all, in which case it’s best to get in touch with the organisation or check out WaybackMachine in case they took snapshots).</p>
-<p>So this book is pretty down on webscraping as there’s almost always a better solution. However, there are times when it is useful.</p>
-<p>If you do find yourself in a scraping situation, be really sure to check that’s legally allowed and also that you are not violating the website’s <code>robots.txt</code> rules: this is a special file on almost every website that sets out what’s fair play to crawl (conditional on legality) and what robots should not go poking around in.</p>
-<p>In Python, you are spoiled for choice when it comes to webscraping. There are five very strong libraries that cover a real range of user styles and needs: <strong>requests</strong>, <strong>lxml</strong>, <strong>beautifulsoup</strong>, <strong>selenium</strong>, and *scrapy**.</p>
-<p>For quick and simple webscraping, my usual combo would <strong>requests</strong>, which does little more than go and grab the HTML of a webpage, and <strong>beautifulsoup</strong>, which then helps you to navigate the structure of the page and pull out what you’re actually interested in. For dynamic webpages that use javascript rather than just HTML, you’ll need <strong>selenium</strong>. To scale up and hit thousands of webpages in an efficient way, you might try <strong>scrapy</strong>, which can work with the other tools and handle multiple sessions, and all other kinds of bells and whistles… it’s actually a “web scraping framework”.</p>
-<p>It’s always helpful to see coding in practice, so that’s what we’ll do now, but note that we’ll be skipping over a lot of important detail such as user agents, being ‘polite’ with your scraping requests, being efficient with caching and crawling.</p>
-<p>In lieu of a better example, let’s scrape the research page of <a href="http://aeturrell.com/">http://aeturrell.com/</a></p>
+<section id="web-scraping" class="level2">
+<h2 class="anchored" data-anchor-id="web-scraping">Web scraping</h2>
+<p>El web scraping es una forma de obtener de internet información pensada para mostrarse en un navegador. Pero solo debería usarse como último recurso, y únicamente cuando lo permitan los términos y condiciones del sitio web.</p>
+<p>Si vas a obtener datos de internet, es mucho mejor usar una API siempre que puedas: obtener información de forma estructurada es <em>exactamente</em> la razón de ser de las API. Además, las API deberían ser más estables que los sitios web, que pueden cambiar con frecuencia. Normalmente, si una organización está de acuerdo en que obtengas sus datos, habrá creado una API expresamente para ello. Es bastante raro que exista un sitio web importante que <em>sí</em> permita el web scraping pero no tenga una API; en esos sitios, si no tienen API, lo más probable es que el scraping vaya en contra de sus términos y condiciones. Esos términos y condiciones pueden ser exigibles legalmente (las normas varían según el país, y de verdad necesitas asesoría legal si no está claro si puedes hacer scraping o no).</p>
+<p>Hay otras razones por las que el web scraping no es tan buena idea; por ejemplo, si necesitas datos históricos, puede que estén disponibles a través de una API pero no se muestren en la página web. (O puede que no estén disponibles en absoluto, en cuyo caso lo mejor es contactar con la organización o consultar la WaybackMachine por si tomó capturas).</p>
+<p>Así que este libro es bastante crítico con el web scraping, ya que casi siempre hay una solución mejor. Sin embargo, hay ocasiones en que resulta útil.</p>
+<p>Si te encuentras en una situación en la que necesitas hacer scraping, asegúrate muy bien de que está permitido legalmente y también de que no infringes las reglas del <code>robots.txt</code> del sitio web: es un archivo especial presente en casi todos los sitios web que establece qué se puede rastrear legítimamente (siempre que sea legal) y en qué no deberían meterse los robots.</p>
+<p>En Python tienes mucho donde elegir en cuanto a web scraping. Hay cinco librerías muy sólidas que cubren una amplia gama de estilos y necesidades: <strong>requests</strong>, <strong>lxml</strong>, <strong>beautifulsoup</strong>, <strong>selenium</strong> y *scrapy**.</p>
+<p>Para un web scraping rápido y sencillo, mi combinación habitual sería <strong>requests</strong>, que se limita prácticamente a obtener el HTML de una página web, y <strong>beautifulsoup</strong>, que te ayuda a navegar por la estructura de la página y extraer lo que realmente te interesa. Para páginas web dinámicas que usan javascript en lugar de solo HTML, necesitarás <strong>selenium</strong>. Para escalar y acceder a miles de páginas web de forma eficiente, puedes probar <strong>scrapy</strong>, que puede funcionar junto con las otras herramientas y gestionar múltiples sesiones, además de todo tipo de extras… de hecho, es un “framework de web scraping”.</p>
+<p>Siempre ayuda ver el código en la práctica, así que eso haremos ahora, pero ten en cuenta que omitiremos muchos detalles importantes, como los user agents, ser “educado” con tus peticiones de scraping o ser eficiente con la caché y el rastreo.</p>
+<p>A falta de un ejemplo mejor, hagamos scraping de la página de investigación de <a href="http://aeturrell.com/">http://aeturrell.com/</a></p>
 <div id="073d89e3" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"http://aeturrell.com/research"</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"http://aeturrell.com/research"</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>page <span class="op">=</span> requests.get(url)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>page.text[:<span class="dv">300</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>page.text[:<span class="dv">300</span>]</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>'&lt;!DOCTYPE html&gt;\n&lt;html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"&gt;&lt;head&gt;\n\n&lt;meta charset="utf-8"&gt;\n&lt;meta name="generator" content="quarto-1.9.32"&gt;\n\n&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"&gt;\n\n&lt;meta name="author" content="Arthur Turrell"&gt;\n'</code></pre>
 </div>
 </div>
-<p>Okay, what just happened? We asked requests to grab the HTML of the webpage and then printed the first 300 characters of the text that it found.</p>
-<p>Let’s now parse this into something humans can read (or can read more easily) using beautifulsoup:</p>
+<p>Bien, ¿qué acaba de pasar? Le pedimos a requests que obtuviera el HTML de la página web y luego imprimimos los primeros 300 caracteres del texto que encontró.</p>
+<p>Ahora vamos a convertir esto en algo que los humanos puedan leer (o leer con más facilidad) usando beautifulsoup:</p>
 <div id="22f96be0" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>soup <span class="op">=</span> BeautifulSoup(page.text, <span class="st">"html.parser"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(soup.prettify()[<span class="dv">60000</span>:<span class="dv">60500</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>soup <span class="op">=</span> BeautifulSoup(page.text, <span class="st">"html.parser"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(soup.prettify()[<span class="dv">60000</span>:<span class="dv">60500</span>])</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&gt;
+<pre><code>stem, Part IV
+           &lt;/i&gt;
+           . Sante Fe Institute, 2025. doi:
+           &lt;a href="https://doi.org/10.37911/9781947864665.11"&gt;
+            &lt;code&gt;
+             https://doi.org/10.37911/9781947864665.11
+            &lt;/code&gt;
+           &lt;/a&gt;
+          &lt;/p&gt;
+         &lt;/div&gt;
+         &lt;div class="thumbnail"&gt;
+          &lt;img alt="Travel time from St. Helens, UK" src="../research/chapters/turrell-2025/travel_area_web.webp"/&gt;
+         &lt;/div&gt;
          &lt;div class="project-categories"&gt;
-          &lt;div class="project-category"&gt;
-           &lt;a href="#category=data science"&gt;
-            data science
-           &lt;/a&gt;
-          &lt;/div&gt;
-          &lt;div class="project-category"&gt;
-           &lt;a href="#category=public policy"&gt;
-            public policy
-           &lt;/a&gt;
-          &lt;/div&gt;
-          &lt;div class="project-category"&gt;
-           &lt;a href="#category=complexity science"&gt;
-            complexity science
-           &lt;/a&gt;
-          &lt;/div&gt;
-         &lt;</code></pre>
+          &lt;div</code></pre>
 </div>
 </div>
-<p>Now we see more structure of the page and even some <em>HTML tags</em> such as ‘title’ and ‘link’. Now we come to the data extraction part: say we want to pull out every paragraph of text, we can use beautifulsoup to skim down the HTML structure and pull out only those parts with the paragraph tag (‘p’).</p>
+<p>Ahora vemos más estructura de la página e incluso algunas <em>etiquetas HTML</em>, como ‘title’ y ‘link’. Llegamos a la parte de extracción de datos: supongamos que queremos extraer cada párrafo de texto; podemos usar beautifulsoup para recorrer la estructura HTML y extraer solo las partes con la etiqueta de párrafo (‘p’).</p>
 <div id="d82775de" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get all paragraphs</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get all paragraphs</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>all_paras <span class="op">=</span> soup.find_all(<span class="st">"p"</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Just show one of the paras</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>all_paras[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>all_paras[<span class="dv">1</span>]</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>&lt;p&gt;Blundell, Jack, Emma Duchini, Stefania Simion, and Arthur Turrell. "Pay transparency and gender equality." &lt;i&gt;American Economic Journal: Economic Policy&lt;/i&gt; (2024). doi: &lt;a href="https://www.aeaweb.org/articles?id=10.1257/pol.20220766&amp;amp;from=f"&gt;&lt;code&gt;10.1257/pol.20220766&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;</code></pre>
 </div>
 </div>
-<p>Although this paragraph isn’t too bad, you can make this more readable by stripping out HTML tags altogether with the <code>.text</code> method:</p>
+<p>Aunque este párrafo no está tan mal, puedes hacerlo más legible eliminando por completo las etiquetas HTML con el método <code>.text</code>:</p>
 <div id="11321154" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>all_paras[<span class="dv">1</span>].text</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>all_paras[<span class="dv">1</span>].text</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>'Blundell, Jack, Emma Duchini, Stefania Simion, and Arthur Turrell. "Pay transparency and gender equality." American Economic Journal: Economic Policy (2024). doi: 10.1257/pol.20220766'</code></pre>
 </div>
 </div>
-<p>Now let’s say we didn’t care about most of the page, we <em>only</em> wanted to get hold of the names of projects. For this we need to identify the tag type of the element we’re interested in, in this case ‘div’, and it’s class type, in this case “project-name”. We do it like this (and show nice text in the process):</p>
+<p>Ahora supongamos que no nos interesa la mayor parte de la página y <em>solo</em> queremos obtener los nombres de los proyectos. Para ello necesitamos identificar el tipo de etiqueta del elemento que nos interesa, en este caso ‘div’, y su clase, en este caso “project-name”. Lo hacemos así (y de paso mostramos el texto limpio):</p>
 <div id="feac1fdd" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>projects <span class="op">=</span> soup.find_all(<span class="st">"div"</span>, class_<span class="op">=</span><span class="st">"project-content listing-pub-info"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>projects <span class="op">=</span> soup.find_all(<span class="st">"div"</span>, class_<span class="op">=</span><span class="st">"project-content listing-pub-info"</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>projects <span class="op">=</span> [x.text.strip() <span class="cf">for</span> x <span class="kw">in</span> projects]</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>projects</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>projects</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>['Blundell, Jack, Emma Duchini, Stefania Simion, and Arthur Turrell. "Pay transparency and gender equality." American Economic Journal: Economic Policy (2024). doi: 10.1257/pol.20220766',
  'Botta, Federico, Robin Lovelace, Laura Gilbert, and Arthur Turrell. "Packaging code and data for reproducible research: A case study of journey time statistics." Environment and Planning B: Urban Analytics and City Science (2024): 23998083241267331. doi: 10.1177/23998083241267331',
@@ -1181,35 +1352,36 @@ Note
  'Duchini, Emma, Stefania Simion, and Arthur Turrell. "A Review of the Effects of Pay Transparency." In Oxford Research Encyclopedia of Economics and Finance, Oxford University Press, 2024. doi: 10.1093/acrefore/9780190625979.013.860',
  'Turrell, Arthur, Bradley Speigner, Jyldyz Djumalieva, David Copple, and James Thurgood. "6. Transforming Naturally Occurring Text Data into Economic Statistics." In Big Data for Twenty-First-Century Economic Statistics, pp. 173-208. University of Chicago Press, 2022. doi: 10.7208/chicago/9780226801391-008',
  'Turrell, Arthur. "Agent-based models: understanding the economy from the bottom up" In Quarterly Bulletin, Q4. Bank of England, 2016.',
- 'Cohen, Samuel N., Giulia Mantoan, Lars Nesheim, Áureo de Paula, Arthur Turrell, and Lingyi Yang. Nowcasting using regression on signatures arXiv preprint arXiv:2305.10256v2 (2025).',
+ 'Codreanu, Mihai, Alex Imas, Juan Mateos-Garcia, Joseph Emmens, Evalyne Muiruri, Arthur Turrell, Julian Jacobs, Atoosa Kasirzadeh, Ana Trisovic, Yiyuan Chen, Tanya Rodchenko, Catherine Pollard, Scott Strand, Daniel Rock, Zanna Iscenko, Fabien Curto Millet, Neil Thompson, and James Manyika. AI in Science: Early Insights arXiv preprint arXiv:2609.28504v2 (2026).',
+ 'Cohen, Samuel N., Giulia Mantoan, Lars Nesheim, Áureo de Paula, Arthur Turrell, and Lingyi Yang. Nowcasting using regression on signatures arXiv preprint arXiv:2305.10256v3 (2026).',
  'Van Dijcke, David, Marcus Buckmann, Arthur Turrell, and Tomas Key. "Vacancy Posting, Firm Balance Sheets, and Pandemic Policy Interventions." Bank of England Staff Working Paper Series 1033 (2022).',
  'Draca, Mirko, Emma Duchini, Roland Rathelot, Arthur Turrell, and Giulia Vattuone. Revolution in Progress? The Rise of Remote Work in the UK. University of Warwick, Department of Economics, 2022.',
  'Hill, Edward, Marco Bardoscia, and Arthur Turrell. "Solving heterogeneous general equilibrium economic models with deep reinforcement learning." arXiv arXiv:2103.16977 (2021).',
  'Turrell, Arthur, James Thurgood, David Copple, Jyldyz Djumalieva, and Bradley Speigner. "Using online job vacancies to understand the UK labour market from the bottom-up." Bank of England Staff Working Papers 742 (2018).']</code></pre>
 </div>
 </div>
-<p>Hooray! We managed to get the information we wanted: all we needed to know was the right tags. A good tip for finding the tags of the info you want is to look at in your browser (eg Google Chrome) and then right-click on the bit you’re interested in, then hit ‘Inspect’. This will show you the HTML element of the bit of the page you clicked on.</p>
-<p>That’s almost it for this very, very brief introduction to webscraping. We’ll just see one more thing: how to iterate over multiple pages.</p>
-<p>Imagine we had a root webpage such as “www.codingforeconomists.com” which had subpages such as “www.codingforeconomists.com/page=1”, “www.codingforeconomists.com/page=2”, and so on. One need only iterate create the HTML strings to pass into a function that scrapes each one and return the relevant data, eg for the first 50 pages, and with a function called <code>scraper()</code>, one might run</p>
+<p>¡Hurra! Conseguimos la información que queríamos: solo necesitábamos conocer las etiquetas correctas. Un buen consejo para encontrar las etiquetas de la información que buscas es abrir la página en tu navegador (p.&nbsp;ej., Google Chrome), hacer clic derecho sobre la parte que te interesa y pulsar ‘Inspeccionar’. Esto te mostrará el elemento HTML de la parte de la página en la que hiciste clic.</p>
+<p>Eso es casi todo en esta brevísima introducción al web scraping. Solo veremos una cosa más: cómo iterar sobre varias páginas.</p>
+<p>Imagina que tenemos una página web raíz como “www.codingforeconomists.com” con subpáginas como “www.codingforeconomists.com/page=1”, “www.codingforeconomists.com/page=2”, etc. Basta con generar iterativamente los strings HTML para pasarlos a una función que haga scraping de cada una y devuelva los datos relevantes; por ejemplo, para las primeras 50 páginas y con una función llamada <code>scraper()</code>, podrías ejecutar</p>
 <pre><code>start, stop = 0, 50
 root_url = "www.codingforeconomists.com/page="
 info_on_pages = [scraper(root_url + str(i)) for i in range(start, stop)]</code></pre>
-<p>That’s all we’ll cover here but remember we’ve barely <em>scraped</em> the surface of this big, complex topic. If you want to read about an application, it’s hard not to recommend the paper on webscraping that has undoubtedly change the world the most, and very likely has affected your own life in numerous ways: <a href="http://ilpubs.stanford.edu:8090/422/">“The PageRank Citation Ranking: Bringing Order to the Web”</a> by Page, Brin, Motwani and Winograd. For a more in-depth example of webscraping, check out realpython’s <a href="https://realpython.com/python-web-scraping-practical-introduction/">tutorial</a>.</p>
-<section id="webscraping-tables" class="level3">
-<h3 class="anchored" data-anchor-id="webscraping-tables">Webscraping Tables</h3>
-<p>Often there are times when you don’t actually want to scrape an entire webpage and all you want is the data from a <em>table</em> within the page. Fortunately, there is an easy way to scrape individual tables using the <strong>pandas</strong> package.</p>
-<p>We will read data from a table on ‘https://webscraper.io/test-sites/tables’ using <strong>pandas</strong>. The function we’ll use is <code>read_html()</code>, which returns a list of data frames of all the tables it finds when you pass it a URL. If you want to filter the list of tables, use the <code>match=</code> keyword argument with text that only appears in the table(s) you’re interested in.</p>
-<p>The example below shows how this works; looking at the website, we can see that the table we’re interested in, has a ‘First Name’ column. Therefore we run:</p>
+<p>Eso es todo lo que veremos aquí, pero recuerda que apenas hemos <em>rascado</em> la superficie de este tema amplio y complejo. Si quieres leer sobre una aplicación, es difícil no recomendar el artículo sobre web scraping que sin duda más ha cambiado el mundo, y que muy probablemente ha influido en tu propia vida de muchas maneras: <a href="http://ilpubs.stanford.edu:8090/422/">“The PageRank Citation Ranking: Bringing Order to the Web”</a> de Page, Brin, Motwani y Winograd. Para un ejemplo más detallado de web scraping, consulta el <a href="https://realpython.com/python-web-scraping-practical-introduction/">tutorial</a> de realpython.</p>
+<section id="web-scraping-de-tablas" class="level3">
+<h3 class="anchored" data-anchor-id="web-scraping-de-tablas">Web scraping de tablas</h3>
+<p>A menudo no quieres hacer scraping de una página web completa, sino que solo quieres los datos de una <em>tabla</em> dentro de la página. Por suerte, hay una forma sencilla de hacer scraping de tablas individuales con el paquete <strong>pandas</strong>.</p>
+<p>Leeremos los datos de una tabla de ‘https://webscraper.io/test-sites/tables’ usando <strong>pandas</strong>. La función que usaremos es <code>read_html()</code>, que devuelve una lista de dataframes con todas las tablas que encuentra cuando le pasas una URL. Si quieres filtrar la lista de tablas, usa el argumento <code>match=</code> con un texto que solo aparezca en la(s) tabla(s) que te interesan.</p>
+<p>El ejemplo siguiente muestra cómo funciona esto; si miramos el sitio web, vemos que la tabla que nos interesa tiene una columna ‘First Name’. Por lo tanto, ejecutamos:</p>
 <div id="0ada9ce7" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df_list <span class="op">=</span> pd.read_html(<span class="st">"https://webscraper.io/test-sites/tables"</span>, match<span class="op">=</span><span class="st">"First Name"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df_list <span class="op">=</span> pd.read_html(<span class="st">"https://webscraper.io/test-sites/tables"</span>, match<span class="op">=</span><span class="st">"First Name"</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve first entry from list of data frames</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df_list[<span class="dv">0</span>]</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1221,21 +1393,21 @@ info_on_pages = [scraper(root_url + str(i)) for i in range(start, stop)]</code><
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th data-quarto-table-cell-role="th">0</th>
 <td>1</td>
 <td>Mark</td>
 <td>Otto</td>
 <td>@mdo</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>2</td>
 <td>Jacob</td>
 <td>Thornton</td>
 <td>@fat</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th data-quarto-table-cell-role="th">2</th>
 <td>3</td>
 <td>Larry</td>
 <td>the Bird</td>
@@ -1247,8 +1419,8 @@ info_on_pages = [scraper(root_url + str(i)) for i in range(start, stop)]</code><
 </div>
 </div>
 </div>
-<p>This gives us the table neatly loaded into a <strong>pandas</strong> data frame ready for further use.</p>
-<p>If you get a ‘403’ error, it means that the website has blocked <strong>pandas</strong> because it can see that you are engaged in web scraping. This is because some people web scrape irresponsibly, or because websites have provided other, preferred ways for you to obtain the data, eg via a download of the whole thing (think Wikipedia) or through an API. (If you really need to, <a href="https://stackoverflow.com/questions/43590153/http-error-403-forbidden-when-reading-html">you can often get around the 403 error</a> though.)</p>
+<p>Esto nos deja la tabla cargada de forma ordenada en un dataframe de <strong>pandas</strong>, lista para seguir usándola.</p>
+<p>Si obtienes un error ‘403’, significa que el sitio web ha bloqueado a <strong>pandas</strong> porque detecta que estás haciendo web scraping. Esto ocurre porque algunas personas hacen web scraping de forma irresponsable, o porque los sitios web ofrecen otras formas preferidas de obtener los datos, por ejemplo, descargándolos completos (piensa en Wikipedia) o mediante una API. (Aun así, si de verdad lo necesitas, <a href="https://stackoverflow.com/questions/43590153/http-error-403-forbidden-when-reading-html">a menudo puedes sortear el error 403</a>.)</p>
 
 
 </section>
@@ -1256,383 +1428,256 @@ info_on_pages = [scraper(root_url + str(i)) for i in range(start, stop)]</code><
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
-      }
-    }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-      }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
-        }
-      });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
       return false;
     }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
     }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
         }
       }
       return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
-        return container.innerHTML
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1640,194 +1685,170 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./rectangling.html" class="pagination-link" aria-label="Nested Data">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Nested Data</span></span>
+      <a href="./rectangling.html" class="pagination-link" aria-label="Datos anidados">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Datos anidados</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./functions.html" class="pagination-link" aria-label="Functions">
-        <span class="nav-page-text"><span class="chapter-title">Functions</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./functions.html" class="pagination-link" aria-label="Funciones">
+        <span class="nav-page-text"><span class="chapter-title">Funciones</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1836,4 +1857,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/aeturrell/python4DS/blob/main/webscraping-and-apis.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/aeturrell/python4DS/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/aeturrell/python4DS/blob/main/webscraping-and-apis.ipynb" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/aeturrell/python4DS/issues/new" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></div></div></footer></body></html>

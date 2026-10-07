@@ -1,18 +1,24 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Boolean Data – Python for Data Science</title>
+<title>Datos booleanos – Python for Data Science</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -21,8 +27,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +40,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -57,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -67,17 +74,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./numbers.html" rel="next">
 <link href="./communicate-plots.html" rel="prev">
 <link href="./favicon.ico" rel="icon">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-b9e8d9863b7928896e96ff6494065671.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b8d228dfc8ea33805744e1debdbf65c8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-b9e8d9863b7928896e96ff6494065671.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -92,17 +102,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
   }
 }</script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-LXJC37BJVX"></script>
@@ -114,30 +124,192 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
 
 
-<meta name="twitter:title" content="Boolean Data – Python for Data Science">
+<meta name="twitter:title" content="Datos booleanos – Python for Data Science">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-sidebar docked">
+<body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./boolean-data.html">Transform</a></li><li class="breadcrumb-item"><a href="./boolean-data.html"><span class="chapter-title">Boolean Data</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./boolean-data.html">Transformar</a></li><li class="breadcrumb-item"><a href="./boolean-data.html"><span class="chapter-title">Datos booleanos</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -151,40 +323,40 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Python for Data Science</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/aeturrell/python4DS" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+    <a href="https://github.com/aeturrell/python4DS" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
 </div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
+        <div id="quarto-search" class="" title="Buscar"></div>
         </div>
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Welcome</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bienvenida</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
- <span class="menu-text">Introduction</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">Introducción</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">First Steps</span></a>
+  <a href="./introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Primeros pasos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./prerequisites.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prerequisites</span></a>
+  <a href="./prerequisites.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Requisitos previos</span></a>
   </div>
 </li>
       </ul>
@@ -192,60 +364,60 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
- <span class="menu-text">Quick Start</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">Inicio rápido</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./whole-game.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Whole Game</span></a>
+  <a href="./whole-game.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">El juego completo</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-visualise.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Visualisation</span></a>
+  <a href="./data-visualise.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Visualización de datos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./workflow-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Workflow: Basics</span></a>
+  <a href="./workflow-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Flujo de trabajo: conceptos básicos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-transform.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Transformation</span></a>
+  <a href="./data-transform.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Transformación de datos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./workflow-style.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Workflow: Style</span></a>
+  <a href="./workflow-style.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Flujo de trabajo: estilo</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-tidy.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Tidy Data</span></a>
+  <a href="./data-tidy.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Tidy data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./workflow-writing-code.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Workflow: Writing Code</span></a>
+  <a href="./workflow-writing-code.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Flujo de trabajo: escribir código</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-import.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Import</span></a>
+  <a href="./data-import.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Importación de datos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./workflow-packages-and-environments.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Workflow: Packages and Environments</span></a>
+  <a href="./workflow-packages-and-environments.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Flujo de trabajo: paquetes y entornos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./workflow-help.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Postscript: Getting Further Help</span></a>
+  <a href="./workflow-help.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Epílogo: cómo obtener más ayuda</span></a>
   </div>
 </li>
       </ul>
@@ -253,30 +425,30 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
- <span class="menu-text">Visualise</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">Visualizar</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualise.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Visualisation</span></a>
+  <a href="./visualise.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Visualización</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./vis-layers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Layers</span></a>
+  <a href="./vis-layers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Capas</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exploratory-data-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exploratory Data Analysis</span></a>
+  <a href="./exploratory-data-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Análisis exploratorio de datos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./communicate-plots.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Graphics for Communication</span></a>
+  <a href="./communicate-plots.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Gráficos para comunicar</span></a>
   </div>
 </li>
       </ul>
@@ -284,45 +456,45 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Transform</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+ <span class="menu-text">Transformar</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./boolean-data.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Boolean Data</span></a>
+  <a href="./boolean-data.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Datos booleanos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./numbers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Numbers</span></a>
+  <a href="./numbers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Números</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./strings.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Strings and Text</span></a>
+  <a href="./strings.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Strings y texto</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./regex.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regular Expressions, aka regex</span></a>
+  <a href="./regex.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Expresiones regulares, también conocidas como regex</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./categorical-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Categorical Data</span></a>
+  <a href="./categorical-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Datos categóricos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dates-and-times.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Dates and Times</span></a>
+  <a href="./dates-and-times.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Fechas y horas</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./missing-values.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Missing Values</span></a>
+  <a href="./missing-values.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Valores faltantes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -335,30 +507,30 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Import</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">Importar</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./spreadsheets.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Spreadsheets</span></a>
+  <a href="./spreadsheets.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Hojas de cálculo</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./databases.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Databases</span></a>
+  <a href="./databases.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bases de datos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rectangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Nested Data</span></a>
+  <a href="./rectangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Datos anidados</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./webscraping-and-apis.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Webscraping and APIs</span></a>
+  <a href="./webscraping-and-apis.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Web scraping y API</span></a>
   </div>
 </li>
       </ul>
@@ -366,25 +538,25 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">Programme</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">Programar</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./functions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Functions</span></a>
+  <a href="./functions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Funciones</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./iteration.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Iteration</span></a>
+  <a href="./iteration.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Iteración</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./command-line.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">The Command Line</span></a>
+  <a href="./command-line.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">La línea de comandos</span></a>
   </div>
 </li>
       </ul>
@@ -392,8 +564,8 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
- <span class="menu-text">Communicate</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">Comunicar</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -413,8 +585,8 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
- <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">Apéndices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -422,7 +594,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
+ <span class="menu-text">Referencias</span></a>
   </div>
 </li>
       </ul>
@@ -434,33 +606,34 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#booleans" id="toc-booleans" class="nav-link" data-scroll-target="#booleans">Booleans</a>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción">Introducción</a></li>
+  <li><a href="#booleanos" id="toc-booleanos" class="nav-link" data-scroll-target="#booleanos">Booleanos</a>
   <ul class="collapse">
-  <li><a href="#boolean-variables-and-conditions" id="toc-boolean-variables-and-conditions" class="nav-link" data-scroll-target="#boolean-variables-and-conditions">Boolean Variables and Conditions</a></li>
-  <li><a href="#conditions-in-list-comprehensions" id="toc-conditions-in-list-comprehensions" class="nav-link" data-scroll-target="#conditions-in-list-comprehensions">Conditions in list comprehensions</a></li>
-  <li><a href="#truthsy-and-falsy-values" id="toc-truthsy-and-falsy-values" class="nav-link" data-scroll-target="#truthsy-and-falsy-values">Truthsy and Falsy Values</a></li>
-  <li><a href="#any-and-all" id="toc-any-and-all" class="nav-link" data-scroll-target="#any-and-all">any() and all()</a></li>
+  <li><a href="#variables-booleanas-y-condiciones" id="toc-variables-booleanas-y-condiciones" class="nav-link" data-scroll-target="#variables-booleanas-y-condiciones">Variables booleanas y condiciones</a></li>
+  <li><a href="#condiciones-en-las-list-comprehensions" id="toc-condiciones-en-las-list-comprehensions" class="nav-link" data-scroll-target="#condiciones-en-las-list-comprehensions">Condiciones en las list comprehensions</a></li>
+  <li><a href="#valores-truthy-y-falsy" id="toc-valores-truthy-y-falsy" class="nav-link" data-scroll-target="#valores-truthy-y-falsy">Valores truthy y falsy</a></li>
+  <li><a href="#any-y-all" id="toc-any-y-all" class="nav-link" data-scroll-target="#any-y-all">any() y all()</a></li>
   </ul></li>
-  <li><a href="#booleans-in-pandas-data-frames" id="toc-booleans-in-pandas-data-frames" class="nav-link" data-scroll-target="#booleans-in-pandas-data-frames">Booleans in <strong>pandas</strong> data frames</a>
+  <li><a href="#booleanos-en-dataframes-de-pandas" id="toc-booleanos-en-dataframes-de-pandas" class="nav-link" data-scroll-target="#booleanos-en-dataframes-de-pandas">Booleanos en dataframes de <strong>pandas</strong></a>
   <ul class="collapse">
-  <li><a href="#operations-on-booleans-in-data-frames" id="toc-operations-on-booleans-in-data-frames" class="nav-link" data-scroll-target="#operations-on-booleans-in-data-frames">Operations on booleans in data frames</a></li>
-  <li><a href="#creating-booleans-from-comparisons-using-columns" id="toc-creating-booleans-from-comparisons-using-columns" class="nav-link" data-scroll-target="#creating-booleans-from-comparisons-using-columns">Creating booleans from comparisons using columns</a></li>
-  <li><a href="#any-and-all-in-data-frames" id="toc-any-and-all-in-data-frames" class="nav-link" data-scroll-target="#any-and-all-in-data-frames">any() and all() in data frames</a></li>
-  <li><a href="#logical-subsetting" id="toc-logical-subsetting" class="nav-link" data-scroll-target="#logical-subsetting">Logical subsetting</a></li>
+  <li><a href="#operaciones-con-booleanos-en-dataframes" id="toc-operaciones-con-booleanos-en-dataframes" class="nav-link" data-scroll-target="#operaciones-con-booleanos-en-dataframes">Operaciones con booleanos en dataframes</a></li>
+  <li><a href="#crear-booleanos-a-partir-de-comparaciones-con-columnas" id="toc-crear-booleanos-a-partir-de-comparaciones-con-columnas" class="nav-link" data-scroll-target="#crear-booleanos-a-partir-de-comparaciones-con-columnas">Crear booleanos a partir de comparaciones con columnas</a></li>
+  <li><a href="#any-y-all-en-dataframes" id="toc-any-y-all-en-dataframes" class="nav-link" data-scroll-target="#any-y-all-en-dataframes">any() y all() en dataframes</a></li>
+  <li><a href="#subconjuntos-lógicos" id="toc-subconjuntos-lógicos" class="nav-link" data-scroll-target="#subconjuntos-lógicos">Subconjuntos lógicos</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.dev/aeturrell/python4DS/blob/main/boolean-data.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/aeturrell/python4DS/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.dev/aeturrell/python4DS/blob/main/boolean-data.ipynb" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/aeturrell/python4DS/issues/new" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./boolean-data.html">Transform</a></li><li class="breadcrumb-item"><a href="./boolean-data.html"><span class="chapter-title">Boolean Data</span></a></li></ol></nav>
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./boolean-data.html">Transformar</a></li><li class="breadcrumb-item"><a href="./boolean-data.html"><span class="chapter-title">Datos booleanos</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-boolean-data" class="quarto-section-identifier"><span class="chapter-title">Boolean Data</span></span></h1>
+<h1 class="title"><span id="sec-boolean-data" class="quarto-section-identifier"><span class="chapter-title">Datos booleanos</span></span></h1>
 </div>
 
 
@@ -477,99 +650,99 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </header>
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>In this chapter, we’ll introduce boolean data: data that can be <code>True</code> or <code>False</code> (which can also be encoded as 1s or 0s). We’ll first look at the fundamental Python true and false boolean variables before seeing how true and false work in data frames.</p>
+<section id="introducción" class="level2">
+<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
+<p>En este capítulo presentaremos los datos booleanos: datos que pueden ser <code>True</code> o <code>False</code> (y que también pueden codificarse como 1 y 0). Primero veremos las variables booleanas fundamentales de Python, verdadero y falso, y después cómo funcionan en los dataframes.</p>
 </section>
-<section id="booleans" class="level2">
-<h2 class="anchored" data-anchor-id="booleans">Booleans</h2>
-<p>Some of the most important operations you will perform are with <code>True</code> and <code>False</code> values, also known as boolean data types. These are fundamental Python variables, just as numbers such as <code>1</code> are.</p>
-<section id="boolean-variables-and-conditions" class="level3">
-<h3 class="anchored" data-anchor-id="boolean-variables-and-conditions">Boolean Variables and Conditions</h3>
-<p>To assign the value <code>True</code> or <code>False</code> to a variable is the same as with any other assignment:</p>
+<section id="booleanos" class="level2">
+<h2 class="anchored" data-anchor-id="booleanos">Booleanos</h2>
+<p>Algunas de las operaciones más importantes que realizarás son con los valores <code>True</code> y <code>False</code>, también conocidos como tipos de dato booleanos. Son variables fundamentales de Python, igual que lo son números como <code>1</code>.</p>
+<section id="variables-booleanas-y-condiciones" class="level3">
+<h3 class="anchored" data-anchor-id="variables-booleanas-y-condiciones">Variables booleanas y condiciones</h3>
+<p>Asignar el valor <code>True</code> o <code>False</code> a una variable se hace igual que cualquier otra asignación:</p>
 <div id="7e35b9fc" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>bool_variable <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>bool_variable</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>bool_variable <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>bool_variable</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>True</code></pre>
 </div>
 </div>
-<p>There are two types of operation that are associated with booleans: boolean operations, in which existing booleans are combined, and condition operations, which create a boolean when executed.</p>
-<p>Boolean operators that return booleans are as follows:</p>
+<p>Hay dos tipos de operaciones asociadas a los booleanos: las operaciones booleanas, en las que se combinan booleanos existentes, y las operaciones de condición, que crean un booleano al ejecutarse.</p>
+<p>Los operadores booleanos que devuelven booleanos son los siguientes:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th style="text-align: center;">Operator</th>
-<th style="text-align: left;">Description</th>
+<th style="text-align: center;">Operador</th>
+<th style="text-align: left;">Descripción</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>x and y</code></td>
-<td style="text-align: left;">are <code>x</code> and <code>y</code> both True?</td>
+<td style="text-align: left;">¿son <code>x</code> e <code>y</code> ambos True?</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><code>x or y</code></td>
-<td style="text-align: left;">is at least one of <code>x</code> and <code>y</code> True?</td>
+<td style="text-align: left;">¿es al menos uno de <code>x</code> e <code>y</code> True?</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><code>not x</code></td>
-<td style="text-align: left;">is <code>x</code> False?</td>
+<td style="text-align: left;">¿es <code>x</code> False?</td>
 </tr>
 </tbody>
 </table>
-<p>These behave as you’d expect: <code>True and False</code> evaluates to <code>False</code>, while <code>True or False</code> evaluates to <code>True</code>. There’s also the <code>not</code> keyword. For example</p>
+<p>Se comportan como cabría esperar: <code>True and False</code> se evalúa como <code>False</code>, mientras que <code>True or False</code> se evalúa como <code>True</code>. También existe la palabra clave <code>not</code>. Por ejemplo</p>
 <div id="590cd75d" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">not</span> <span class="va">True</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">not</span> <span class="va">True</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>False</code></pre>
 </div>
 </div>
-<p>as you would expect.</p>
-<p>Conditions are expressions that evaluate as booleans. A simple example is <code>10 == 20</code>. The <code>==</code> is an operator that compares the objects on either side and returns <code>True</code> if they have the same <em>values</em>–though be careful using it with different data types.</p>
-<p>Here’s a table of conditions that return booleans:</p>
+<p>como cabría esperar.</p>
+<p>Las condiciones son expresiones que se evalúan como booleanos. Un ejemplo sencillo es <code>10 == 20</code>. <code>==</code> es un operador que compara los objetos a cada lado y devuelve <code>True</code> si tienen los mismos <em>valores</em>, aunque ten cuidado al usarlo con tipos de datos diferentes.</p>
+<p>Aquí tienes una tabla de condiciones que devuelven booleanos:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th style="text-align: left;">Operator</th>
-<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Operador</th>
+<th style="text-align: left;">Descripción</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><code>x == y</code></td>
-<td style="text-align: left;">is <code>x</code> equal to <code>y</code>?</td>
+<td style="text-align: left;">¿es <code>x</code> igual a <code>y</code>?</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>x != y</code></td>
-<td style="text-align: left;">is <code>x</code> not equal to <code>y</code>?</td>
+<td style="text-align: left;">¿es <code>x</code> distinto de <code>y</code>?</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>x &gt; y</code></td>
-<td style="text-align: left;">is <code>x</code> greater than <code>y</code>?</td>
+<td style="text-align: left;">¿es <code>x</code> mayor que <code>y</code>?</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>x &gt;= y</code></td>
-<td style="text-align: left;">is <code>x</code> greater than or equal to <code>y</code>?</td>
+<td style="text-align: left;">¿es <code>x</code> mayor o igual que <code>y</code>?</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>x &lt; y</code></td>
-<td style="text-align: left;">is <code>x</code> less than <code>y</code>?</td>
+<td style="text-align: left;">¿es <code>x</code> menor que <code>y</code>?</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>x &lt;= y</code></td>
-<td style="text-align: left;">is <code>x</code> less than or equal to <code>y</code>?</td>
+<td style="text-align: left;">¿es <code>x</code> menor o igual que <code>y</code>?</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>x is y</code></td>
-<td style="text-align: left;">is <code>x</code> the same object as <code>y</code>?</td>
+<td style="text-align: left;">¿es <code>x</code> el mismo objeto que <code>y</code>?</td>
 </tr>
 </tbody>
 </table>
-<p>As you can see from the table, the opposite of <code>==</code> is <code>!=</code>, which you can read as ‘not equal to the value of’. Here’s an example of <code>==</code>:</p>
+<p>Como ves en la tabla, lo contrario de <code>==</code> es <code>!=</code>, que puedes leer como «no es igual al valor de». Aquí tienes un ejemplo de <code>==</code>:</p>
 <div id="51622575" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>boolean_condition <span class="op">=</span> <span class="dv">10</span> <span class="op">==</span> <span class="dv">20</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(boolean_condition)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>boolean_condition <span class="op">=</span> <span class="dv">10</span> <span class="op">==</span> <span class="dv">20</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(boolean_condition)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>False</code></pre>
 </div>
@@ -580,16 +753,16 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise
+<span class="screen-reader-only">Tip</span>Exercise
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>What does <code>not (not True)</code> evaluate to?</p>
 </div>
 </div>
-<p>The real power of conditions comes when we start to use them in more complex examples. Some of the keywords that evaluate conditions are <code>if</code>, <code>else</code>, <code>and</code>, <code>or</code>, <code>in</code>, <code>not</code>, and <code>is</code>. Here’s an example showing how some of these conditional keywords work:</p>
+<p>La verdadera potencia de las condiciones aparece cuando empezamos a usarlas en ejemplos más complejos. Algunas de las palabras clave que evalúan condiciones son <code>if</code>, <code>else</code>, <code>and</code>, <code>or</code>, <code>in</code>, <code>not</code> e <code>is</code>. Aquí tienes un ejemplo que muestra cómo funcionan algunas de estas palabras clave condicionales:</p>
 <div id="0c550daa" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> <span class="st">"Ada"</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> <span class="st">"Ada"</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> <span class="dv">99</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> name <span class="op">==</span> <span class="st">"Ada"</span> <span class="kw">and</span> score <span class="op">&gt;</span> <span class="dv">90</span>:</span>
@@ -599,36 +772,36 @@ Exercise
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"You could be called Smith or have a high score"</span>)</span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> name <span class="op">!=</span> <span class="st">"Smith"</span> <span class="kw">and</span> score <span class="op">&gt;</span> <span class="dv">90</span>:</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"You are not called Smith and you have a high score"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"You are not called Smith and you have a high score"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ada, you achieved a high score.
 You could be called Smith or have a high score
 You are not called Smith and you have a high score</code></pre>
 </div>
 </div>
-<p>All three of these conditions evaluate as True, and so all three messages get printed. Given that <code>==</code> and <code>!=</code> test for equality and not equal, respectively, you may be wondering what the keywords <code>is</code> and <code>not</code> are for. Remember that everything in Python is an object, and that values can be assigned to objects. <code>==</code> and <code>!=</code> compare <em>values</em>, while <code>is</code> and <code>not</code> compare <em>objects</em>. For example,</p>
+<p>Las tres condiciones se evalúan como True, así que se imprimen los tres mensajes. Dado que <code>==</code> y <code>!=</code> comprueban la igualdad y la desigualdad, respectivamente, quizá te preguntes para qué sirven las palabras clave <code>is</code> y <code>not</code>. Recuerda que en Python todo es un objeto y que se pueden asignar valores a los objetos. <code>==</code> y <code>!=</code> comparan <em>valores</em>, mientras que <code>is</code> y <code>not</code> comparan <em>objetos</em>. Por ejemplo,</p>
 <div id="7420e1c1" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>name_list <span class="op">=</span> [<span class="st">"Ada"</span>, <span class="st">"Adam"</span>]</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>name_list <span class="op">=</span> [<span class="st">"Ada"</span>, <span class="st">"Adam"</span>]</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>name_list_two <span class="op">=</span> [<span class="st">"Ada"</span>, <span class="st">"Adam"</span>]</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare values</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(name_list <span class="op">==</span> name_list_two)</span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare objects</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(name_list <span class="kw">is</span> name_list_two)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(name_list <span class="kw">is</span> name_list_two)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>True
 False</code></pre>
 </div>
 </div>
-<p>Note that code with lots of branching if statements is not very helpful to you or to anyone else who reads your code. Some automatic code checkers will pick this up and tell you that your code is too complex. Almost all of the time, there’s a way to rewrite your code without lots of branching logic that will be better and clearer than having many nested <code>if</code> statements.</p>
-<p>One of the most useful conditional keywords is <code>in</code>. This one must pop up ten times a day in most coders’ lives because it can pick out a variable or make sure something is where it’s supposed to be.</p>
+<p>Ten en cuenta que el código con muchas sentencias if ramificadas no es muy útil ni para ti ni para nadie que lea tu código. Algunos verificadores automáticos de código lo detectarán y te dirán que tu código es demasiado complejo. Casi siempre hay una forma de reescribir el código sin tanta lógica ramificada que resultará mejor y más clara que tener muchas sentencias <code>if</code> anidadas.</p>
+<p>Una de las palabras clave condicionales más útiles es <code>in</code>. Seguramente aparece diez veces al día en la vida de la mayoría de los programadores, porque permite localizar una variable o asegurarse de que algo está donde debe estar.</p>
 <div id="39caa7be" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>name_list <span class="op">=</span> [<span class="st">"Lovelace"</span>, <span class="st">"Smith"</span>, <span class="st">"Hopper"</span>, <span class="st">"Babbage"</span>]</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>name_list <span class="op">=</span> [<span class="st">"Lovelace"</span>, <span class="st">"Smith"</span>, <span class="st">"Hopper"</span>, <span class="st">"Babbage"</span>]</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Lovelace"</span> <span class="kw">in</span> name_list)</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Bob"</span> <span class="kw">in</span> name_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Bob"</span> <span class="kw">in</span> name_list)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>True
 False</code></pre>
@@ -640,17 +813,17 @@ False</code></pre>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise
+<span class="screen-reader-only">Tip</span>Exercise
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Check if “a” is in the string “Walloping weasels” using <code>in</code>. Is “a” <code>in</code> “Anodyne”?</p>
 </div>
 </div>
-<p>The opposite is <code>not in</code>.</p>
-<p>Finally, one conditional construct you’re bound to use at <em>some</em> point, is the <code>if</code>…<code>else</code> structure:</p>
+<p>Lo contrario es <code>not in</code>.</p>
+<p>Por último, una construcción condicional que seguro usarás en <em>algún</em> momento es la estructura <code>if</code>…<code>else</code>:</p>
 <div id="95794e71" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> <span class="dv">98</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> <span class="dv">98</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> score <span class="op">==</span> <span class="dv">100</span>:</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Top marks!"</span>)</span>
@@ -659,54 +832,54 @@ Exercise
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> score <span class="op">&gt;</span> <span class="dv">10</span> <span class="kw">and</span> score <span class="op">&lt;=</span> <span class="dv">90</span>:</span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Better luck next time."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Better luck next time."</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>High score!</code></pre>
 </div>
 </div>
-<p>Note that this does nothing if the score is between 11 and 90, and prints a message otherwise.</p>
+<p>Observa que esto no hace nada si la puntuación está entre 11 y 90, y en caso contrario imprime un mensaje.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise
+<span class="screen-reader-only">Tip</span>Exercise
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Create a new <code>if</code> … <code>elif</code> … <code>else</code> statement that prints “well done” if a score is over 90, “good” if between 40 and 90, and “bad luck” otherwise.</p>
 </div>
 </div>
-<p>One nice feature of Python is that you can make multiple boolean comparisons in a single line.</p>
+<p>Una característica práctica de Python es que puedes hacer varias comparaciones booleanas en una sola línea.</p>
 <div id="cd1cd061" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> <span class="dv">3</span>, <span class="dv">6</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> <span class="dv">3</span>, <span class="dv">6</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="op">&lt;</span> a <span class="op">&lt;</span> b <span class="op">&lt;</span> <span class="dv">20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="op">&lt;</span> a <span class="op">&lt;</span> b <span class="op">&lt;</span> <span class="dv">20</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>True</code></pre>
 </div>
 </div>
 </section>
-<section id="conditions-in-list-comprehensions" class="level3">
-<h3 class="anchored" data-anchor-id="conditions-in-list-comprehensions">Conditions in list comprehensions</h3>
-<p>List comprehensions are an incredibly useful pattern in Python. Here’s a simple one that produces a list of the first 12 numbers starting from 0:</p>
+<section id="condiciones-en-las-list-comprehensions" class="level3">
+<h3 class="anchored" data-anchor-id="condiciones-en-las-list-comprehensions">Condiciones en las list comprehensions</h3>
+<p>Las list comprehensions (listas por comprensión) son un patrón increíblemente útil en Python. Aquí tienes una sencilla que produce una lista con los primeros 12 números empezando por 0:</p>
 <div id="59638407" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>[x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">12</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>[x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">12</span>)]</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]</code></pre>
 </div>
 </div>
-<p>Booleans bring conditionality to the table. We’ll add an <code>if</code> statement followed by a condition that evaluates to either True or False depending on the value of <code>x</code>. So, for example, we can ask for only those numbers that are divisible by 2:</p>
+<p>Los booleanos aportan condicionalidad. Añadiremos una sentencia <code>if</code> seguida de una condición que se evalúa como True o False según el valor de <code>x</code>. Así, por ejemplo, podemos pedir solo los números divisibles por 2:</p>
 <div id="8e8072ea" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>[x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">12</span>) <span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>[x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">12</span>) <span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>]</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>[0, 2, 4, 6, 8, 10]</code></pre>
 </div>
 </div>
-<p>This trick even works with an <code>else</code> clause (but note that we have moved both <code>if</code> and <code>else</code> before the <code>for x in ...</code> part)</p>
+<p>Este truco funciona incluso con una cláusula <code>else</code> (pero observa que hemos movido tanto <code>if</code> como <code>else</code> antes de la parte <code>for x in ...</code>)</p>
 <div id="ec01f460" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>[x <span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">"Not divisible by 2"</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">12</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>[x <span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">"Not divisible by 2"</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">12</span>)]</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>[0,
  'Not divisible by 2',
@@ -723,94 +896,94 @@ Exercise
 </div>
 </div>
 </section>
-<section id="truthsy-and-falsy-values" class="level3">
-<h3 class="anchored" data-anchor-id="truthsy-and-falsy-values">Truthsy and Falsy Values</h3>
-<p>Python objects can be used in expressions that will return a boolean value, such as when a list, <code>listy</code>, is used with <code>if listy</code>. Built-in Python objects that are empty are usually evaluated as <code>False</code>, and are said to be ‘Falsy’. In contrast, when these built-in objects are not empty, they evaluate as <code>True</code> and are said to be ‘truthy’. Let’s see some examples:</p>
+<section id="valores-truthy-y-falsy" class="level3">
+<h3 class="anchored" data-anchor-id="valores-truthy-y-falsy">Valores truthy y falsy</h3>
+<p>Los objetos de Python pueden usarse en expresiones que devuelven un valor booleano, como cuando una lista, <code>listy</code>, se usa con <code>if listy</code>. Los objetos integrados de Python que están vacíos normalmente se evalúan como <code>False</code>, y se dice que son «falsy». En cambio, cuando estos objetos integrados no están vacíos, se evalúan como <code>True</code> y se dice que son «truthy». Veamos algunos ejemplos:</p>
 <div id="dc605a93" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>listy <span class="op">=</span> []</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>listy <span class="op">=</span> []</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>other_listy <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> (listy):</span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Falsy"</span>)</span>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Truthy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Truthy"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Falsy</code></pre>
 </div>
 </div>
 <div id="da8fe682" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> (other_listy):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> (other_listy):</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Falsy"</span>)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Truthy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Truthy"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Truthy</code></pre>
 </div>
 </div>
-<p>The method doesn’t just operate on lists; it’ll work for many various other truthy and falsy objects:</p>
+<p>El método no solo funciona con listas; sirve para muchos otros objetos truthy y falsy:</p>
 <div id="d80ba0be" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> <span class="dv">0</span>:</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> <span class="dv">0</span>:</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Falsy"</span>)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Truthy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Truthy"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Falsy</code></pre>
 </div>
 </div>
 <div id="1973d44d" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>]:</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>]:</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Falsy"</span>)</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Truthy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Truthy"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Truthy</code></pre>
 </div>
 </div>
-<p>Note that zero was falsy, its the nothing of a float, but a list of three zeros is not an empty list, so it evaluates as truthy.</p>
+<p>Observa que el cero era falsy, es la «nada» de un float, pero una lista de tres ceros no es una lista vacía, así que se evalúa como truthy.</p>
 <div id="62840c4a" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> <span class="va">None</span>:</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Falsy"</span>)</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Truthy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Truthy"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Falsy</code></pre>
 </div>
 </div>
-<p>Knowing what is truthy or falsy is useful in practice; imagine you’d like to default to a specific behaviour if a list called <code>list_vals</code> doesn’t have any values in. You now know you can do it simply with <code>if list_vals</code>.</p>
+<p>Saber qué es truthy o falsy es útil en la práctica; imagina que quieres recurrir a un comportamiento por defecto si una lista llamada <code>list_vals</code> no contiene ningún valor. Ahora sabes que puedes hacerlo simplemente con <code>if list_vals</code>.</p>
 </section>
-<section id="any-and-all" class="level3">
-<h3 class="anchored" data-anchor-id="any-and-all">any() and all()</h3>
-<p>Of course, there is a big wide world of booleans out there; they don’t always occur on their own. That’s why the operators <code>any()</code> and <code>all()</code> exist. These apply to <em>iterables</em> of booleans, like a list of booleans.</p>
-<p><code>any()</code> takes a list of booleans with at least one true value and returns true:</p>
+<section id="any-y-all" class="level3">
+<h3 class="anchored" data-anchor-id="any-y-all">any() y all()</h3>
+<p>Por supuesto, el mundo de los booleanos es muy amplio; no siempre aparecen solos. Por eso existen los operadores <code>any()</code> y <code>all()</code>. Se aplican a <em>iterables</em> de booleanos, como una lista de booleanos.</p>
+<p><code>any()</code> toma una lista de booleanos con al menos un valor verdadero y devuelve verdadero:</p>
 <div id="bdcb09a5" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">any</span>([<span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">any</span>([<span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>])</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>True</code></pre>
 </div>
 </div>
-<p><code>all()</code> takes a list of booleans and returns true only if <em>all</em> values are true:</p>
+<p><code>all()</code> toma una lista de booleanos y devuelve verdadero solo si <em>todos</em> los valores son verdaderos:</p>
 <div id="2f666185" class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="bu">all</span>([<span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="bu">all</span>([<span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span>])</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <pre><code>True</code></pre>
 </div>
 </div>
-<p>Both of these also work for 1s and 0s:</p>
+<p>Ambos funcionan también con 1 y 0:</p>
 <div id="78777d9c" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="bu">all</span>([<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="bu">all</span>([<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>])</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>False</code></pre>
 </div>
 </div>
 </section>
 </section>
-<section id="booleans-in-pandas-data-frames" class="level2">
-<h2 class="anchored" data-anchor-id="booleans-in-pandas-data-frames">Booleans in <strong>pandas</strong> data frames</h2>
-<section id="operations-on-booleans-in-data-frames" class="level3">
-<h3 class="anchored" data-anchor-id="operations-on-booleans-in-data-frames">Operations on booleans in data frames</h3>
-<p>Quite often, you will run into a scenario where you’re working with data that have True or False values in a data frame. It is easy to create a column of booleans in a <strong>pandas</strong> data frame:</p>
+<section id="booleanos-en-dataframes-de-pandas" class="level2">
+<h2 class="anchored" data-anchor-id="booleanos-en-dataframes-de-pandas">Booleanos en dataframes de <strong>pandas</strong></h2>
+<section id="operaciones-con-booleanos-en-dataframes" class="level3">
+<h3 class="anchored" data-anchor-id="operaciones-con-booleanos-en-dataframes">Operaciones con booleanos en dataframes</h3>
+<p>Con bastante frecuencia te encontrarás trabajando con datos que tienen valores True o False en un dataframe. Es fácil crear una columna de booleanos en un dataframe de <strong>pandas</strong>:</p>
 <div id="7f338fd7" class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame.from_dict(</span>
 <span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    {</span>
@@ -818,12 +991,12 @@ Exercise
 <span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"bool_col_2"</span>: [<span class="va">True</span>, <span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">True</span>],</span>
 <span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -833,27 +1006,27 @@ Exercise
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th data-quarto-table-cell-role="th">0</th>
 <td>False</td>
 <td>True</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>False</td>
 <td>False</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th data-quarto-table-cell-role="th">2</th>
 <td>False</td>
 <td>True</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th data-quarto-table-cell-role="th">3</th>
 <td>True</td>
 <td>False</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th data-quarto-table-cell-role="th">4</th>
 <td>True</td>
 <td>True</td>
 </tr>
@@ -863,9 +1036,9 @@ Exercise
 </div>
 </div>
 </div>
-<p>We can perform operations on these just like regular <strong>pandas</strong> data frame columns. These accept <code>&amp;</code> (and), <code>|</code> (or), <code>==</code> (equal), and <code>!=</code> (not equal) as operations:</p>
+<p>Podemos realizar operaciones con ellas igual que con las columnas normales de un dataframe de <strong>pandas</strong>. Aceptan como operaciones <code>&amp;</code> (y), <code>|</code> (o), <code>==</code> (igual) y <code>!=</code> (distinto):</p>
 <div id="9cdaec7a" class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"bool_col_1"</span>] <span class="op">|</span> df[<span class="st">"bool_col_2"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"bool_col_1"</span>] <span class="op">|</span> df[<span class="st">"bool_col_2"</span>]</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
 <pre><code>0     True
 1    False
@@ -875,19 +1048,19 @@ Exercise
 dtype: bool</code></pre>
 </div>
 </div>
-<p>Quite often, it’s useful to have a count of the number of true values. If you take the sum of boolean columns in a <strong>pandas</strong> data frame, it will tot up the number of <code>True</code> values:</p>
+<p>A menudo resulta útil contar el número de valores verdaderos. Si sumas columnas booleanas en un dataframe de <strong>pandas</strong>, obtendrás el total de valores <code>True</code>:</p>
 <div id="89ee3e44" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>df.<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>df.<span class="bu">sum</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <pre><code>bool_col_1    2
 bool_col_2    3
 dtype: int64</code></pre>
 </div>
 </div>
-<p>And if you ever get data formatted as 1s and 0s rather than True and False, it’s easy to convert by changing the data type:</p>
+<p>Y si alguna vez recibes datos con formato de 1 y 0 en lugar de True y False, es fácil convertirlos cambiando el tipo de dato:</p>
 <div id="5e30cee7" class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame.from_dict({<span class="st">"bool_col"</span>: [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>]})</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"bool_col"</span>].astype(<span class="bu">bool</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame.from_dict({<span class="st">"bool_col"</span>: [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>]})</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"bool_col"</span>].astype(<span class="bu">bool</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>0    False
 1     True
@@ -898,19 +1071,19 @@ Name: bool_col, dtype: bool</code></pre>
 </div>
 </div>
 </section>
-<section id="creating-booleans-from-comparisons-using-columns" class="level3">
-<h3 class="anchored" data-anchor-id="creating-booleans-from-comparisons-using-columns">Creating booleans from comparisons using columns</h3>
-<p>It’s also possible to create boolean columns from numerical (or some other) columns. Let’s use the diamonds dataset to demonstrate this:</p>
+<section id="crear-booleanos-a-partir-de-comparaciones-con-columnas" class="level3">
+<h3 class="anchored" data-anchor-id="crear-booleanos-a-partir-de-comparaciones-con-columnas">Crear booleanos a partir de comparaciones con columnas</h3>
+<p>También es posible crear columnas booleanas a partir de columnas numéricas (o de otro tipo). Usemos el dataset diamonds para demostrarlo:</p>
 <div id="9f63005f" class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="op">=</span> pd.read_csv(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="op">=</span> pd.read_csv(</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://github.com/mwaskom/seaborn-data/raw/master/diamonds.csv"</span></span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>diamonds.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>diamonds.head()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="24">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -928,7 +1101,7 @@ Name: bool_col, dtype: bool</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th data-quarto-table-cell-role="th">0</th>
 <td>0.23</td>
 <td>Ideal</td>
 <td>E</td>
@@ -941,7 +1114,7 @@ Name: bool_col, dtype: bool</code></pre>
 <td>2.43</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>0.21</td>
 <td>Premium</td>
 <td>E</td>
@@ -954,7 +1127,7 @@ Name: bool_col, dtype: bool</code></pre>
 <td>2.31</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th data-quarto-table-cell-role="th">2</th>
 <td>0.23</td>
 <td>Good</td>
 <td>E</td>
@@ -967,7 +1140,7 @@ Name: bool_col, dtype: bool</code></pre>
 <td>2.31</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th data-quarto-table-cell-role="th">3</th>
 <td>0.29</td>
 <td>Premium</td>
 <td>I</td>
@@ -980,7 +1153,7 @@ Name: bool_col, dtype: bool</code></pre>
 <td>2.63</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th data-quarto-table-cell-role="th">4</th>
 <td>0.31</td>
 <td>Good</td>
 <td>J</td>
@@ -998,15 +1171,15 @@ Name: bool_col, dtype: bool</code></pre>
 </div>
 </div>
 </div>
-<p>We’re going to create a new boolean variable for whenever the price is above 1000.</p>
+<p>Vamos a crear una nueva variable booleana que indique cuándo el precio es superior a 1000.</p>
 <div id="7a27f0a0" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>diamonds[<span class="st">"expensive"</span>] <span class="op">=</span> diamonds[<span class="st">"price"</span>] <span class="op">&gt;</span> <span class="dv">1000</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>diamonds.sample(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>diamonds[<span class="st">"expensive"</span>] <span class="op">=</span> diamonds[<span class="st">"price"</span>] <span class="op">&gt;</span> <span class="dv">1000</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>diamonds.sample(<span class="dv">10</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1025,143 +1198,143 @@ Name: bool_col, dtype: bool</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">5039</td>
-<td>1.08</td>
-<td>Premium</td>
-<td>I</td>
-<td>SI2</td>
-<td>60.1</td>
-<td>59.0</td>
-<td>3750</td>
-<td>6.75</td>
-<td>6.69</td>
-<td>4.04</td>
-<td>True</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">18376</td>
+<th data-quarto-table-cell-role="th">44654</th>
 <td>0.29</td>
-<td>Good</td>
-<td>E</td>
-<td>VVS2</td>
-<td>63.2</td>
-<td>60.0</td>
-<td>617</td>
-<td>4.17</td>
+<td>Very Good</td>
+<td>G</td>
+<td>VVS1</td>
+<td>62.0</td>
+<td>58.0</td>
+<td>522</td>
 <td>4.19</td>
-<td>2.64</td>
+<td>4.23</td>
+<td>2.61</td>
 <td>False</td>
 </tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">23172</th>
+<td>1.51</td>
+<td>Premium</td>
+<td>H</td>
+<td>VS2</td>
+<td>61.2</td>
+<td>58.0</td>
+<td>11188</td>
+<td>7.40</td>
+<td>7.36</td>
+<td>4.52</td>
+<td>True</td>
+</tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">16248</td>
-<td>1.01</td>
-<td>Ideal</td>
+<th data-quarto-table-cell-role="th">45006</th>
+<td>0.54</td>
+<td>Premium</td>
 <td>G</td>
 <td>VS1</td>
-<td>61.8</td>
-<td>57.0</td>
-<td>6499</td>
-<td>6.40</td>
-<td>6.45</td>
-<td>3.97</td>
+<td>61.1</td>
+<td>60.0</td>
+<td>1637</td>
+<td>5.23</td>
+<td>5.28</td>
+<td>3.21</td>
 <td>True</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">40641</td>
-<td>0.41</td>
-<td>Ideal</td>
-<td>E</td>
-<td>VS1</td>
-<td>62.7</td>
-<td>55.0</td>
-<td>1153</td>
-<td>4.76</td>
-<td>4.72</td>
-<td>2.97</td>
-<td>True</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">14852</td>
-<td>1.07</td>
-<td>Ideal</td>
-<td>F</td>
-<td>SI1</td>
-<td>62.7</td>
-<td>56.0</td>
-<td>5982</td>
-<td>6.47</td>
-<td>6.53</td>
-<td>4.08</td>
-<td>True</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">39411</td>
-<td>0.41</td>
-<td>Ideal</td>
-<td>F</td>
-<td>VS1</td>
-<td>61.3</td>
-<td>55.0</td>
-<td>1076</td>
-<td>4.83</td>
-<td>4.79</td>
-<td>2.95</td>
-<td>True</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">18891</td>
-<td>0.90</td>
+<th data-quarto-table-cell-role="th">24205</th>
+<td>1.57</td>
 <td>Very Good</td>
-<td>E</td>
-<td>IF</td>
-<td>63.9</td>
-<td>55.0</td>
-<td>7747</td>
-<td>6.05</td>
-<td>6.09</td>
-<td>3.88</td>
+<td>H</td>
+<td>SI1</td>
+<td>62.4</td>
+<td>58.0</td>
+<td>12392</td>
+<td>7.39</td>
+<td>7.49</td>
+<td>4.64</td>
+<td>True</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">39197</th>
+<td>0.43</td>
+<td>Ideal</td>
+<td>D</td>
+<td>SI1</td>
+<td>61.5</td>
+<td>56.0</td>
+<td>1064</td>
+<td>4.87</td>
+<td>4.82</td>
+<td>2.98</td>
 <td>True</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">38260</td>
-<td>0.30</td>
+<th data-quarto-table-cell-role="th">14035</th>
+<td>1.05</td>
 <td>Ideal</td>
+<td>H</td>
+<td>SI1</td>
+<td>60.8</td>
+<td>56.0</td>
+<td>5704</td>
+<td>6.62</td>
+<td>6.58</td>
+<td>4.01</td>
+<td>True</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">14670</th>
+<td>1.28</td>
+<td>Very Good</td>
 <td>I</td>
 <td>SI1</td>
-<td>61.8</td>
-<td>57.0</td>
-<td>382</td>
-<td>4.30</td>
-<td>4.34</td>
-<td>2.67</td>
-<td>False</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">18363</td>
-<td>0.37</td>
-<td>Very Good</td>
-<td>F</td>
-<td>SI1</td>
-<td>62.5</td>
-<td>58.0</td>
-<td>616</td>
-<td>4.52</td>
-<td>4.57</td>
-<td>2.84</td>
-<td>False</td>
+<td>63.6</td>
+<td>54.0</td>
+<td>5920</td>
+<td>6.87</td>
+<td>6.90</td>
+<td>4.38</td>
+<td>True</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">11523</td>
-<td>1.24</td>
-<td>Premium</td>
-<td>J</td>
+<th data-quarto-table-cell-role="th">44870</th>
+<td>0.63</td>
+<td>Ideal</td>
+<td>G</td>
+<td>SI1</td>
+<td>62.0</td>
+<td>55.0</td>
+<td>1628</td>
+<td>5.49</td>
+<td>5.54</td>
+<td>3.42</td>
+<td>True</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">41376</th>
+<td>0.50</td>
+<td>Ideal</td>
+<td>I</td>
 <td>VS2</td>
-<td>61.4</td>
-<td>59.0</td>
-<td>5026</td>
-<td>6.91</td>
-<td>6.83</td>
-<td>4.22</td>
+<td>61.6</td>
+<td>54.0</td>
+<td>1220</td>
+<td>5.11</td>
+<td>5.14</td>
+<td>3.16</td>
+<td>True</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">16124</th>
+<td>0.91</td>
+<td>Ideal</td>
+<td>D</td>
+<td>VS2</td>
+<td>60.9</td>
+<td>57.0</td>
+<td>6444</td>
+<td>6.26</td>
+<td>6.32</td>
+<td>3.83</td>
 <td>True</td>
 </tr>
 </tbody>
@@ -1170,14 +1343,14 @@ Name: bool_col, dtype: bool</code></pre>
 </div>
 </div>
 </div>
-<p>Of course, this could also have been achieved in a call to assign:</p>
+<p>Por supuesto, esto también podría haberse conseguido con una llamada a assign:</p>
 <div id="c78a6d47" class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>diamonds.assign(expensive<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="st">"price"</span>] <span class="op">&gt;</span> <span class="dv">1000</span>).head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>diamonds.assign(expensive<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="st">"price"</span>] <span class="op">&gt;</span> <span class="dv">1000</span>).head()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="26">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1196,7 +1369,7 @@ Name: bool_col, dtype: bool</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th data-quarto-table-cell-role="th">0</th>
 <td>0.23</td>
 <td>Ideal</td>
 <td>E</td>
@@ -1210,7 +1383,7 @@ Name: bool_col, dtype: bool</code></pre>
 <td>False</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>0.21</td>
 <td>Premium</td>
 <td>E</td>
@@ -1224,7 +1397,7 @@ Name: bool_col, dtype: bool</code></pre>
 <td>False</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th data-quarto-table-cell-role="th">2</th>
 <td>0.23</td>
 <td>Good</td>
 <td>E</td>
@@ -1238,7 +1411,7 @@ Name: bool_col, dtype: bool</code></pre>
 <td>False</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th data-quarto-table-cell-role="th">3</th>
 <td>0.29</td>
 <td>Premium</td>
 <td>I</td>
@@ -1252,7 +1425,7 @@ Name: bool_col, dtype: bool</code></pre>
 <td>False</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th data-quarto-table-cell-role="th">4</th>
 <td>0.31</td>
 <td>Good</td>
 <td>J</td>
@@ -1271,35 +1444,35 @@ Name: bool_col, dtype: bool</code></pre>
 </div>
 </div>
 </div>
-<p>Another use of booleans that is quite useful when it comes to data frames is the <code>.isin()</code> function. For example, if you just want some True or False values for whether a set of columns is in a data frame:</p>
+<p>Otro uso de los booleanos bastante útil con los dataframes es la función <code>.isin()</code>. Por ejemplo, si solo quieres valores True o False que indiquen si un conjunto de columnas está en un dataframe:</p>
 <div id="d12f537d" class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>diamonds.columns.isin([<span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"z"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>diamonds.columns.isin([<span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"z"</span>])</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="27">
 <pre><code>array([False, False, False, False, False, False, False,  True,  True,
         True, False])</code></pre>
 </div>
 </div>
 </section>
-<section id="any-and-all-in-data-frames" class="level3">
-<h3 class="anchored" data-anchor-id="any-and-all-in-data-frames">any() and all() in data frames</h3>
-<p>A <strong>pandas</strong> column of booleans behaves a lot like a list of booleans, and we can apply the same logic to it via <strong>pandas</strong> built-in <code>.any()</code> and <code>.all()</code> methods. We expect some entries for <code>"expensive"</code> to be true, so <code>any()</code> should return true:</p>
+<section id="any-y-all-en-dataframes" class="level3">
+<h3 class="anchored" data-anchor-id="any-y-all-en-dataframes">any() y all() en dataframes</h3>
+<p>Una columna de booleanos de <strong>pandas</strong> se comporta de forma muy parecida a una lista de booleanos, y podemos aplicarle la misma lógica mediante los métodos integrados de <strong>pandas</strong> <code>.any()</code> y <code>.all()</code>. Esperamos que algunas entradas de <code>"expensive"</code> sean verdaderas, así que <code>any()</code> debería devolver verdadero:</p>
 <div id="35e73305" class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>diamonds[<span class="st">"expensive"</span>].<span class="bu">any</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>diamonds[<span class="st">"expensive"</span>].<span class="bu">any</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="28">
 <pre><code>np.True_</code></pre>
 </div>
 </div>
 </section>
-<section id="logical-subsetting" class="level3">
-<h3 class="anchored" data-anchor-id="logical-subsetting">Logical subsetting</h3>
-<p>Although we’ve been effectively using this all along, it’s useful to make it explicit: booleans can be used to logically subset a data frame. Let’s say we only want the bits of a data frame where <code>x</code> is greater than <code>y</code>:</p>
+<section id="subconjuntos-lógicos" class="level3">
+<h3 class="anchored" data-anchor-id="subconjuntos-lógicos">Subconjuntos lógicos</h3>
+<p>Aunque lo hemos estado usando todo el tiempo, conviene hacerlo explícito: los booleanos pueden usarse para obtener subconjuntos lógicos de un dataframe. Supongamos que solo queremos las partes de un dataframe en las que <code>x</code> es mayor que <code>y</code>:</p>
 <div id="d1bbb0fa" class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>diamonds[diamonds[<span class="st">"x"</span>] <span class="op">&gt;</span> diamonds[<span class="st">"y"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>diamonds[diamonds[<span class="st">"x"</span>] <span class="op">&gt;</span> diamonds[<span class="st">"y"</span>]]</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="29">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1318,7 +1491,7 @@ Name: bool_col, dtype: bool</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>0.21</td>
 <td>Premium</td>
 <td>E</td>
@@ -1332,7 +1505,7 @@ Name: bool_col, dtype: bool</code></pre>
 <td>False</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">8</td>
+<th data-quarto-table-cell-role="th">8</th>
 <td>0.22</td>
 <td>Fair</td>
 <td>E</td>
@@ -1346,7 +1519,7 @@ Name: bool_col, dtype: bool</code></pre>
 <td>False</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">11</td>
+<th data-quarto-table-cell-role="th">11</th>
 <td>0.23</td>
 <td>Ideal</td>
 <td>J</td>
@@ -1360,7 +1533,7 @@ Name: bool_col, dtype: bool</code></pre>
 <td>False</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">12</td>
+<th data-quarto-table-cell-role="th">12</th>
 <td>0.22</td>
 <td>Premium</td>
 <td>F</td>
@@ -1374,7 +1547,7 @@ Name: bool_col, dtype: bool</code></pre>
 <td>False</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">14</td>
+<th data-quarto-table-cell-role="th">14</th>
 <td>0.20</td>
 <td>Premium</td>
 <td>E</td>
@@ -1388,7 +1561,7 @@ Name: bool_col, dtype: bool</code></pre>
 <td>False</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
+<th data-quarto-table-cell-role="th">...</th>
 <td>...</td>
 <td>...</td>
 <td>...</td>
@@ -1402,7 +1575,7 @@ Name: bool_col, dtype: bool</code></pre>
 <td>...</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">53928</td>
+<th data-quarto-table-cell-role="th">53928</th>
 <td>0.79</td>
 <td>Premium</td>
 <td>E</td>
@@ -1416,7 +1589,7 @@ Name: bool_col, dtype: bool</code></pre>
 <td>True</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">53929</td>
+<th data-quarto-table-cell-role="th">53929</th>
 <td>0.71</td>
 <td>Ideal</td>
 <td>G</td>
@@ -1430,7 +1603,7 @@ Name: bool_col, dtype: bool</code></pre>
 <td>True</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">53930</td>
+<th data-quarto-table-cell-role="th">53930</th>
 <td>0.71</td>
 <td>Premium</td>
 <td>E</td>
@@ -1444,7 +1617,7 @@ Name: bool_col, dtype: bool</code></pre>
 <td>True</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">53931</td>
+<th data-quarto-table-cell-role="th">53931</th>
 <td>0.71</td>
 <td>Premium</td>
 <td>F</td>
@@ -1458,7 +1631,7 @@ Name: bool_col, dtype: bool</code></pre>
 <td>True</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">53938</td>
+<th data-quarto-table-cell-role="th">53938</th>
 <td>0.86</td>
 <td>Premium</td>
 <td>H</td>
@@ -1478,7 +1651,7 @@ Name: bool_col, dtype: bool</code></pre>
 </div>
 </div>
 </div>
-<p>The expression <code>diamonds["x"] &gt; diamonds["y"]</code> creates a column of booleans that is used to filter to just the rows where the condition is true.</p>
+<p>La expresión <code>diamonds["x"] &gt; diamonds["y"]</code> crea una columna de booleanos que se usa para filtrar y quedarse solo con las filas en las que la condición es verdadera.</p>
 
 
 </section>
@@ -1486,383 +1659,256 @@ Name: bool_col, dtype: bool</code></pre>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
-      }
-    }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-      }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
-        }
-      });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
       return false;
     }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
     }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
         }
       }
       return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
-        return container.innerHTML
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1870,194 +1916,170 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./communicate-plots.html" class="pagination-link" aria-label="Graphics for Communication">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Graphics for Communication</span></span>
+      <a href="./communicate-plots.html" class="pagination-link" aria-label="Gráficos para comunicar">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Gráficos para comunicar</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./numbers.html" class="pagination-link" aria-label="Numbers">
-        <span class="nav-page-text"><span class="chapter-title">Numbers</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./numbers.html" class="pagination-link" aria-label="Números">
+        <span class="nav-page-text"><span class="chapter-title">Números</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -2066,4 +2088,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/aeturrell/python4DS/blob/main/boolean-data.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/aeturrell/python4DS/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/aeturrell/python4DS/blob/main/boolean-data.ipynb" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/aeturrell/python4DS/issues/new" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></div></div></footer></body></html>
