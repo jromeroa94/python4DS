@@ -154,16 +154,16 @@ pd.crosstab(df["species"], [df["island"], df["sex"]], margins=True)
 
 La tabla siguiente muestra todas las opciones para los bloques de código.
 
-  | Opción    | Descripción                                                                                                                                                                                 |
-  | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  | `eval`    | Evalúa el bloque de código (si es false, solo reproduce el código en la salida).                                                                                                                    |
-  | `echo`    | Incluye el código fuente en la salida                                                                                                                                                           |
+  | Opción    | Descripción                                                                                                                                                                                          |
+  | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  | `eval`    | Evalúa el bloque de código (si es false, solo reproduce el código en la salida).                                                                                                                     |
+  | `echo`    | Incluye el código fuente en la salida                                                                                                                                                                |
   | `output`  | Incluye en la salida los resultados de ejecutar el código (true, false o asis para indicar que la salida es markdown sin procesar y no debe llevar nada del markdown envolvente estándar de Quarto). |
-  | `warning` | Incluye las advertencias en la salida.                                                                                                                                                             |
-  | `error`   | Incluye los errores en la salida (ten en cuenta que esto implica que los errores al ejecutar el código no detendrán el procesamiento del documento).                                                                  |
-  | `include` | Opción general para impedir que se incluya cualquier salida (código o resultados) (p. ej., include: false suprime toda la salida del bloque de código).                                                  |
-  | `true`    | Verdadero                                                                                                                                                                                        |
-  | `false`   | Falso                                                                                                                                                                                       |
+  | `warning` | Incluye las advertencias en la salida.                                                                                                                                                               |
+  | `error`   | Incluye los errores en la salida (ten en cuenta que esto implica que los errores al ejecutar el código no detendrán el procesamiento del documento).                                                 |
+  | `include` | Opción general para impedir que se incluya cualquier salida (código o resultados) (p. ej., include: false suprime toda la salida del bloque de código).                                              |
+  | `true`    | Verdadero                                                                                                                                                                                            |
+  | `false`   | Falso                                                                                                                                                                                                |
 
 También es **posible insertar resultados de código en línea con el texto**. Aquí tienes un ejemplo mínimo.
 

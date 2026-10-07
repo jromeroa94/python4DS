@@ -153,11 +153,11 @@ La sintaxis básica para crear tablas es
 
 que se convierte en
 
-  | Queso              | País        | Coste por kg |
-  | ------------------ | ----------- | ----------- |
-  | Appleby's Cheshire | Reino Unido | £30         |
-  | Edam               | Países Bajos | £8          |
-  | Pélardon           | Francia     | £37         |
+  | Queso              | País         | Coste por kg |
+  | ------------------ | ------------ | ------------ |
+  | Appleby's Cheshire | Reino Unido  | £30          |
+  | Edam               | Países Bajos | £8           |
+  | Pélardon           | Francia      | £37          |
 
 ¡pero rara vez querrás escribirlas tú mismo! En la práctica, lo más fácil es exportar un archivo markdown desde un dataframe de **pandas** usando `df.to_markdown()` o usar el práctico sitio web [markdown table generator](https://www.tablesgenerator.com/markdown_tables).
 
