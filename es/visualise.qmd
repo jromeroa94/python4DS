@@ -82,7 +82,7 @@ for ax, (label, (x, y)) in zip(axs.flat, datasets.items()):
         horizontalalignment="right",
     )
 
-plt.suptitle("Anscombe's Quartet")
+plt.suptitle("Cuarteto de Anscombe")
 plt.show()
 ```
 
