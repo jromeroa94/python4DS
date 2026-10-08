@@ -659,7 +659,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <h2 class="anchored" data-anchor-id="funciones">Funciones</h2>
 <p>Una función tiene entradas, realiza su función y devuelve las salidas que tenga. Las funciones comienzan con la palabra clave def, de ‘definir una función’. Luego tienen un nombre, seguido de paréntesis, (), que pueden contener argumentos de la función y argumentos de palabra clave. A esto le siguen dos puntos. El cuerpo de la función se indenta con respecto al texto situado más a la izquierda. Los argumentos de la función se definen entre paréntesis después del nombre, con las distintas entradas separadas por comas. Las salidas se indican con la palabra clave return, de nuevo con las distintas variables separadas por comas.</p>
 <p>Veamos un ejemplo muy sencillo de una función con un único <em>argumento</em> (o arg):</p>
-<div id="0450ad6c" class="cell" data-execution_count="1">
+<div id="0450ad6c" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> welcome_message(name):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"Hello </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">, and welcome!"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -668,44 +668,37 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> <span class="st">"Ada"</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>output_string <span class="op">=</span> welcome_message(name)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(output_string)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Hello Ada, and welcome!</code></pre>
-</div>
 </div>
 <p>Una característica potente de las funciones es que podemos definir valores por defecto para los argumentos de entrada. Estos se llaman <em>argumentos de palabra clave</em> (o kwargs). Veámoslo en acción definiendo un valor por defecto para <code>name</code>, junto con varias salidas: un mensaje de saludo y una puntuación.</p>
-<div id="dd49bee5" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> score_message(score, name<span class="op">=</span><span class="st">"student"</span>):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""This is a doc-string, a string describing a function.</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">        score (float): Raw score</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">        name (str): Name of student</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">        str: A hello message.</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">        float: A normalised score.</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    norm_score <span class="op">=</span> (score <span class="op">-</span> <span class="dv">50</span>) <span class="op">/</span> <span class="dv">10</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"Hello </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">"</span>, norm_score</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Without indentation, this code is not part of function</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> <span class="st">"Ada"</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> <span class="dv">98</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># No name entered</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(score_message(score))</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Name entered</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(score_message(score, name<span class="op">=</span>name))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>('Hello student', 4.8)
-('Hello Ada', 4.8)</code></pre>
+<div id="dd49bee5" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> score_message(score, name<span class="op">=</span><span class="st">"student"</span>):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""This is a doc-string, a string describing a function.</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">        score (float): Raw score</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">        name (str): Name of student</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">        str: A hello message.</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">        float: A normalised score.</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    norm_score <span class="op">=</span> (score <span class="op">-</span> <span class="dv">50</span>) <span class="op">/</span> <span class="dv">10</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"Hello </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">"</span>, norm_score</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Without indentation, this code is not part of function</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> <span class="st">"Ada"</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> <span class="dv">98</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># No name entered</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(score_message(score))</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Name entered</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(score_message(score, name<span class="op">=</span>name))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled" title="Arguments and keyword arguments">
+<div class="callout callout-style-default callout-note callout-titled" title="Argumentos y argumentos con nombre (keyword arguments)">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Arguments and keyword arguments
+<span class="screen-reader-only">Nota</span>Argumentos y argumentos con nombre (keyword arguments)
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -713,47 +706,34 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <p>Los <em>argumentos de palabra clave</em> son las variables opcionales de las funciones, como <code>c</code> en <code>def add(a, b, c=5): return a + b - c</code>. Si no proporcionas un valor para <code>c</code> al llamar a la función, se usará automáticamente <code>c=5</code>. A los argumentos de palabra clave a veces se les llama <em>kwargs</em>.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout callout-style-default callout-tip callout-titled" title="Ejercicio">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Exercise
+<span class="screen-reader-only">Tip</span>Ejercicio
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>What is the return type of a function with multiple return values separated by commas following the <code>return</code> statement?</p>
+<p>¿Cuál es el tipo de retorno de una función con varios valores de retorno separados por comas después de la instrucción <code>return</code>?</p>
 </div>
 </div>
 <p>En ese último ejemplo, habrás notado que añadimos algo de texto a la función. Es un docstring, o cadena de documentación. Sirve para ayudar a los usuarios (y, muy probablemente, a tu yo del futuro) a entender qué hace la función. Veamos cómo funciona llamando a <code>help()</code> sobre la función <code>score_message</code>:</p>
-<div id="50dfff24" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(score_message)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Help on function score_message in module __main__:
-
-score_message(score, name='student')
-    This is a doc-string, a string describing a function.
-    Args:
-        score (float): Raw score
-        name (str): Name of student
-    Returns:
-        str: A hello message.
-        float: A normalised score.
-</code></pre>
+<div id="50dfff24" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(score_message)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout callout-style-default callout-tip callout-titled" title="Ejercicio">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Exercise
+<span class="screen-reader-only">Tip</span>Ejercicio
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Write a function that returns a high five unicode character if the input is equal to “coding for economists” and a sad face, “:-/” otherwise.</p>
+<p>Escribe una función que devuelva un carácter unicode de “chócala” (high five) si la entrada es igual a “coding for economists” y, en caso contrario, una cara triste, “:-/”.</p>
 <p>Añade un segundo argumento que tome por defecto un string vacío pero que, si se usa, se añada (concatene) al mensaje devuelto. Úsalo para crear la salida “:-/ here is my message.”</p>
 <p>Escribe un docstring para tu función y llama a <code>help</code> sobre ella.</p>
 </div>
@@ -763,34 +743,34 @@ score_message(score, name='student')
 <section id="cuándo-deberías-escribir-una-función" class="level2">
 <h2 class="anchored" data-anchor-id="cuándo-deberías-escribir-una-función">¿Cuándo deberías escribir una función?</h2>
 <p>Deberías considerar escribir una función siempre que hayas copiado y pegado un bloque de código más de dos veces (es decir, ya tienes tres copias del mismo código). Por ejemplo, echa un vistazo a este código. ¿Qué hace?</p>
-<div id="7a744085" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(np.random.normal(size<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>)), columns<span class="op">=</span>[<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>])</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"a"</span>] <span class="op">=</span> (df[<span class="st">"a"</span>] <span class="op">-</span> df[<span class="st">"a"</span>].<span class="bu">min</span>()) <span class="op">/</span> (df[<span class="st">"a"</span>].<span class="bu">max</span>() <span class="op">-</span> df[<span class="st">"a"</span>].<span class="bu">min</span>())</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"b"</span>] <span class="op">=</span> (df[<span class="st">"b"</span>] <span class="op">-</span> df[<span class="st">"b"</span>].<span class="bu">min</span>()) <span class="op">/</span> (df[<span class="st">"b"</span>].<span class="bu">max</span>() <span class="op">-</span> df[<span class="st">"a"</span>].<span class="bu">min</span>())</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"c"</span>] <span class="op">=</span> (df[<span class="st">"c"</span>] <span class="op">-</span> df[<span class="st">"c"</span>].<span class="bu">min</span>()) <span class="op">/</span> (df[<span class="st">"c"</span>].<span class="bu">max</span>() <span class="op">-</span> df[<span class="st">"c"</span>].<span class="bu">min</span>())</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"d"</span>] <span class="op">=</span> (df[<span class="st">"d"</span>] <span class="op">-</span> df[<span class="st">"d"</span>].<span class="bu">min</span>()) <span class="op">/</span> (df[<span class="st">"d"</span>].<span class="bu">max</span>() <span class="op">-</span> df[<span class="st">"d"</span>].<span class="bu">min</span>())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="7a744085" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(np.random.normal(size<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>)), columns<span class="op">=</span>[<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>])</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"a"</span>] <span class="op">=</span> (df[<span class="st">"a"</span>] <span class="op">-</span> df[<span class="st">"a"</span>].<span class="bu">min</span>()) <span class="op">/</span> (df[<span class="st">"a"</span>].<span class="bu">max</span>() <span class="op">-</span> df[<span class="st">"a"</span>].<span class="bu">min</span>())</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"b"</span>] <span class="op">=</span> (df[<span class="st">"b"</span>] <span class="op">-</span> df[<span class="st">"b"</span>].<span class="bu">min</span>()) <span class="op">/</span> (df[<span class="st">"b"</span>].<span class="bu">max</span>() <span class="op">-</span> df[<span class="st">"a"</span>].<span class="bu">min</span>())</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"c"</span>] <span class="op">=</span> (df[<span class="st">"c"</span>] <span class="op">-</span> df[<span class="st">"c"</span>].<span class="bu">min</span>()) <span class="op">/</span> (df[<span class="st">"c"</span>].<span class="bu">max</span>() <span class="op">-</span> df[<span class="st">"c"</span>].<span class="bu">min</span>())</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"d"</span>] <span class="op">=</span> (df[<span class="st">"d"</span>] <span class="op">-</span> df[<span class="st">"d"</span>].<span class="bu">min</span>()) <span class="op">/</span> (df[<span class="st">"d"</span>].<span class="bu">max</span>() <span class="op">-</span> df[<span class="st">"d"</span>].<span class="bu">min</span>())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Quizá puedas deducir que reescala cada columna para que tenga un rango de 0 a 1. Pero ¿viste el error? Hubo una equivocación al copiar y pegar el código para <code>df["b"]</code>: alguien olvidó cambiar una <code>a</code> por una <code>b</code>. Extraer el código repetido a una función es una buena idea porque evita que cometas este tipo de errores.</p>
 <p>Para escribir una función, primero necesitas analizar el código. ¿Cuántas entradas tiene?</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"a"</span>] <span class="op">-</span> df[<span class="st">"a"</span>].<span class="bu">min</span>() <span class="op">/</span> (df[<span class="st">"a"</span>].<span class="bu">max</span>() <span class="op">-</span> df[<span class="st">"a"</span>].<span class="bu">min</span>())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"a"</span>] <span class="op">-</span> df[<span class="st">"a"</span>].<span class="bu">min</span>() <span class="op">/</span> (df[<span class="st">"a"</span>].<span class="bu">max</span>() <span class="op">-</span> df[<span class="st">"a"</span>].<span class="bu">min</span>())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Este código solo tiene una entrada: <code>df["a"]</code>. Para que las entradas sean más claras, es buena idea reescribir el código usando variables temporales con nombres generales. Aquí el código solo requiere un único vector numérico, así que lo llamaremos <code>x</code> y lo pondremos en una función.</p>
 <p>Las funciones comienzan con la palabra clave def, de ‘definir una función’. Luego tienen un nombre, seguido de paréntesis, (), que pueden contener argumentos de la función y argumentos de palabra clave. A esto le siguen dos puntos. El cuerpo de la función se indenta con respecto al texto situado más a la izquierda. Los argumentos de la función se definen entre paréntesis después del nombre, con las distintas entradas separadas por comas. Las salidas se indican con la palabra clave return, de nuevo con las distintas variables separadas por comas.</p>
 <p>Así, en Python, las funciones tienen la forma:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> name_of_function(<span class="op">&lt;</span>inputs<span class="op">&gt;</span>):</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>code to carry out on inputs<span class="op">&gt;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span><span class="cf">return</span> statement, <span class="cf">if</span> appropriate<span class="op">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> name_of_function(<span class="op">&lt;</span>inputs<span class="op">&gt;</span>):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>code to carry out on inputs<span class="op">&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span><span class="cf">return</span> statement, <span class="cf">if</span> appropriate<span class="op">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Así que aquí sería:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rescale(x):</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x <span class="op">-</span> x.<span class="bu">min</span>()) <span class="op">/</span> (x.<span class="bu">max</span>() <span class="op">-</span> x.<span class="bu">min</span>())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rescale(x):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x <span class="op">-</span> x.<span class="bu">min</span>()) <span class="op">/</span> (x.<span class="bu">max</span>() <span class="op">-</span> x.<span class="bu">min</span>())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Todavía hay algo de duplicación en este código. Estamos calculando el mínimo de los datos dos veces, así que tiene sentido hacerlo una sola vez:</p>
-<div id="406648b6" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rescale(x):</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    minimum <span class="op">=</span> x.<span class="bu">min</span>()</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x <span class="op">-</span> minimum) <span class="op">/</span> (x.<span class="bu">max</span>() <span class="op">-</span> minimum)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="406648b6" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rescale(x):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    minimum <span class="op">=</span> x.<span class="bu">min</span>()</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x <span class="op">-</span> minimum) <span class="op">/</span> (x.<span class="bu">max</span>() <span class="op">-</span> minimum)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Extraer los cálculos intermedios a variables con nombre es una buena práctica, porque deja más claro lo que hace el código.</p>
 <p>Hay tres pasos clave para crear una nueva función:</p>
@@ -801,64 +781,34 @@ score_message(score, name='student')
 </ol>
 <p>Fíjate en el proceso general: solo creamos la función después de haber averiguado cómo hacerla funcionar con una entrada sencilla. Es más fácil empezar con código que funciona y convertirlo en una función; es más difícil crear una función y luego intentar que funcione.</p>
 <p>En este punto, es buena idea comprobar tu función con algunas entradas diferentes:</p>
-<div id="b72eafca" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>rescale(pd.Series([<span class="op">-</span><span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">10</span>]))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>0    0.0
-1    0.5
-2    1.0
-dtype: float64</code></pre>
+<div id="b72eafca" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rescale(pd.Series([<span class="op">-</span><span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">10</span>]))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-<div id="edd018c7" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>rescale(pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, np.nan, <span class="dv">5</span>]))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
-<pre><code>0    0.00
-1    0.25
-2    0.50
-3     NaN
-4    1.00
-dtype: float64</code></pre>
-</div>
+<div id="edd018c7" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>rescale(pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, np.nan, <span class="dv">5</span>]))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>A medida que escribas más y más funciones, con el tiempo querrás convertir estas pruebas informales e interactivas en pruebas formales y automatizadas. Ese proceso se llama pruebas unitarias (unit testing). Por desgracia, queda fuera del alcance de este libro.</p>
 <p>Ahora que tenemos una función, podemos simplificar el ejemplo original:</p>
-<div id="ce066e4f" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"a"</span>] <span class="op">=</span> rescale(df[<span class="st">"a"</span>])</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"b"</span>] <span class="op">=</span> rescale(df[<span class="st">"b"</span>])</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"c"</span>] <span class="op">=</span> rescale(df[<span class="st">"c"</span>])</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"d"</span>] <span class="op">=</span> rescale(df[<span class="st">"d"</span>])</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="ce066e4f" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"a"</span>] <span class="op">=</span> rescale(df[<span class="st">"a"</span>])</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"b"</span>] <span class="op">=</span> rescale(df[<span class="st">"b"</span>])</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"c"</span>] <span class="op">=</span> rescale(df[<span class="st">"c"</span>])</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"d"</span>] <span class="op">=</span> rescale(df[<span class="st">"d"</span>])</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>En comparación con el original, este código es más fácil de entender y hemos eliminado un tipo de errores de copiar y pegar. Todavía hay bastante duplicación, ya que hacemos lo mismo con varias columnas; en realidad también podemos eliminarla, pero veremos cómo hacerlo más adelante en el libro.</p>
 <p>Otra ventaja de las funciones es que, si nuestros requisitos cambian, solo necesitamos hacer el cambio en un lugar. Por ejemplo, podríamos descubrir que algunas de nuestras variables incluyen valores infinitos y que <code>rescale()</code> (en la práctica) falla:</p>
-<div id="f503c36b" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>rescale(pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, np.inf, <span class="dv">5</span>]))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
-<pre><code>0    0.0
-1    0.0
-2    0.0
-3    NaN
-4    0.0
-dtype: float64</code></pre>
-</div>
+<div id="f503c36b" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>rescale(pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, np.inf, <span class="dv">5</span>]))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Como hemos extraído el código a una función, solo necesitamos hacer la corrección en un lugar:</p>
-<div id="67c861b6" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rescale(x):</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> x.replace(np.inf, np.nan)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    minimum <span class="op">=</span> x.<span class="bu">min</span>()</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x <span class="op">-</span> minimum) <span class="op">/</span> (x.<span class="bu">max</span>() <span class="op">-</span> minimum)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>rescale(pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, np.inf, <span class="dv">5</span>]))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
-<pre><code>0    0.00
-1    0.25
-2    0.50
-3     NaN
-4    1.00
-dtype: float64</code></pre>
-</div>
+<div id="67c861b6" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rescale(x):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> x.replace(np.inf, np.nan)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    minimum <span class="op">=</span> x.<span class="bu">min</span>()</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x <span class="op">-</span> minimum) <span class="op">/</span> (x.<span class="bu">max</span>() <span class="op">-</span> minimum)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>rescale(pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, np.inf, <span class="dv">5</span>]))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Esta es una parte importante del principio “no te repitas” (o DRY, por sus siglas en inglés). Cuanta más repetición tengas en tu código, más lugares tendrás que recordar actualizar cuando las cosas cambien (¡y siempre cambian!), y más probable será que introduzcas errores con el tiempo.</p>
 </section>
@@ -867,20 +817,20 @@ dtype: float64</code></pre>
 <p>Es importante recordar que las funciones no son solo para la computadora, sino también para los humanos. En general, a Python no le importa cómo se llame tu función ni qué comentarios contenga, pero esto es importante para los lectores humanos. Esta sección trata algunas cosas que deberías tener en cuenta al escribir funciones que los humanos puedan entender.</p>
 <p>El nombre de una función es importante. Lo ideal es que el nombre de tu función sea corto, pero que evoque claramente lo que hace la función. ¡Eso es difícil! Pero es mejor ser claro que breve, ya que el autocompletado de Visual Studio Code facilita escribir nombres largos.</p>
 <p>En general, los nombres de las funciones deberían ser verbos, y los argumentos, sustantivos. Hay algunas excepciones: los sustantivos están bien si la función calcula un sustantivo muy conocido (por ejemplo, <code>mean</code> es mejor que <code>compute_mean</code>) o si accede a alguna propiedad de un objeto (por ejemplo, <code>coef</code> es mejor que <code>get_coefficients</code>). Una buena señal de que un sustantivo podría ser mejor opción es que estés usando un verbo muy amplio como “get”, “compute”, “calculate” o “determine”. Usa tu mejor criterio y no tengas miedo de renombrar una función si más adelante se te ocurre un nombre mejor.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Not a verb, or descriptive</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>my_awesome_function()</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Long, but clear</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>impute_missing()</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>collapse_years()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Not a verb, or descriptive</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>my_awesome_function()</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Long, but clear</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>impute_missing()</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>collapse_years()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Si el nombre de tu función se compone de varias palabras, usa “snake_case”, donde cada palabra en minúsculas se separa con un guion bajo. Si tienes una familia de funciones que hacen cosas similares, asegúrate de que tengan nombres y argumentos coherentes. Usa un prefijo común para indicar que están relacionadas. Eso es mejor que un sufijo común, porque el autocompletado te permite escribir el prefijo y ver todos los miembros de la familia.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Good</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>input_select()</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>input_checkbox()</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>input_text()</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Not so good</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>select_input()</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>checkbox_input()</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>text_input()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Good</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>input_select()</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>input_checkbox()</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>input_text()</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Not so good</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>select_input()</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>checkbox_input()</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>text_input()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Un buen ejemplo de este diseño es el paquete <strong>pandas</strong>: si no recuerdas exactamente qué función necesitas para leer datos, puedes escribir <code>pd.read_</code> y refrescar la memoria mientras el autocompletado te muestra las opciones.</p>
 </section>
 <section id="ámbito-de-las-funciones" class="level2">
@@ -888,41 +838,34 @@ dtype: float64</code></pre>
 <p>El ámbito (<em>scope</em>) se refiere a qué partes de tu código pueden ver qué otras partes. Hay tres ámbitos diferentes que debes tener en cuenta: local, global y no local.</p>
 <p><strong>Local</strong></p>
 <p>Si defines una variable dentro de una función, el resto de tu código no podrá ‘verla’ ni usarla. Por ejemplo, aquí tienes una función que crea una variable y, a continuación, un ejemplo de cómo llamar a esa variable:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> var_func():</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    str_variable <span class="op">=</span> <span class="st">'Hello World!'</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>var_func()</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(str_variable)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> var_func():</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    str_variable <span class="op">=</span> <span class="st">'Hello World!'</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>var_func()</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(str_variable)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Esto generaría un error porque, para el resto de tu código, <code>str_variable</code> no existe fuera de la función. Este es un ejemplo de una variable <em>local</em>, es decir, una que solo existe dentro de una función.</p>
 <p>Si quieres crear variables dentro de una función y que persistan, tienes que devolverlas explícitamente usando, por ejemplo, <code>return str_variable</code>, así:</p>
-<div id="8725b986" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> var_func():</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    str_variable <span class="op">=</span> <span class="st">"Hello World!"</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> str_variable</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>returned_var <span class="op">=</span> var_func()</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(returned_var)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Hello World!</code></pre>
-</div>
+<div id="8725b986" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> var_func():</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    str_variable <span class="op">=</span> <span class="st">"Hello World!"</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> str_variable</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>returned_var <span class="op">=</span> var_func()</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(returned_var)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><strong>Global</strong></p>
 <p>Una variable declarada fuera de una función se conoce como variable global porque es accesible desde cualquier parte:</p>
-<div id="b0a4fe15" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="st">"I'm a global variable"</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_y():</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"y is inside a function:"</span>, y)</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>print_y()</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"y is outside a function:"</span>, y)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>y is inside a function: I'm a global variable
-y is outside a function: I'm a global variable</code></pre>
-</div>
+<div id="b0a4fe15" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="st">"I'm a global variable"</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_y():</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"y is inside a function:"</span>, y)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>print_y()</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"y is outside a function:"</span>, y)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 

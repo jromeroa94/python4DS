@@ -653,7 +653,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <div class="cell-output cell-output-stderr">
 <pre><code>&lt;&gt;:4: SyntaxWarning: invalid escape sequence '\w'
 &lt;&gt;:4: SyntaxWarning: invalid escape sequence '\w'
-/var/folders/8n/n8x6tb9n5tz72hhnwdf7l04w0000gn/T/ipykernel_71968/970224743.py:4: SyntaxWarning: invalid escape sequence '\w'
+/var/folders/8n/n8x6tb9n5tz72hhnwdf7l04w0000gn/T/ipykernel_75800/970224743.py:4: SyntaxWarning: invalid escape sequence '\w'
   re.findall("string \w+\s", text)</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="1">
@@ -710,7 +710,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <div class="cell-output cell-output-stderr">
 <pre><code>&lt;&gt;:2: SyntaxWarning: invalid escape sequence '\w'
 &lt;&gt;:2: SyntaxWarning: invalid escape sequence '\w'
-/var/folders/8n/n8x6tb9n5tz72hhnwdf7l04w0000gn/T/ipykernel_71968/3231031485.py:2: SyntaxWarning: invalid escape sequence '\w'
+/var/folders/8n/n8x6tb9n5tz72hhnwdf7l04w0000gn/T/ipykernel_75800/3231031485.py:2: SyntaxWarning: invalid escape sequence '\w'
   re.sub("string \w+\s", new_text, text)</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="2">
@@ -856,17 +856,17 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </tr>
 </tbody>
 </table>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout callout-style-default callout-tip callout-titled" title="Ejercicio">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Exercise
+<span class="screen-reader-only">Tip</span>Ejercicio
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Find a single regex that will pick out only the percentage numbers from both “Inflation in year 3 was 2 percent” and “Interest rates were as high as 12 percent”.</p>
+<p>Encuentra una única regex que extraiga solo los números de porcentaje tanto de “Inflation in year 3 was 2 percent” como de “Interest rates were as high as 12 percent”.</p>
 </div>
 </div>
 </section>
@@ -916,17 +916,17 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 </tbody>
 </table>
 <p>Como hay tantos caracteres con significado especial en regex, si quieres buscar, por ejemplo, un signo de dólar o un punto, primero tienes que escapar el carácter con una barra invertida. Así, <code>\${1}\d+</code> buscaría un único signo de dólar seguido de algunos dígitos y detectaría el ‘$50’ en ‘she made $50 dollars’.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout callout-style-default callout-tip callout-titled" title="Ejercicio">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Exercise
+<span class="screen-reader-only">Tip</span>Ejercicio
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Find the regex that will pick out only the first instance of the word ‘money’ and any word subsequent to ‘money’ from the following: “money supply has grown considerably. money demand has not kept up.”.</p>
+<p>Encuentra la regex que extraiga solo la primera aparición de la palabra ‘money’ y cualquier palabra que siga a ‘money’ en el siguiente texto: “money supply has grown considerably. money demand has not kept up.”.</p>
 </div>
 </div>
 </section>
@@ -1003,7 +1003,7 @@ The lazy match is stacko</code></pre>
 <div class="cell-output cell-output-stderr">
 <pre><code>&lt;&gt;:2: SyntaxWarning: invalid escape sequence '\$'
 &lt;&gt;:2: SyntaxWarning: invalid escape sequence '\$'
-/var/folders/8n/n8x6tb9n5tz72hhnwdf7l04w0000gn/T/ipykernel_71968/3729052804.py:2: SyntaxWarning: invalid escape sequence '\$'
+/var/folders/8n/n8x6tb9n5tz72hhnwdf7l04w0000gn/T/ipykernel_75800/3729052804.py:2: SyntaxWarning: invalid escape sequence '\$'
   re.findall("\$(\d{2}.\d{2})", text)</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="4">
@@ -1023,17 +1023,17 @@ The lazy match is stacko</code></pre>
 </div>
 <p>En este caso, la regex busca primero hasta 6 dígitos, luego opcionalmente un punto, luego opcionalmente otro par de dígitos, después un guion o ‘to’ usando el operador ‘|’ (que significa o), seguido de un número similar, seguido de ‘per’.</p>
 <p>Pero el grupo de captura es solo el subconjunto de la coincidencia que corresponde al rango de números; descartamos casi todo lo demás. Observa también que otros números, aunque vayan seguidos de ‘per’, no se recogen. <code>(?:)</code> inicia un <em>grupo de no captura</em>, que solo busca coincidencias pero no captura, de modo que, aunque <code>(?:\s?per)</code> busca ” per” después de un salario (con el espacio opcional gracias al segundo <code>?</code>), no se devuelve.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout callout-style-default callout-tip callout-titled" title="Ejercicio">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Exercise
+<span class="screen-reader-only">Tip</span>Ejercicio
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Find a regex that captures the wage range from “Salary Pay in range $9.00 - $12.02 but you must start at 8.00 - 8.30 every morning.”.</p>
+<p>Encuentra una regex que capture el rango salarial de “Salary Pay in range $9.00 - $12.02 but you must start at 8.00 - 8.30 every morning.”.</p>
 </div>
 </div>
 <p>Este ha sido un recorrido vertiginoso por las regexes. Aunque una regex parezca un galimatías, es una herramienta muy útil para tareas más complejas de limpieza y extracción de strings.</p>

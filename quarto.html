@@ -727,17 +727,17 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <p>Para convertir el informe anterior en un PDF de salida, guárdalo como <code>report.qmd</code> y luego, en la línea de comandos y en el mismo directorio que el archivo, ejecuta</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render report.qmd</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Recuerda que si usas la <a href="https://marketplace.visualstudio.com/items?itemName=quarto.quarto">extensión de quarto</a> de Visual Studio Code (recomendada), puedes pulsar el botón de render en su lugar (pero tendrás que elegir PDF como salida).</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout callout-style-default callout-tip callout-titled" title="Ejercicio">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Exercise
+<span class="screen-reader-only">Tip</span>Ejercicio
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Successfuly create a PDF by saving the markdown above into a file called <code>report.qmd</code>.</p>
+<p>Crea correctamente un PDF guardando el markdown anterior en un archivo llamado <code>report.qmd</code>.</p>
 <p>Si obtienes un error porque no se encuentra el kernel de Jupyter, primero comprueba que tienes Jupyter Lab instalado y luego verifica cómo se llama tu kernel de Jupyter con <code>jupyter kernelspec list</code> en la línea de comandos. Debes especificar correctamente el nombre de tu kernel de Jupyter en el encabezado del documento (en el ejemplo anterior se llama ‘python3’, que es el predeterminado).</p>
 </div>
 </div>
@@ -747,17 +747,17 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render report.qmd <span class="at">--to</span> docx</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Un pequeño inconveniente de la conversión a documentos de Word es que las tablas generadas por código (dataframes) no se renderizan como tablas en el documento de Word.</p>
 <p>La sintaxis básica es escribir <code>--to outputformat</code> al final del comando render.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout callout-style-default callout-tip callout-titled" title="Ejercicio">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Exercise
+<span class="screen-reader-only">Tip</span>Ejercicio
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Successfully create a HTML report by saving the markdown above into a file called <code>report.qmd</code> and then running the quarto render command with the to html option.</p>
+<p>Crea correctamente un informe HTML guardando el markdown anterior en un archivo llamado <code>report.qmd</code> y luego ejecutando el comando quarto render con la opción to html.</p>
 <p>¿Qué ocurre con el menú del lado derecho a medida que añades más encabezados con la sintaxis markdown <code>##</code>?</p>
 </div>
 </div>
@@ -852,17 +852,17 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>Encontramos que el pingüino más pesado, de un total de <span class="in">`python f"{number}"`</span> pingüinos, tiene una masa de <span class="in">`python f"{big_pen:.2f}"`</span> kilogramos.</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Ten en cuenta que, en este ejemplo, la parte <code>:2f</code> de <code>{big_pen:.2f}</code> es una instrucción para mostrar el número con 2 decimales.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout callout-style-default callout-tip callout-titled" title="Ejercicio">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Exercise
+<span class="screen-reader-only">Tip</span>Ejercicio
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Create a HTML report with an in-line number using the above example but change the formatting of the heaviest penguin to not show any decimal places.</p>
+<p>Crea un informe HTML con un número en línea usando el ejemplo anterior, pero cambia el formato del pingüino más pesado para que no muestre ningún decimal.</p>
 </div>
 </div>
 <p>Por supuesto, hay muchas otras funcionalidades que van más allá de este ejemplo.</p>
@@ -885,17 +885,17 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <p>Como antes, también puedes crear texto que se actualice dinámicamente con las salidas del código; solo tienes que elegir una celda de código en lugar de una celda markdown.</p>
 <p>La principal diferencia con los Jupyter Notebooks es que debes decidir si quieres <em>ejecutar</em> el notebook antes de renderizarlo con <strong>Quarto</strong>. Ejecutar un notebook simplemente significa correr el código antes de exportarlo a un nuevo formato. (Como nota aparte, la buena práctica al usar Jupyter Notebooks es guardarlos sin ninguna salida de código, así que ejecutar y renderizar sería la forma estándar de hacerlo). El comando de terminal para ejecutar un notebook y renderizarlo es:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render jupyter-report.ipynb <span class="at">--execute</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout callout-style-default callout-tip callout-titled" title="Ejercicio">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Exercise
+<span class="screen-reader-only">Tip</span>Ejercicio
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Create a new Jupyter Notebook called <code>jupyter-report.ipynb</code> with the header above. Re-use the blocks of code and text from the <code>qmd</code> example in the previous section. Render it with the command above.</p>
+<p>Crea un nuevo Jupyter Notebook llamado <code>jupyter-report.ipynb</code> con el encabezado anterior. Reutiliza los bloques de código y texto del ejemplo <code>qmd</code> de la sección anterior. Renderízalo con el comando anterior.</p>
 </div>
 </div>
 <p>Para cambiar el tipo de salida, añade otra instrucción al comando usando <code>--to</code>:</p>
@@ -916,17 +916,17 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <figcaption>Jupyter notebook y vista previa HTML en vivo del informe generado</figcaption>
 </figure>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout callout-style-default callout-tip callout-titled" title="Ejercicio">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Exercise
+<span class="screen-reader-only">Tip</span>Ejercicio
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Take the Jupyter example from the previous exercise and change the format to HTML. Then add both a new text cell and a new figure (from a code cell) while in preview mode, making use of the <code>quarto preview</code> command above. If you need inspiration for the new figure, here’s a simple scatter plot:</p>
+<p>Toma el ejemplo de Jupyter del ejercicio anterior y cambia el formato a HTML. Luego agrega una nueva celda de texto y una nueva figura (a partir de una celda de código) mientras estás en modo de vista previa, usando el comando <code>quarto preview</code> anterior. Si necesitas inspiración para la nueva figura, aquí tienes un scatter plot (gráfico de dispersión) sencillo:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -979,30 +979,30 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
 <span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Ten en cuenta que esto no mostrará el código, solo la figura, ya que hemos puesto <code>#| echo: false</code> en el bloque de código. También podrías poner <code>echo: false</code> para toda la presentación en el encabezado.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout callout-style-default callout-tip callout-titled" title="Ejercicio">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Exercise
+<span class="screen-reader-only">Tip</span>Ejercicio
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Render this slide example in all three of the main formats</p>
+<p>Renderiza este ejemplo de diapositivas en los tres formatos principales</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout callout-style-default callout-tip callout-titled" title="Ejercicio">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Exercise
+<span class="screen-reader-only">Tip</span>Ejercicio
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Add outputs from in-line code into your rendered deck, adapting the heaviest penguin example from earlier.</p>
+<p>Agrega resultados de código en línea a tu presentación renderizada, adaptando el ejemplo anterior del pingüino más pesado.</p>
 </div>
 </div>
 

@@ -735,22 +735,22 @@ window.Quarto = {
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>now <span class="op">=</span> datetime.now()</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(now)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>2026-10-07 21:06:33.225133</code></pre>
+<pre><code>2026-10-07 21:22:38.888188</code></pre>
 </div>
 </div>
 <p>La mayoría de las personas estarán más acostumbradas a trabajar con día-mes-año, mientras que algunas incluso usan mes-día-año, ¡lo cual claramente no tiene ningún sentido! Pero ten en cuenta que datetime sigue la norma <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>, el estándar internacional para datetimes, que usa año-mes-día-horas:minutos:segundos, con las horas en formato de 24 horas. Este es también el formato que deberías usar al programar.</p>
 <p>Podemos ver que la variable que creamos tiene métodos como <code>year</code>, <code>month</code>, <code>day</code>, etc., hasta <code>microsecond</code>. Al llamar a estos métodos sobre el objeto <code>now</code> que creamos, devolverán el dato correspondiente.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout callout-style-default callout-tip callout-titled" title="Ejercicio">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Exercise
+<span class="screen-reader-only">Tip</span>Ejercicio
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Try calling the year, month, and day functions on an instance of <code>datetime.now()</code>.</p>
+<p>Prueba a llamar a las funciones de año, mes y día sobre una instancia de <code>datetime.now()</code>.</p>
 </div>
 </div>
 <p>Ten en cuenta que, una vez creado, <code>now</code> no se actualiza solo: queda congelado en el momento en que se creó.</p>
@@ -995,7 +995,7 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>time_diff <span class="op">=</span> now <span class="op">-</span> datetime(year<span class="op">=</span><span class="dv">2020</span>, month<span class="op">=</span><span class="dv">1</span>, day<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(time_diff)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>2471 days, 21:06:33.225133</code></pre>
+<pre><code>2471 days, 21:22:38.888188</code></pre>
 </div>
 </div>
 <p>Está en el formato de días, horas, minutos, segundos y microsegundos. Comprobemos el tipo con <code>type()</code>:</p>
@@ -1183,7 +1183,7 @@ memory usage: 4.5+ KB</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"date"</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">"date"</span>])</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"date"</span>].head()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/8n/n8x6tb9n5tz72hhnwdf7l04w0000gn/T/ipykernel_71979/3535541307.py:1: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+<pre><code>/var/folders/8n/n8x6tb9n5tz72hhnwdf7l04w0000gn/T/ipykernel_75813/3535541307.py:1: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
   df["date"] = pd.to_datetime(df["date"])</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="21">
@@ -1365,7 +1365,7 @@ Name: date, dtype: int32</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.asfreq(<span class="st">"M"</span>)</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>df.index[:<span class="dv">5</span>]</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/8n/n8x6tb9n5tz72hhnwdf7l04w0000gn/T/ipykernel_71979/2067773505.py:1: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+<pre><code>/var/folders/8n/n8x6tb9n5tz72hhnwdf7l04w0000gn/T/ipykernel_75813/2067773505.py:1: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
   df = df.asfreq("M")</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="28">
@@ -1484,7 +1484,7 @@ Name: date, dtype: int32</code></pre>
 <div id="e56ba5c4" class="cell" data-execution_count="30">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>df.resample(<span class="st">"A"</span>).mean()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/8n/n8x6tb9n5tz72hhnwdf7l04w0000gn/T/ipykernel_71979/311401334.py:1: FutureWarning: 'A' is deprecated and will be removed in a future version, please use 'YE' instead.
+<pre><code>/var/folders/8n/n8x6tb9n5tz72hhnwdf7l04w0000gn/T/ipykernel_75813/311401334.py:1: FutureWarning: 'A' is deprecated and will be removed in a future version, please use 'YE' instead.
   df.resample("A").mean()</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="30">

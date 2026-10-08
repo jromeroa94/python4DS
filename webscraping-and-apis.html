@@ -682,7 +682,7 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>LetsPlot.setup_html()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
-            <div id="8UMkof"></div>
+            <div id="051bQt"></div>
             <script type="text/javascript" data-lets-plot-script="library">
                 if(!window.letsPlotCallQueue) {
                     window.letsPlotCallQueue = [];
@@ -706,9 +706,9 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
                         var div = document.createElement("div");
                         div.style.color = 'darkred';
                         div.textContent = 'Error loading Lets-Plot JS';
-                        document.getElementById("8UMkof").appendChild(div);
+                        document.getElementById("051bQt").appendChild(div);
                     };
-                    var e = document.getElementById("8UMkof");
+                    var e = document.getElementById("051bQt");
                     e.appendChild(script);
                 })()
             </script>
@@ -940,7 +940,7 @@ Nota
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>An API key is needed in order to access some APIs. Sometimes all you need to do is register with site, in other cases you may have to pay for access.</p>
+<p>Para acceder a algunas API se necesita una clave de API (API key). A veces basta con registrarte en el sitio; en otros casos, puede que tengas que pagar por el acceso.</p>
 </div>
 </div>
 <p>Para comprobarlo, usemos directamente una API para obtener algunos datos de series temporales. Haremos la llamada a internet con el paquete <strong>requests</strong>.</p>
@@ -965,7 +965,7 @@ Nota
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"value"</span>].plot(title<span class="op">=</span>title, ylim<span class="op">=</span>(<span class="dv">0</span>, df[<span class="st">"value"</span>].<span class="bu">max</span>() <span class="op">*</span> <span class="fl">1.2</span>), lw<span class="op">=</span><span class="fl">3.0</span>)<span class="op">;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/8n/n8x6tb9n5tz72hhnwdf7l04w0000gn/T/ipykernel_72033/1249132001.py:11: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+<pre><code>/var/folders/8n/n8x6tb9n5tz72hhnwdf7l04w0000gn/T/ipykernel_75858/1249132001.py:11: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
   date=lambda x: pd.to_datetime(x["date"]),</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -995,7 +995,9 @@ Nota
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df_u <span class="op">=</span> web.DataReader(<span class="st">"LRHUTTTTGBM156S"</span>, <span class="st">"fred"</span>)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>df_u.plot(title<span class="op">=</span><span class="st">"Desempleo en el Reino Unido (porcentaje)"</span>, legend<span class="op">=</span><span class="va">False</span>, ylim<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">6</span>), lw<span class="op">=</span><span class="fl">3.0</span>)<span class="op">;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>df_u.plot(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Desempleo en el Reino Unido (porcentaje)"</span>, legend<span class="op">=</span><span class="va">False</span>, ylim<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">6</span>), lw<span class="op">=</span><span class="fl">3.0</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1084,13 +1086,13 @@ Nota
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
-   <div id="XkTVPX"></div>
+   <div id="qFf2Rc"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("XkTVPX");
+   var containerDiv = document.getElementById("qFf2Rc");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
