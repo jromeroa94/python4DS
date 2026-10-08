@@ -1213,10 +1213,10 @@ gtag('config', 'G-LXJC37BJVX', { 'anonymize_ip': true});
 <span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> hero <span class="kw">in</span> results:</span>
 <span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(hero)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>name='Deadpond' id=1 secret_name='Dive Wilson' age=None
-name='Spider-Boy' id=2 secret_name='Pedro Parqueador' age=None
-name='Rusty-Man' id=3 secret_name='Tommy Sharp' age=48
-name='Ms Amazing' id=4 secret_name='Barjabeen Bhabra' age=17</code></pre>
+<pre><code>secret_name='Dive Wilson' age=None id=1 name='Deadpond'
+secret_name='Pedro Parqueador' age=None id=2 name='Spider-Boy'
+secret_name='Tommy Sharp' age=48 id=3 name='Rusty-Man'
+secret_name='Barjabeen Bhabra' age=17 id=4 name='Ms Amazing'</code></pre>
 </div>
 </div>
 <p>También podemos recuperarlo todo mediante <code>results.all()</code>. El objeto resultante es una lista de objetos “hero” cuyas propiedades se pueden consultar mediante <code>heroes[0].name</code>, etc.</p>
@@ -1228,10 +1228,10 @@ name='Ms Amazing' id=4 secret_name='Barjabeen Bhabra' age=17</code></pre>
 <span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="op">*</span>heroes, sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>name='Deadpond' id=1 secret_name='Dive Wilson' age=None
-name='Spider-Boy' id=2 secret_name='Pedro Parqueador' age=None
-name='Rusty-Man' id=3 secret_name='Tommy Sharp' age=48
-name='Ms Amazing' id=4 secret_name='Barjabeen Bhabra' age=17</code></pre>
+<pre><code>secret_name='Dive Wilson' age=None id=1 name='Deadpond'
+secret_name='Pedro Parqueador' age=None id=2 name='Spider-Boy'
+secret_name='Tommy Sharp' age=48 id=3 name='Rusty-Man'
+secret_name='Barjabeen Bhabra' age=17 id=4 name='Ms Amazing'</code></pre>
 </div>
 </div>
 <p>Puedes encontrar más información en la <a href="https://sqlmodel.tiangolo.com/">documentación</a> de <strong>SQLModel</strong>, pero la mayoría de los comandos de consulta SQL que esperarías están disponibles. Ejecutemos un ejemplo de antes:</p>
@@ -1243,8 +1243,8 @@ name='Ms Amazing' id=4 secret_name='Barjabeen Bhabra' age=17</code></pre>
 <span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="op">*</span>heroes, sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>name='Ms Amazing' id=4 secret_name='Barjabeen Bhabra' age=17
-name='Rusty-Man' id=3 secret_name='Tommy Sharp' age=48</code></pre>
+<pre><code>secret_name='Barjabeen Bhabra' age=17 id=4 name='Ms Amazing'
+secret_name='Tommy Sharp' age=48 id=3 name='Rusty-Man'</code></pre>
 </div>
 </div>
 <p>Esto apenas araña la superficie de lo que <strong>SQLModel</strong> puede hacer: joins, actualización de datos, eliminación de filas y mucho más también son posibles.</p>

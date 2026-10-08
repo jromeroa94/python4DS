@@ -810,9 +810,9 @@ Advertencia
 <p>Ahora veremos algunos comandos útiles para la terminal.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 28%">
 <col style="width: 26%">
-<col style="width: 27%">
+<col style="width: 29%">
+<col style="width: 26%">
 <col style="width: 17%">
 </colgroup>
 <thead>
@@ -886,7 +886,7 @@ Advertencia
 </tr>
 <tr class="odd">
 <td><code>|</code></td>
-<td>El símbolo pipe: usa la salida de un comando como entrada de otro. Por ejemplo, <code>head -n 10 data.csv                                               | &gt; hello_world.txt</code> escribiría las primeras 10 líneas de data.csv en un archivo llamado hello_world.txt</td>
+<td>El símbolo pipe: usa la salida de un comando como entrada de otro. Por ejemplo, <code>head -n 10 data.csv                                                     | &gt; hello_world.txt</code> escribiría las primeras 10 líneas de data.csv en un archivo llamado hello_world.txt</td>
 <td></td>
 <td></td>
 </tr>
@@ -898,7 +898,7 @@ Advertencia
 </tr>
 <tr class="odd">
 <td><code>wc -l</code></td>
-<td>Devuelve el número de líneas de la entrada, por ejemplo <code>cat &lt;filename&gt;                                                                                    | wc -l</code>. Usa <code>wc</code> solo para contar palabras.</td>
+<td>Devuelve el número de líneas de la entrada, por ejemplo <code>cat &lt;filename&gt;                                                                                                  | wc -l</code>. Usa <code>wc</code> solo para contar palabras.</td>
 <td></td>
 <td></td>
 </tr>
@@ -910,7 +910,7 @@ Advertencia
 </tr>
 <tr class="odd">
 <td><code>uniq</code></td>
-<td>Elimina las líneas duplicadas de la entrada, por ejemplo <code>cat &lt;filename&gt;                                                                                   | uniq</code>, o <code>uniq -d</code> para mostrar los duplicados</td>
+<td>Elimina las líneas duplicadas de la entrada, por ejemplo <code>cat &lt;filename&gt;                                                                                                 | uniq</code>, o <code>uniq -d</code> para mostrar los duplicados</td>
 <td></td>
 <td></td>
 </tr>
@@ -946,7 +946,7 @@ Advertencia
 </tr>
 <tr class="odd">
 <td><code>grep &lt;searchterm&gt;</code></td>
-<td>Busca un término dado, por ejemplo <code>cat hello_world.txt                                                                                        | grep world</code></td>
+<td>Busca un término dado, por ejemplo <code>cat hello_world.txt                                                                                                                  | grep world</code></td>
 <td></td>
 <td></td>
 </tr>
@@ -982,7 +982,7 @@ Advertencia
 </tr>
 <tr class="odd">
 <td><code>find</code></td>
-<td>Busca archivos concretos en tu computadora; se puede encadenar con otros comandos mediante pipe, por ejemplo <code>find *.md -size +5k -type f                                  | xargs wc -l</code> contará el número de líneas (<code>wc -l</code>) de todos los archivos (<code>-type f</code>) que terminan en <code>.md</code> y que pesan más de 5 kilobytes (<code>-size +5k</code>).</td>
+<td>Busca archivos concretos en tu computadora; se puede encadenar con otros comandos mediante pipe, por ejemplo <code>find *.md -size +5k -type f                                | xargs wc -l</code> contará el número de líneas (<code>wc -l</code>) de todos los archivos (<code>-type f</code>) que terminan en <code>.md</code> y que pesan más de 5 kilobytes (<code>-size +5k</code>).</td>
 <td></td>
 <td></td>
 </tr>

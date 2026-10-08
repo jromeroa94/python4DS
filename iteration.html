@@ -978,45 +978,45 @@ execution complete</code></pre>
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">0</th>
-<td>0.704029</td>
-<td>-1.403160</td>
-<td>0.592448</td>
-<td>-0.482648</td>
+<td>0.779287</td>
+<td>-2.015560</td>
+<td>1.899847</td>
+<td>-0.039943</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">1</th>
-<td>-0.279052</td>
-<td>1.908568</td>
-<td>-1.259689</td>
-<td>2.483850</td>
+<td>0.734699</td>
+<td>1.115300</td>
+<td>0.242169</td>
+<td>0.127447</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">2</th>
-<td>0.275002</td>
-<td>-0.835322</td>
-<td>1.462103</td>
-<td>0.584255</td>
+<td>-0.366543</td>
+<td>0.991566</td>
+<td>-0.562873</td>
+<td>0.829870</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">3</th>
-<td>-0.980967</td>
-<td>-1.432249</td>
-<td>-1.679000</td>
-<td>0.838860</td>
+<td>1.584997</td>
+<td>-1.011301</td>
+<td>2.274414</td>
+<td>-0.211103</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">4</th>
-<td>-1.305499</td>
-<td>0.778941</td>
-<td>-1.684482</td>
-<td>-1.281808</td>
+<td>-0.531231</td>
+<td>0.172028</td>
+<td>-0.061901</td>
+<td>-0.815056</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">5</th>
-<td>-0.042049</td>
-<td>-0.705400</td>
-<td>-0.721846</td>
-<td>-0.640061</td>
+<td>-1.138402</td>
+<td>0.603445</td>
+<td>0.823941</td>
+<td>-0.590694</td>
 </tr>
 </tbody>
 </table>
@@ -1028,22 +1028,22 @@ execution complete</code></pre>
 <div id="ac909c2f" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df.median(axis<span class="op">=</span><span class="st">"rows"</span>)  <span class="co"># can also use axis=1</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
-<pre><code>a   -0.160551
-b   -0.770361
-c   -0.990767
-d    0.050804
+<pre><code>a    0.184078
+b    0.387737
+c    0.533055
+d   -0.125523
 dtype: float64</code></pre>
 </div>
 </div>
 <div id="96426002" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df.median(axis<span class="op">=</span><span class="st">"columns"</span>)  <span class="co"># can also use axis=0</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
-<pre><code>0    0.054900
-1    0.814758
-2    0.429628
-3   -1.206608
-4   -1.293654
-5   -0.672731
+<pre><code>0    0.369672
+1    0.488434
+2    0.231663
+3    0.686947
+4   -0.296566
+5    0.006376
 dtype: float64</code></pre>
 </div>
 </div>
@@ -1060,14 +1060,14 @@ dtype: float64</code></pre>
 <span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit add_five_slow(df)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>264 μs ± 373 ns per loop (mean ± std. dev. of 7 runs, 1,000 loops each)</code></pre>
+<pre><code>281 μs ± 9.34 μs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)</code></pre>
 </div>
 </div>
 <p>Pero para hacer esto hay que acceder a cada celda individual y operar sobre ella, así que es muy lento: tarda milisegundos. <strong>pandas</strong> tiene formas mucho más rápidas de realizar la misma operación. Para operaciones sencillas sobre dataframes con un tipo de dato uniforme, basta con sumar cinco a todo el dataframe:</p>
 <div id="1a48ae52" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit df <span class="op">+</span> <span class="dv">5</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>6.51 μs ± 8.29 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)</code></pre>
+<pre><code>6.75 μs ± 140 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)</code></pre>
 </div>
 </div>
 <p>Esto tardó decenas de <em>microsegundos</em>, mucho más rápido.</p>
@@ -1083,12 +1083,12 @@ dtype: float64</code></pre>
 <div id="31adcb3f" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>df.<span class="bu">apply</span>(<span class="kw">lambda</span> x: x[<span class="st">"a"</span>] <span class="op">-</span> x[<span class="st">"new_a"</span>].mean() <span class="op">*</span> x[<span class="st">"c"</span>] <span class="op">/</span> x[<span class="st">"b"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
-<pre><code>0   -6.995957
-1   -1.831524
-2   -7.297771
-3   -4.753216
-4   -2.536401
-5   -4.983552
+<pre><code>0   -8.916160
+1   -4.126769
+2   -3.445421
+3   -8.286330
+4   -4.766046
+5   -5.220514
 dtype: float64</code></pre>
 </div>
 </div>
@@ -1119,51 +1119,51 @@ dtype: float64</code></pre>
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">0</th>
-<td>-0.318911</td>
-<td>-2.426099</td>
-<td>-0.430492</td>
-<td>-1.505587</td>
-<td>4.681089</td>
+<td>-0.501296</td>
+<td>-3.296144</td>
+<td>0.619263</td>
+<td>-1.320527</td>
+<td>4.498704</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">1</th>
-<td>-1.793977</td>
-<td>0.393643</td>
-<td>-2.774614</td>
-<td>0.968925</td>
-<td>3.206023</td>
+<td>-0.856164</td>
+<td>-0.475562</td>
+<td>-1.348694</td>
+<td>-1.463416</td>
+<td>4.143836</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">2</th>
-<td>-1.077206</td>
-<td>-2.187530</td>
-<td>0.109895</td>
-<td>-0.767953</td>
-<td>3.922794</td>
+<td>-1.471639</td>
+<td>-0.113529</td>
+<td>-1.667968</td>
+<td>-0.275225</td>
+<td>3.528361</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">3</th>
-<td>-1.134102</td>
-<td>-1.585384</td>
-<td>-1.832135</td>
-<td>0.685724</td>
-<td>3.865898</td>
+<td>-0.259404</td>
+<td>-2.855701</td>
+<td>0.430013</td>
+<td>-2.055504</td>
+<td>4.740596</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">4</th>
-<td>-1.345830</td>
-<td>0.738610</td>
-<td>-1.724812</td>
-<td>-1.322139</td>
-<td>3.654170</td>
+<td>-1.177752</td>
+<td>-0.474494</td>
+<td>-0.708423</td>
+<td>-1.461578</td>
+<td>3.822248</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">5</th>
-<td>-0.611768</td>
-<td>-1.275119</td>
-<td>-1.291565</td>
-<td>-1.209780</td>
-<td>4.388232</td>
+<td>-1.850380</td>
+<td>-0.108532</td>
+<td>0.111964</td>
+<td>-1.302672</td>
+<td>3.149620</td>
 </tr>
 </tbody>
 </table>
@@ -1197,57 +1197,57 @@ dtype: float64</code></pre>
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">0</th>
-<td>-0.318911</td>
-<td>-2.426099</td>
-<td>-0.430492</td>
-<td>-1.505587</td>
-<td>4.681089</td>
-<td>-0.068127</td>
+<td>-0.501296</td>
+<td>-3.296144</td>
+<td>0.619263</td>
+<td>-1.320527</td>
+<td>4.498704</td>
+<td>-0.111431</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">1</th>
-<td>-1.793977</td>
-<td>0.393643</td>
-<td>-2.774614</td>
-<td>0.968925</td>
-<td>3.206023</td>
-<td>-0.559565</td>
+<td>-0.856164</td>
+<td>-0.475562</td>
+<td>-1.348694</td>
+<td>-1.463416</td>
+<td>4.143836</td>
+<td>-0.206611</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">2</th>
-<td>-1.077206</td>
-<td>-2.187530</td>
-<td>0.109895</td>
-<td>-0.767953</td>
-<td>3.922794</td>
-<td>-0.274602</td>
+<td>-1.471639</td>
+<td>-0.113529</td>
+<td>-1.667968</td>
+<td>-0.275225</td>
+<td>3.528361</td>
+<td>-0.417088</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">3</th>
-<td>-1.134102</td>
-<td>-1.585384</td>
-<td>-1.832135</td>
-<td>0.685724</td>
-<td>3.865898</td>
-<td>-0.293361</td>
+<td>-0.259404</td>
+<td>-2.855701</td>
+<td>0.430013</td>
+<td>-2.055504</td>
+<td>4.740596</td>
+<td>-0.054720</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">4</th>
-<td>-1.345830</td>
-<td>0.738610</td>
-<td>-1.724812</td>
-<td>-1.322139</td>
-<td>3.654170</td>
-<td>-0.368300</td>
+<td>-1.177752</td>
+<td>-0.474494</td>
+<td>-0.708423</td>
+<td>-1.461578</td>
+<td>3.822248</td>
+<td>-0.308131</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">5</th>
-<td>-0.611768</td>
-<td>-1.275119</td>
-<td>-1.291565</td>
-<td>-1.209780</td>
-<td>4.388232</td>
-<td>-0.139411</td>
+<td>-1.850380</td>
+<td>-0.108532</td>
+<td>0.111964</td>
+<td>-1.302672</td>
+<td>3.149620</td>
+<td>-0.587493</td>
 </tr>
 </tbody>
 </table>

@@ -1555,20 +1555,20 @@ Name: money, dtype: float64</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>real_nums <span class="op">=</span> <span class="dv">100</span> <span class="op">*</span> np.random.random(size<span class="op">=</span><span class="dv">10</span>)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>real_nums</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
-<pre><code>array([47.02726759, 72.61069036, 26.30795829, 47.23210581, 59.72202097,
-       86.10305252,  4.17188594, 15.77747274, 48.68180021,  8.32750531])</code></pre>
+<pre><code>array([99.82706843,  2.05722498,  5.2478937 , 71.47349326, 19.63118571,
+       67.366295  , 65.12353567, 96.79094651, 19.50435141,  0.81022286])</code></pre>
 </div>
 </div>
 <div id="dc3608d6" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>np.ceil(real_nums)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
-<pre><code>array([48., 73., 27., 48., 60., 87.,  5., 16., 49.,  9.])</code></pre>
+<pre><code>array([100.,   3.,   6.,  72.,  20.,  68.,  66.,  97.,  20.,   1.])</code></pre>
 </div>
 </div>
 <div id="d577bb21" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>np.floor(real_nums)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
-<pre><code>array([47., 72., 26., 47., 59., 86.,  4., 15., 48.,  8.])</code></pre>
+<pre><code>array([99.,  2.,  5., 71., 19., 67., 65., 96., 19.,  0.])</code></pre>
 </div>
 </div>
 <p>Recuerda que siempre puedes aplicar funciones de <strong>numpy</strong> a columnas de un dataframe de <strong>pandas</strong> así:</p>
@@ -1825,7 +1825,7 @@ Name: money, dtype: float64</code></pre>
 <p>Conviene recordar que todas las estadísticas descriptivas anteriores son una forma de reducir la distribución a un único número. Esto significa que son fundamentalmente reductivas y, si eliges la medida equivocada, puedes pasar por alto fácilmente diferencias importantes entre grupos. Por eso siempre es buena idea visualizar la distribución de los valores además de usar estadísticas agregadas.</p>
 <p>El gráfico siguiente muestra la distribución general de los retrasos de salida. La distribución es tan asimétrica que tenemos que acercarnos para ver la mayor parte de los datos. Esto sugiere que la media probablemente no sea un buen resumen y que quizá prefiramos la mediana.</p>
 <div id="b5ac4861" class="cell" data-execution_count="33">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>flights[<span class="st">"dep_delay"</span>].plot.hist(bins<span class="op">=</span><span class="dv">50</span>, title<span class="op">=</span><span class="st">"         Distribution: length of delay"</span>)<span class="op">;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>flights[<span class="st">"dep_delay"</span>].plot.hist(bins<span class="op">=</span><span class="dv">50</span>, title<span class="op">=</span><span class="st">"         Distribución: duración del retraso"</span>)<span class="op">;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1836,7 +1836,7 @@ Name: money, dtype: float64</code></pre>
 </div>
 <div id="d4e76051" class="cell" data-execution_count="34">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>flights.query(<span class="st">"dep_delay &lt;= 120"</span>)[<span class="st">"dep_delay"</span>].plot.hist(</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    bins<span class="op">=</span><span class="dv">50</span>, title<span class="op">=</span><span class="st">"         Distribution: length of delay"</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    bins<span class="op">=</span><span class="dv">50</span>, title<span class="op">=</span><span class="st">"         Distribución: duración del retraso"</span></span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
