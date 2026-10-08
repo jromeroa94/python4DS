@@ -25,7 +25,7 @@ Cuando ejecutas un comando de instalación para un paquete concreto, este se des
 La *terminal*, *línea de comandos* o a veces *símbolo del sistema* aparecía con el número 4 en la captura de pantalla de Visual Studio Code del capítulo @sec-introduction. La terminal es una forma basada en texto de dar todo tipo de órdenes a tu computadora (no solo comandos de Python), y saber un poco sobre ella es muy útil para programar (y más), porque la gestión de paquetes, de entornos (que aún no hemos tratado) y del control de versiones (ídem) se puede hacer desde la terminal. Llegaremos a esto a su debido tiempo en el capítulo @sec-command-line, pero por ahora, veamos un poco de contexto sobre qué es la terminal y qué hace.
 
 ::: {.callout-note}
-To open up the command line within Visual Studio Code, use the <kbd>⌃</kbd> + <kbd>\`</kbd> keyboard shortcut (Mac) or <kbd>ctrl</kbd> + <kbd>\`</kbd> (Windows/Linux), or click "View > Terminal".
+Para abrir la línea de comandos dentro de Visual Studio Code, usa el atajo de teclado <kbd>⌃</kbd> + <kbd>\`</kbd> (Mac) o <kbd>ctrl</kbd> + <kbd>\`</kbd> (Windows/Linux), o haz clic en "View > Terminal".
 
 Si quieres abrir la línea de comandos sin usar Visual Studio Code, busca "Terminal" en Mac y Linux, y "Powershell" en Windows.
 :::
@@ -33,7 +33,7 @@ Si quieres abrir la línea de comandos sin usar Visual Studio Code, busca "Termi
 En primer lugar, todo lo que puedes hacer haciendo clic en iconos para abrir programas en tu computadora, también puedes hacerlo desde la terminal, también conocida como línea de comandos. En muchos programas, gran parte de su funcionalidad es accesible desde la línea de comandos, y otros programas *solo* tienen una interfaz de línea de comandos (CLI), incluidos algunos que se usan en ciencia de datos.
 
 ::: {.callout-tip}
-The command line interacts with your operating system and is used to create, activate, or change Python installations.
+La línea de comandos interactúa con tu sistema operativo y se usa para crear, activar o cambiar instalaciones de Python.
 :::
 
 Usa Visual Studio Code para abrir una ventana de terminal haciendo clic en Terminal -> New Terminal en la lista de comandos de la parte superior de la ventana. Si has instalado uv en tu computadora, tu terminal debería mostrar algo parecido a esto como 'símbolo del sistema':
@@ -64,8 +64,8 @@ Para instalar paquetes adicionales de Python, la forma predeterminada y más sen
 
 `uv add ...` instalará los paquetes en el entorno de Python especial de tu carpeta actual (se encuentra en un subdirectorio llamado ".venv", que estará oculto por defecto en la mayoría de los sistemas). Es muy útil y una buena práctica tener un entorno de Python por proyecto, y **uv** lo hace automáticamente por ti.
 
-::: {.callout-tip title="Exercise"}
-Try installing the **matplotlib**, **pandas**, **statsmodels**, and **skimpy** packages using `uv add`.
+::: {.callout-tip title="Ejercicio"}
+Intenta instalar los paquetes **matplotlib**, **pandas**, **statsmodels** y **skimpy** usando `uv add`.
 :::
 
 ### Usar paquetes

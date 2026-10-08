@@ -68,7 +68,7 @@ aquí `head` es el comando que muestra el inicio del archivo, `-n` es una opció
 Los flags u opciones, como `-n` en el ejemplo anterior, suelen empezar con un guion (`-`) u, ocasionalmente, con un guion doble (`--`). También se pueden encadenar; por ejemplo, `ls -la` combina `ls -a` y `ls -l`.
 
 ::: {.callout-warning}
-Spaces take on a special role when using the command line. For this reason, it's good practice to avoid spaces in file names. If you need to refer to a filename with spaces in, you’ll need to use quotes or escape the spaces in the file names using a `\`, for example `this is my file.txt` becomes `this\ is\ my\ file.txt`
+Los espacios cumplen una función especial cuando usas la línea de comandos. Por eso, es buena práctica evitar los espacios en los nombres de archivo. Si necesitas referirte a un nombre de archivo que contiene espacios, tendrás que usar comillas o escapar los espacios del nombre con una `\`; por ejemplo, `this is my file.txt` se convierte en `this\ is\ my\ file.txt`
 :::
 
 Para ejecutar programas desde la línea de comandos, solo necesitas el nombre del programa como comando: de hecho, los comandos *son* programas. El comando `date` hace referencia a un programa real en tu computadora que puedes encontrar. Y esto también explica un poco lo que ocurre cuando *ejecutas un script desde la línea de comandos* (más sobre esto después).
